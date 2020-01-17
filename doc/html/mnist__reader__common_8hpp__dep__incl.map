@@ -1,0 +1,7 @@
+<map id="src/data/mnist/include/mnist/mnist_reader_common.hpp" name="src/data/mnist/include/mnist/mnist_reader_common.hpp">
+<area shape="rect" id="node2" href="$mnist__reader__less_8hpp.html" title="Contains functions to read the MNIST dataset (less features, Visual Studio friendly) ..." alt="" coords="104,95,297,136"/>
+<area shape="rect" id="node6" href="$mnist__reader_8hpp.html" title="Contains functions to read the MNIST dataset. " alt="" coords="322,95,485,136"/>
+<area shape="rect" id="node3" href="$DatasetOperations_8h_source.html" title="src/data/DatasetOperations.h" alt="" coords="104,184,297,211"/>
+<area shape="rect" id="node4" href="$CompleteNetworkTests_8h_source.html" title="tests/CompleteNetworkTests.h" alt="" coords="5,259,209,285"/>
+<area shape="rect" id="node5" href="$ConvTest_8h_source.html" title="tests/ConvTest.h" alt="" coords="234,259,357,285"/>
+</map>

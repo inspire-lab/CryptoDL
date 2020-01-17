@@ -1,0 +1,121 @@
+\hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser}{}\section{nlohmann\+:\+:detail\+:\+:json\+\_\+sax\+\_\+dom\+\_\+parser$<$ Basic\+Json\+Type $>$ Class Template Reference}
+\label{classnlohmann_1_1detail_1_1json__sax__dom__parser}\index{nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser$<$ Basic\+Json\+Type $>$@{nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser$<$ Basic\+Json\+Type $>$}}
+
+
+S\+AX implementation to create a J\+S\+ON value from S\+AX events.  
+
+
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a3d5cd67d179aa7422ce90e54984a441e}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a3d5cd67d179aa7422ce90e54984a441e}} 
+using {\bfseries number\+\_\+integer\+\_\+t} = typename Basic\+Json\+Type\+::number\+\_\+integer\+\_\+t
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a90f19b272530a479db81db11be2ea15c}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a90f19b272530a479db81db11be2ea15c}} 
+using {\bfseries number\+\_\+unsigned\+\_\+t} = typename Basic\+Json\+Type\+::number\+\_\+unsigned\+\_\+t
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad8da3aad0147b18b3cb76868480300fe}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad8da3aad0147b18b3cb76868480300fe}} 
+using {\bfseries number\+\_\+float\+\_\+t} = typename Basic\+Json\+Type\+::number\+\_\+float\+\_\+t
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_afd4d961ab2a6b01cbe6e840f7fb90cdc}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_afd4d961ab2a6b01cbe6e840f7fb90cdc}} 
+using {\bfseries string\+\_\+t} = typename Basic\+Json\+Type\+::string\+\_\+t
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser_afc50fee0a92ce84afb84041ebbdfba80}{json\+\_\+sax\+\_\+dom\+\_\+parser} (Basic\+Json\+Type \&r, const bool allow\+\_\+exceptions\+\_\+=true)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a0a00cd158d678e294f6e974cd9373c4b}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a0a00cd158d678e294f6e974cd9373c4b}} 
+{\bfseries json\+\_\+sax\+\_\+dom\+\_\+parser} (const \hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} \&)=delete
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad6e588652d5a9cb647a3c32a6221f13e}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad6e588652d5a9cb647a3c32a6221f13e}} 
+{\bfseries json\+\_\+sax\+\_\+dom\+\_\+parser} (\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} \&\&)=default
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a98448bf2cbc15d15e2eddc5a09a40a42}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a98448bf2cbc15d15e2eddc5a09a40a42}} 
+\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} \& {\bfseries operator=} (const \hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} \&)=delete
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_aff928a07e40e4efb16b3ff9384f4401c}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_aff928a07e40e4efb16b3ff9384f4401c}} 
+\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} \& {\bfseries operator=} (\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} \&\&)=default
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_abb06babaa861f123d8d0cb443b887d8a}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_abb06babaa861f123d8d0cb443b887d8a}} 
+bool {\bfseries null} ()
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a476c4634b93546a1a555725e551c2b33}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a476c4634b93546a1a555725e551c2b33}} 
+bool {\bfseries boolean} (bool val)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_aff77f861ba336df48c9786a993941397}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_aff77f861ba336df48c9786a993941397}} 
+bool {\bfseries number\+\_\+integer} (number\+\_\+integer\+\_\+t val)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a2b4ff5146ed46993527e4a67d99c1355}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a2b4ff5146ed46993527e4a67d99c1355}} 
+bool {\bfseries number\+\_\+unsigned} (number\+\_\+unsigned\+\_\+t val)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_aef4652c0e81d6c052acb5d36afe09499}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_aef4652c0e81d6c052acb5d36afe09499}} 
+bool {\bfseries number\+\_\+float} (number\+\_\+float\+\_\+t val, const string\+\_\+t \&)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a851d965082d20a726138f5d0330dc7d8}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a851d965082d20a726138f5d0330dc7d8}} 
+bool {\bfseries string} (string\+\_\+t \&val)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a9929b4cc92d471c49bd0a92802629f90}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a9929b4cc92d471c49bd0a92802629f90}} 
+bool {\bfseries start\+\_\+object} (std\+::size\+\_\+t len)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad427febda4997cbd8345a2596af66649}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad427febda4997cbd8345a2596af66649}} 
+bool {\bfseries key} (string\+\_\+t \&val)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a88de4907ad5668d0358af2135236101f}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a88de4907ad5668d0358af2135236101f}} 
+bool {\bfseries end\+\_\+object} ()
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a056b895d011efaf48ea096c024aca0d4}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a056b895d011efaf48ea096c024aca0d4}} 
+bool {\bfseries start\+\_\+array} (std\+::size\+\_\+t len)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_af7cb5e5fe06ea908b0ce4ed762919759}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_af7cb5e5fe06ea908b0ce4ed762919759}} 
+bool {\bfseries end\+\_\+array} ()
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_a7d3bf1f361ebb817c694ba45b3814fa6}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_a7d3bf1f361ebb817c694ba45b3814fa6}} 
+bool {\bfseries parse\+\_\+error} (std\+::size\+\_\+t, const \hyperlink{namespacenlohmann_1_1detail_a1ed8fc6239da25abcaf681d30ace4985ab45cffe084dd3d20d928bee85e7b0f21}{std\+::string} \&, const \hyperlink{classnlohmann_1_1detail_1_1exception}{detail\+::exception} \&ex)
+\item 
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad1b9f3681fadbbb2e0127f5c8a99c662}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_ad1b9f3681fadbbb2e0127f5c8a99c662}} 
+constexpr bool {\bfseries is\+\_\+errored} () const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Basic\+Json\+Type$>$\newline
+class nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser$<$ Basic\+Json\+Type $>$}
+
+S\+AX implementation to create a J\+S\+ON value from S\+AX events. 
+
+This class implements the \hyperlink{structnlohmann_1_1json__sax}{json\+\_\+sax} interface and processes the S\+AX events to create a J\+S\+ON value which makes it basically a D\+OM parser. The structure or hierarchy of the J\+S\+ON value is managed by the stack {\ttfamily ref\+\_\+stack} which contains a pointer to the respective array or object for each recursion depth.
+
+After successful parsing, the value that is passed by reference to the constructor contains the parsed value.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Basic\+Json\+Type} & the J\+S\+ON type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnlohmann_1_1detail_1_1json__sax__dom__parser_afc50fee0a92ce84afb84041ebbdfba80}\label{classnlohmann_1_1detail_1_1json__sax__dom__parser_afc50fee0a92ce84afb84041ebbdfba80}} 
+\index{nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser@{nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser}!json\+\_\+sax\+\_\+dom\+\_\+parser@{json\+\_\+sax\+\_\+dom\+\_\+parser}}
+\index{json\+\_\+sax\+\_\+dom\+\_\+parser@{json\+\_\+sax\+\_\+dom\+\_\+parser}!nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser@{nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser}}
+\subsubsection{\texorpdfstring{json\+\_\+sax\+\_\+dom\+\_\+parser()}{json\_sax\_dom\_parser()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type$>$ \\
+\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{nlohmann\+::detail\+::json\+\_\+sax\+\_\+dom\+\_\+parser}$<$ Basic\+Json\+Type $>$\+::\hyperlink{classnlohmann_1_1detail_1_1json__sax__dom__parser}{json\+\_\+sax\+\_\+dom\+\_\+parser} (\begin{DoxyParamCaption}\item[{Basic\+Json\+Type \&}]{r,  }\item[{const bool}]{allow\+\_\+exceptions\+\_\+ = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em r} & reference to a J\+S\+ON value that is manipulated while parsing \\
+\hline
+\mbox{\tt in}  & {\em allow\+\_\+exceptions\+\_\+} & whether parse errors yield exceptions \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tools/json/json.\+hpp\end{DoxyCompactItemize}

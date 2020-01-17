@@ -1,0 +1,105 @@
+\hypertarget{classPolynomialActivationDegree3}{}\section{Polynomial\+Activation\+Degree3$<$ T $>$ Class Template Reference}
+\label{classPolynomialActivationDegree3}\index{Polynomial\+Activation\+Degree3$<$ T $>$@{Polynomial\+Activation\+Degree3$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Activation\+Function\+Impl.\+h$>$}
+
+
+
+Inheritance diagram for Polynomial\+Activation\+Degree3$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classPolynomialActivationDegree3__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Polynomial\+Activation\+Degree3$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classPolynomialActivationDegree3__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolynomialActivationDegree3_ab203d9dff5711cd378babeb455a9cd5a}\label{classPolynomialActivationDegree3_ab203d9dff5711cd378babeb455a9cd5a}} 
+{\bfseries Polynomial\+Activation\+Degree3} (float a, float b, float c, float d, TensorP$<$ T $>$ tensor)
+\item 
+void \hyperlink{classPolynomialActivationDegree3_ac68e75e02f29c445e8d8f818fc60bee1}{activate} (T \&in) override
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \hyperlink{classActivation}{Activation}$<$ T $>$ $>$ \hyperlink{classPolynomialActivationDegree3_a667e6e63f1e9e1028facf857c04a6019}{get\+Shared\+Pointer} (float a, float b, float c, float d, TensorP$<$ T $>$ tensor)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolynomialActivationDegree3_a2ed1e474229c9f6bf0b1791fe75ca3b4}\label{classPolynomialActivationDegree3_a2ed1e474229c9f6bf0b1791fe75ca3b4}} 
+const float {\bfseries a}
+\item 
+\mbox{\Hypertarget{classPolynomialActivationDegree3_a50bcd410ee516d8ef35e9512960d2ccf}\label{classPolynomialActivationDegree3_a50bcd410ee516d8ef35e9512960d2ccf}} 
+const float {\bfseries b}
+\item 
+\mbox{\Hypertarget{classPolynomialActivationDegree3_ade9d3561fffbb4222c196a1c69773050}\label{classPolynomialActivationDegree3_ade9d3561fffbb4222c196a1c69773050}} 
+const float {\bfseries c}
+\item 
+\mbox{\Hypertarget{classPolynomialActivationDegree3_ae02f7b6ba9b5730a8e8263159d123407}\label{classPolynomialActivationDegree3_ae02f7b6ba9b5730a8e8263159d123407}} 
+const float {\bfseries d}
+\item 
+\mbox{\Hypertarget{classPolynomialActivationDegree3_a6c17ea9b87ea3ec83450d39e552a1a7d}\label{classPolynomialActivationDegree3_a6c17ea9b87ea3ec83450d39e552a1a7d}} 
+const TensorP$<$ T $>$ {\bfseries tensor}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Polynomial\+Activation\+Degree3$<$ T $>$}
+
+$<$$<$$<$$<$$<$$<$$<$ H\+E\+AD \subsection*{ax$^\wedge$4+bx$^\wedge$3+cx$^\wedge$2+dx+e }
+
+ax$^\wedge$3+bx$^\wedge$2+cx+d \begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+rnn\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classPolynomialActivationDegree3_ac68e75e02f29c445e8d8f818fc60bee1}\label{classPolynomialActivationDegree3_ac68e75e02f29c445e8d8f818fc60bee1}} 
+\index{Polynomial\+Activation\+Degree3@{Polynomial\+Activation\+Degree3}!activate@{activate}}
+\index{activate@{activate}!Polynomial\+Activation\+Degree3@{Polynomial\+Activation\+Degree3}}
+\subsubsection{\texorpdfstring{activate()}{activate()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classPolynomialActivationDegree3}{Polynomial\+Activation\+Degree3}$<$ T $>$\+::activate (\begin{DoxyParamCaption}\item[{T \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Need to calculate the individual parts and then sum it up at the end 
+
+Implements \hyperlink{classActivation}{Activation$<$ T $>$}.
+
+\mbox{\Hypertarget{classPolynomialActivationDegree3_a667e6e63f1e9e1028facf857c04a6019}\label{classPolynomialActivationDegree3_a667e6e63f1e9e1028facf857c04a6019}} 
+\index{Polynomial\+Activation\+Degree3@{Polynomial\+Activation\+Degree3}!get\+Shared\+Pointer@{get\+Shared\+Pointer}}
+\index{get\+Shared\+Pointer@{get\+Shared\+Pointer}!Polynomial\+Activation\+Degree3@{Polynomial\+Activation\+Degree3}}
+\subsubsection{\texorpdfstring{get\+Shared\+Pointer()}{getSharedPointer()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+static std\+::shared\+\_\+ptr$<$\hyperlink{classActivation}{Activation}$<$T$>$ $>$ \hyperlink{classPolynomialActivationDegree3}{Polynomial\+Activation\+Degree3}$<$ T $>$\+::get\+Shared\+Pointer (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b,  }\item[{float}]{c,  }\item[{float}]{d,  }\item[{TensorP$<$ T $>$}]{tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Needs coeffecients a,b,c,d, for ax$^\wedge$3+bx$^\wedge$2+cx+d and Tensor\+P$<$\+T$>$ that can provied an empty T. It does not need initialized storage. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Activation\+Function\+Impl.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,48 @@
+\subsection*{Backend}
+
+This project uses \href{https://github.com/nlohmann/json}{\tt nlohmann\textquotesingle{}s json parser} to load json files and create models from them using our architecture.
+
+\subsection*{Custom \hyperlink{classActivation}{Activation} Functions}
+
+To use custom activation functions, extend the \hyperlink{classActivation}{Activation} class in your Keras model through Python. e.\+g.\+: 
+\begin{DoxyCode}
+# extend activation class
+class Square(Activation):
+    def \_\_init\_\_(self, activation, **kwargs):
+        super(Square, self).\_\_init\_\_(activation, **kwargs)
+        self.\_\_name\_\_ = 'square'
+
+# activation function
+def square(x):
+    return K.square(x)
+
+# update custom objects
+keras.utils.get\_custom\_objects().update( \{ 'square': Square(square) \} )
+\end{DoxyCode}
+ Then, you will need to add the appropriate name in \hyperlink{JSONModel_8h_source}{J\+S\+O\+N\+Model.\+h}\textquotesingle{}s {\ttfamily grab\+Activation()} and function in {\ttfamily \hyperlink{ActivationFunctionImpl_8h_source}{architecture/\+Activation\+Function\+Impl.\+h}}.
+
+\subsection*{Memory Usage}
+
+When creating a model using \hyperlink{JSONModel_8h_source}{J\+S\+O\+N\+Model.\+h}\textquotesingle{}s {\ttfamily from\+File()}, you can dictate what type of memory usage you would like. Although we currently only allow for greedy usage (and it acts as a default param for creation), there are plans to allow for a lazy memory usage instantiation.
+
+\subsection*{\hyperlink{classLayer}{Layer} Attributes}
+
+As we currently only allow for Conv2D, \hyperlink{classDense}{Dense}, and \hyperlink{classFlatten}{Flatten} layer functionality, these are the attributes that we will focus on.
+
+\subsubsection*{Conv2D}
+
+The Keras json file provides us with the following attributes\+: {\ttfamily kernel\+\_\+initializer, bias\+\_\+regularizer, dilation\+\_\+rate, activity\+\_\+regularizer, activation, data\+\_\+format, filters, kernel\+\_\+regularizer, use\+\_\+bias, kernel\+\_\+constraint, name, bias\+\_\+initializer, kernel\+\_\+size, dtype, trainable, batch\+\_\+input\+\_\+shape, bias\+\_\+constraint, strides, padding}
+
+We only use the following attributes in our architecture\+: {\ttfamily name, activation, filters, kernel\+\_\+size, strides, padding} and sometimes {\ttfamily batch\+\_\+input\+\_\+shape} (when it is the first layer in the model)
+
+\subsubsection*{\hyperlink{classDense}{Dense}}
+
+The Keras json file provides us with the following attributes\+: {\ttfamily bias\+\_\+regularizer, units, activation, bias\+\_\+initializer, dtype, kernel\+\_\+regularizer, use\+\_\+bias, kernel\+\_\+constraint, kernel\+\_\+initializer, name, trainable, bias\+\_\+constraint, activity\+\_\+regularizer, batch\+\_\+input\+\_\+shape}
+
+We only use the following attributes in our architecture\+: {\ttfamily name, activation, units} and sometimes {\ttfamily batch\+\_\+input\+\_\+shape} (when it is the first layer in the model)
+
+\subsubsection*{\hyperlink{classFlatten}{Flatten}}
+
+The Keras json file provides us with the following attributes\+: {\ttfamily data\+\_\+format, trainable, name}
+
+We only use the following attributes in our architecture\+: {\ttfamily name} 

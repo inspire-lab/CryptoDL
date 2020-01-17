@@ -1,0 +1,5 @@
+<map id="Convolution2D&lt; ValueType, WeightType, DataTensorType, WeightTensorType, ConvertedWeights &gt;" name="Convolution2D&lt; ValueType, WeightType, DataTensorType, WeightTensorType, ConvertedWeights &gt;">
+<area shape="rect" id="node2" href="$classLayer.html" title="Layer\&lt; ValueType, Weight\lType, DataTensorType,\l WeightTensorType, ConvertedWeights \&gt;" alt="" coords="395,16,659,72"/>
+<area shape="rect" id="node3" href="$classTensorFactory.html" title="TensorFactory\&lt; ValueType \&gt;" alt="" coords="9,5,201,32"/>
+<area shape="rect" id="node4" href="$classTensorFactory.html" title="TensorFactory\&lt; WeightType \&gt;" alt="" coords="5,56,205,83"/>
+</map>

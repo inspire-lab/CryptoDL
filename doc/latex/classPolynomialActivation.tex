@@ -1,0 +1,86 @@
+\hypertarget{classPolynomialActivation}{}\section{Polynomial\+Activation$<$ T $>$ Class Template Reference}
+\label{classPolynomialActivation}\index{Polynomial\+Activation$<$ T $>$@{Polynomial\+Activation$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Activation\+Function\+Impl.\+h$>$}
+
+
+
+Inheritance diagram for Polynomial\+Activation$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classPolynomialActivation__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Polynomial\+Activation$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classPolynomialActivation__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_a6fffe5767ff2ba325e2c9765769cbc54}\label{classPolynomialActivation_a6fffe5767ff2ba325e2c9765769cbc54}} 
+{\bfseries Polynomial\+Activation} (float a, float b, float c, TensorP$<$ T $>$ tensor)
+\item 
+void \hyperlink{classPolynomialActivation_ac245cf706f30922e33700ca58de7c21d}{activate} (T \&in) override
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \hyperlink{classActivation}{Activation}$<$ T $>$ $>$ \hyperlink{classPolynomialActivation_a48b1d88e1c62d65bfb8148625aa6b245}{get\+Shared\+Pointer} (float a, float b, float c, TensorP$<$ T $>$ tensor)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_a0340f6d2e54ed0c417618f8487300421}\label{classPolynomialActivation_a0340f6d2e54ed0c417618f8487300421}} 
+const float {\bfseries a}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_adececd0c6b3bb702aa8666f1aa46cac1}\label{classPolynomialActivation_adececd0c6b3bb702aa8666f1aa46cac1}} 
+const float {\bfseries b}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_a58174c4eed6ba216758701c3105f7e92}\label{classPolynomialActivation_a58174c4eed6ba216758701c3105f7e92}} 
+const float {\bfseries c}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_a23ec90b1a33c058c093a3dd944d08ae0}\label{classPolynomialActivation_a23ec90b1a33c058c093a3dd944d08ae0}} 
+const TensorP$<$ T $>$ {\bfseries tensor}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Polynomial\+Activation$<$ T $>$}
+
+ax$^\wedge$2+bx+c 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classPolynomialActivation_ac245cf706f30922e33700ca58de7c21d}\label{classPolynomialActivation_ac245cf706f30922e33700ca58de7c21d}} 
+\index{Polynomial\+Activation@{Polynomial\+Activation}!activate@{activate}}
+\index{activate@{activate}!Polynomial\+Activation@{Polynomial\+Activation}}
+\subsubsection{\texorpdfstring{activate()}{activate()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classPolynomialActivation}{Polynomial\+Activation}$<$ T $>$\+::activate (\begin{DoxyParamCaption}\item[{T \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Need to calculate the invidual parts and then sum it up at the end 
+
+Implements \hyperlink{classActivation}{Activation$<$ T $>$}.
+
+\mbox{\Hypertarget{classPolynomialActivation_a48b1d88e1c62d65bfb8148625aa6b245}\label{classPolynomialActivation_a48b1d88e1c62d65bfb8148625aa6b245}} 
+\index{Polynomial\+Activation@{Polynomial\+Activation}!get\+Shared\+Pointer@{get\+Shared\+Pointer}}
+\index{get\+Shared\+Pointer@{get\+Shared\+Pointer}!Polynomial\+Activation@{Polynomial\+Activation}}
+\subsubsection{\texorpdfstring{get\+Shared\+Pointer()}{getSharedPointer()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+static std\+::shared\+\_\+ptr$<$\hyperlink{classActivation}{Activation}$<$T$>$ $>$ \hyperlink{classPolynomialActivation}{Polynomial\+Activation}$<$ T $>$\+::get\+Shared\+Pointer (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b,  }\item[{float}]{c,  }\item[{TensorP$<$ T $>$}]{tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Needs coeffecients a,b,c for ax$^\wedge$2+bx+c and Tensor\+P$<$\+T$>$ that can provied an empty T. It does not need initialized storage. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Activation\+Function\+Impl.\+h\end{DoxyCompactItemize}

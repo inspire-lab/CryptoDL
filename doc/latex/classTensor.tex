@@ -1,0 +1,208 @@
+\hypertarget{classTensor}{}\section{Tensor$<$ Value\+Type $>$ Class Template Reference}
+\label{classTensor}\index{Tensor$<$ Value\+Type $>$@{Tensor$<$ Value\+Type $>$}}
+
+
+{\ttfamily \#include $<$Tensor\+Impl.\+h$>$}
+
+
+
+Inheritance diagram for Tensor$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classTensor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tensor$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{classTensor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structTensor_1_1array__deleter}{array\+\_\+deleter}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTensor_a65505189656c9ffa74f6eb526abdb519}\label{classTensor_a65505189656c9ffa74f6eb526abdb519}} 
+{\bfseries Tensor} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classTensor_aa5b4bb53587cf98068ebb2df2b1469ad}\label{classTensor_aa5b4bb53587cf98068ebb2df2b1469ad}} 
+\hyperlink{classTensor_aa5b4bb53587cf98068ebb2df2b1469ad}{Tensor} (\hyperlink{classShape}{Shape} s, std\+::shared\+\_\+ptr$<$ \hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$$>$ other)
+\begin{DoxyCompactList}\small\item\em Constructor that uses the them same underlying data as the input tensor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTensor_aa56cee69dc4ff47337a0d163ba6cea81}\label{classTensor_aa56cee69dc4ff47337a0d163ba6cea81}} 
+{\bfseries Tensor} (const \hyperlink{classTensor}{Tensor} \&other)=delete
+\item 
+\mbox{\Hypertarget{classTensor_a74d22bed53c825f34ccf48c049d8f2c1}\label{classTensor_a74d22bed53c825f34ccf48c049d8f2c1}} 
+void {\bfseries operator=} (const \hyperlink{classTensor}{Tensor} \&other)=delete
+\item 
+\mbox{\Hypertarget{classTensor_a303ca3215d8bfe415e4c439d0c3191ff}\label{classTensor_a303ca3215d8bfe415e4c439d0c3191ff}} 
+virtual Value\+Type \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (std\+::initializer\+\_\+list$<$ size\+\_\+t $>$ idxs)
+\item 
+virtual Value\+Type \& \hyperlink{classTensor_a02fa9d476a6d1f85046380ef4eebbe34}{operator\mbox{[}$\,$\mbox{]}} (long idx)
+\begin{DoxyCompactList}\small\item\em Provides access to tensor as if it were flattened. Can be negative. In this case it follows python logic and accesses the \hyperlink{classTensor}{Tensor} from the back. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTensor_a969b3b215515961f8e47d0b93784f8ce}\label{classTensor_a969b3b215515961f8e47d0b93784f8ce}} 
+bool {\bfseries operator==} (\hyperlink{classTensor}{Tensor} \&other)
+\item 
+\mbox{\Hypertarget{classTensor_ac1f55ee7c7253712b0e5e802e8bf2be3}\label{classTensor_ac1f55ee7c7253712b0e5e802e8bf2be3}} 
+virtual std\+::vector$<$ int $>$ {\bfseries argmax\+Vector} (uint axis=0)=0
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classTensor_a0cb0540d4f6ea27229eb623574780d94}{feed} (T \&vector)
+\item 
+void \hyperlink{classTensor_a83a18e08d96aed4132f615b6c63b3333}{reshape} (\hyperlink{classShape}{Shape} new\+Shape)
+\item 
+void \hyperlink{classTensor_a317bac130e357848259647c0add63e84}{flatten} ()
+\item 
+\mbox{\Hypertarget{classTensor_a55540af212af70e2203d148e73ec3f28}\label{classTensor_a55540af212af70e2203d148e73ec3f28}} 
+virtual Value\+Type {\bfseries empty} ()=0
+\item 
+\mbox{\Hypertarget{classTensor_abf11542f256677294f6db738f2fefd94}\label{classTensor_abf11542f256677294f6db738f2fefd94}} 
+virtual void \hyperlink{classTensor_abf11542f256677294f6db738f2fefd94}{perform\+Checks} ()
+\begin{DoxyCompactList}\small\item\em A hook that can be called to perform various checks on the content of the vector. Gets called at the end of each layer. One of its uses is to perform denoising of the ciphertexts if the noise grows out of control. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTensor_aad5a014fb26699d196a847fd1810799f}\label{classTensor_aad5a014fb26699d196a847fd1810799f}} 
+virtual void {\bfseries init} ()=0
+\item 
+\mbox{\Hypertarget{classTensor_a10f4af35e46470f48ecabaa0d0a5bd1a}\label{classTensor_a10f4af35e46470f48ecabaa0d0a5bd1a}} 
+virtual void \hyperlink{classTensor_a10f4af35e46470f48ecabaa0d0a5bd1a}{init\+Random} (uint seed=7)=0
+\begin{DoxyCompactList}\small\item\em allocates the memory and fills it with random values \mbox{[}0,1\mbox{]} You can pass a seed for the random generator. Default seed is 7 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTensor_a8b828fb18e441ca8acb251631de23699}\label{classTensor_a8b828fb18e441ca8acb251631de23699}} 
+{\footnotesize template$<$class T $>$ }\\void {\bfseries init} (T \&in)
+\item 
+\mbox{\Hypertarget{classTensor_a243ede81443adc070eb5fb8cc4477dd8}\label{classTensor_a243ede81443adc070eb5fb8cc4477dd8}} 
+virtual void {\bfseries init} (std\+::vector$<$ Value\+Type $>$ \&in)
+\item 
+\mbox{\Hypertarget{classTensor_a21bee5f1396fbedc4bc955d8d4bb1108}\label{classTensor_a21bee5f1396fbedc4bc955d8d4bb1108}} 
+virtual void {\bfseries init} (std\+::vector$<$ std\+::vector$<$ Value\+Type $>$$>$ \&in)
+\item 
+\mbox{\Hypertarget{classTensor_afc9a5dd31992bbee855913ddad5fdc14}\label{classTensor_afc9a5dd31992bbee855913ddad5fdc14}} 
+virtual void {\bfseries init} (std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ Value\+Type $>$$>$$>$ \&in)
+\item 
+\mbox{\Hypertarget{classTensor_ae2a9a0b04a3354be9bf934d43a4aa33d}\label{classTensor_ae2a9a0b04a3354be9bf934d43a4aa33d}} 
+virtual void {\bfseries init} (std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ Value\+Type $>$$>$$>$$>$ \&in)
+\item 
+\mbox{\Hypertarget{classTensor_a25628fbb3737d69d73082e4eeabb4fc2}\label{classTensor_a25628fbb3737d69d73082e4eeabb4fc2}} 
+void {\bfseries copy\+Into} (\hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$ \&target)
+\item 
+\mbox{\Hypertarget{classTensor_aa56b8edeb9a500e6f28064cd149ba4cb}\label{classTensor_aa56b8edeb9a500e6f28064cd149ba4cb}} 
+void {\bfseries fill\+String} (std\+::string \&nested\+String, std\+::string \&array\+String, uint \&copy\+\_\+idx, uint \&val\+\_\+per\+\_\+line)
+\item 
+\mbox{\Hypertarget{classTensor_a0107a824d09e5507dee7b2a3c4637032}\label{classTensor_a0107a824d09e5507dee7b2a3c4637032}} 
+void {\bfseries create\+String\+Reper} (std\+::string \&nested\+String, uint \&braces)
+\item 
+\mbox{\Hypertarget{classTensor_aa4b9e3eaaafc60b8b550bfff71c8052e}\label{classTensor_aa4b9e3eaaafc60b8b550bfff71c8052e}} 
+void {\bfseries clear} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTensor_ab09a1deced521e092078826a3349af89}\label{classTensor_ab09a1deced521e092078826a3349af89}} 
+\hyperlink{classShape}{Shape} {\bfseries shape}
+\item 
+\mbox{\Hypertarget{classTensor_a42376507c8279854b9194f819579ca9d}\label{classTensor_a42376507c8279854b9194f819579ca9d}} 
+std\+::shared\+\_\+ptr$<$ Value\+Type $>$ {\bfseries mdata}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classTensor_a22b23dcd3dbe86924e01d13476f44204}{compute\+Strides} ()
+\item 
+\mbox{\Hypertarget{classTensor_aa7505cc7d52a2f7aaac80c28b2ea5ef0}\label{classTensor_aa7505cc7d52a2f7aaac80c28b2ea5ef0}} 
+void {\bfseries bounds\+Check} (std\+::initializer\+\_\+list$<$ size\+\_\+t $>$ \&idxs)
+\item 
+\mbox{\Hypertarget{classTensor_ac5996704991104f37ca26f6b1795c7ed}\label{classTensor_ac5996704991104f37ca26f6b1795c7ed}} 
+size\+\_\+t {\bfseries to\+Index} (const std\+::initializer\+\_\+list$<$ size\+\_\+t $>$ \&idxs)
+\item 
+\mbox{\Hypertarget{classTensor_ac552bc5d40c3ac529444bab9a782f3da}\label{classTensor_ac552bc5d40c3ac529444bab9a782f3da}} 
+virtual void {\bfseries create\+Storage} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTensor_ae7f973176887e0f98ff2c2c4fc5739bf}\label{classTensor_ae7f973176887e0f98ff2c2c4fc5739bf}} 
+std\+::vector$<$ uint $>$ {\bfseries strides}
+\item 
+\mbox{\Hypertarget{classTensor_a9697400d712e27a4a2d1b0fc4a98eb76}\label{classTensor_a9697400d712e27a4a2d1b0fc4a98eb76}} 
+bool {\bfseries m\+Storage\+Created} = false
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTensor_ae78294461d52191aceda3dd148406dcb}\label{classTensor_ae78294461d52191aceda3dd148406dcb}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&output, \hyperlink{classTensor}{Tensor} \&T)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Value\+Type$>$\newline
+class Tensor$<$ Value\+Type $>$}
+
+Abstract base for all Tensors.
+
+A tensor provides a view to storage object that allows us to reshape the view. The shape of an tensor indicates how the data can be accessed.
+
+Tensors provide access via the \mbox{[}\mbox{]} operator. Since it allows for multiple indices to be passed Tensors not be acces with initializer lists e.\+g t\mbox{[} \{ 1,2,3 \} \mbox{]}.
+
+Currently is not possible to access subtensors i.\+e do slicing of tensors. This means in turn that during access an index for every dimension must be provided.
+
+The storage of tensor is not initialized upon the creation of the tensor and needs to be manually initialized by calling one fo the {\ttfamily init} functions. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classTensor_a22b23dcd3dbe86924e01d13476f44204}\label{classTensor_a22b23dcd3dbe86924e01d13476f44204}} 
+\index{Tensor@{Tensor}!compute\+Strides@{compute\+Strides}}
+\index{compute\+Strides@{compute\+Strides}!Tensor@{Tensor}}
+\subsubsection{\texorpdfstring{compute\+Strides()}{computeStrides()}}
+{\footnotesize\ttfamily template$<$class Value\+Type$>$ \\
+virtual void \hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$\+::compute\+Strides (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+precompute the strides for index into the storage array every index is multplied with the product of the following dimensions considering a tensor with shape( x,y,z ) the index i would be calculated as ( i1 $\ast$ ( y $\ast$ z )) + ( i2 $\ast$ z ) + i3 
+
+Reimplemented in \hyperlink{classHETensor_ab0b9ca7b3826bc6c385514523e29de06}{H\+E\+Tensor$<$ T $>$}.
+
+\mbox{\Hypertarget{classTensor_a0cb0540d4f6ea27229eb623574780d94}\label{classTensor_a0cb0540d4f6ea27229eb623574780d94}} 
+\index{Tensor@{Tensor}!feed@{feed}}
+\index{feed@{feed}!Tensor@{Tensor}}
+\subsubsection{\texorpdfstring{feed()}{feed()}}
+{\footnotesize\ttfamily template$<$class Value\+Type$>$ \\
+template$<$class T $>$ \\
+void \hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$\+::feed (\begin{DoxyParamCaption}\item[{T \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Used to feed data to a tensor with already initailized storage \mbox{\Hypertarget{classTensor_a317bac130e357848259647c0add63e84}\label{classTensor_a317bac130e357848259647c0add63e84}} 
+\index{Tensor@{Tensor}!flatten@{flatten}}
+\index{flatten@{flatten}!Tensor@{Tensor}}
+\subsubsection{\texorpdfstring{flatten()}{flatten()}}
+{\footnotesize\ttfamily template$<$class Value\+Type$>$ \\
+void \hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$\+::flatten (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Special reshape function. Reshapes into a 1D tensor of same capacity \mbox{\Hypertarget{classTensor_a02fa9d476a6d1f85046380ef4eebbe34}\label{classTensor_a02fa9d476a6d1f85046380ef4eebbe34}} 
+\index{Tensor@{Tensor}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Tensor@{Tensor}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$class Value\+Type$>$ \\
+virtual Value\+Type\& \hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{long}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Provides access to tensor as if it were flattened. Can be negative. In this case it follows python logic and accesses the \hyperlink{classTensor}{Tensor} from the back. 
+
+\mbox{\Hypertarget{classTensor_a83a18e08d96aed4132f615b6c63b3333}\label{classTensor_a83a18e08d96aed4132f615b6c63b3333}} 
+\index{Tensor@{Tensor}!reshape@{reshape}}
+\index{reshape@{reshape}!Tensor@{Tensor}}
+\subsubsection{\texorpdfstring{reshape()}{reshape()}}
+{\footnotesize\ttfamily template$<$class Value\+Type$>$ \\
+void \hyperlink{classTensor}{Tensor}$<$ Value\+Type $>$\+::reshape (\begin{DoxyParamCaption}\item[{\hyperlink{classShape}{Shape}}]{new\+Shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Reshapes the tensor. It does not alter the storage of the tensor or any other views of this tensors.
+
+The target shape needs to be off the same capacity. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Tensor\+Impl.\+h\end{DoxyCompactItemize}

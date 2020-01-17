@@ -1,0 +1,42 @@
+\hypertarget{classTensorFactory}{}\section{Tensor\+Factory$<$ T $>$ Class Template Reference}
+\label{classTensorFactory}\index{Tensor\+Factory$<$ T $>$@{Tensor\+Factory$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Tensor\+Factory.\+h$>$}
+
+
+
+Inheritance diagram for Tensor\+Factory$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{classTensorFactory__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTensorFactory_a45c8009a148dd01bb7fd84be786a222c}\label{classTensorFactory_a45c8009a148dd01bb7fd84be786a222c}} 
+virtual TensorP$<$ T $>$ {\bfseries create} (\hyperlink{classShape}{Shape} s)=0
+\item 
+\mbox{\Hypertarget{classTensorFactory_ad14cbf4066594cc77f2fb75ee0a6ca74}\label{classTensorFactory_ad14cbf4066594cc77f2fb75ee0a6ca74}} 
+virtual TensorP$<$ T $>$ \hyperlink{classTensorFactory_ad14cbf4066594cc77f2fb75ee0a6ca74}{create\+View} (\hyperlink{classShape}{Shape} s, TensorP$<$ T $>$ other)=0
+\begin{DoxyCompactList}\small\item\em Creates a different view on the same datastorage. Shapes must match. Views can alter the underlying data just as the original \hyperlink{classTensor}{Tensor}. After the creation they share equal ownership of the data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTensorFactory_a07e8fa825917864f24c49772163e466e}\label{classTensorFactory_a07e8fa825917864f24c49772163e466e}} 
+virtual TensorP$<$ T $>$ {\bfseries ones\+And\+Init} (\hyperlink{classShape}{Shape})=0
+\item 
+\mbox{\Hypertarget{classTensorFactory_a1da615806f5f5f3b7c1c43c006ff4ee5}\label{classTensorFactory_a1da615806f5f5f3b7c1c43c006ff4ee5}} 
+virtual TensorP$<$ T $>$ {\bfseries arange\+And\+Init} (\hyperlink{classShape}{Shape}, int, int)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Tensor\+Factory$<$ T $>$}
+
+Abstract base to create Tensors 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Tensor\+Factory.\+h\end{DoxyCompactItemize}

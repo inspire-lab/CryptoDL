@@ -1,0 +1,169 @@
+\hypertarget{mnist__reader__less_8hpp}{}\section{src/data/mnist/include/mnist/mnist\+\_\+reader\+\_\+less.hpp File Reference}
+\label{mnist__reader__less_8hpp}\index{src/data/mnist/include/mnist/mnist\+\_\+reader\+\_\+less.\+hpp@{src/data/mnist/include/mnist/mnist\+\_\+reader\+\_\+less.\+hpp}}
+
+
+Contains functions to read the M\+N\+I\+ST dataset (less features, Visual Studio friendly)  
+
+
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mnist\+\_\+reader\+\_\+common.\+hpp\char`\"{}}\newline
+Include dependency graph for mnist\+\_\+reader\+\_\+less.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mnist__reader__less_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{mnist__reader__less_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmnist_1_1MNIST__dataset}{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$}
+\begin{DoxyCompactList}\small\item\em Represents a complete mnist dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ }\\std\+::vector$<$ std\+::vector$<$ Pixel $>$ $>$ \hyperlink{mnist__reader__less_8hpp_ae094b069d1f8c229a83efeb536a813e4}{mnist\+::read\+\_\+mnist\+\_\+image\+\_\+file} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST image file and return a container filled with the images. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Label  = uint8\+\_\+t$>$ }\\std\+::vector$<$ Label $>$ \hyperlink{mnist__reader__less_8hpp_a4dccf9edf261f4251ae1e4df95487e12}{mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST label file and return a container filled with the labels. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ }\\std\+::vector$<$ std\+::vector$<$ Pixel $>$ $>$ \hyperlink{mnist__reader__less_8hpp_ac6b0996a2f78c8ee681b35d4419dfa01}{mnist\+::read\+\_\+training\+\_\+images} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read all training images and return a container filled with the images. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ }\\std\+::vector$<$ std\+::vector$<$ Pixel $>$ $>$ \hyperlink{mnist__reader__less_8hpp_a3218d2de4b62fd0e570c3cb02ab49cf2}{mnist\+::read\+\_\+test\+\_\+images} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read all test images and return a container filled with the images. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Label  = uint8\+\_\+t$>$ }\\std\+::vector$<$ Label $>$ \hyperlink{mnist__reader__less_8hpp_a4da4b8702db6255a9f0ae98b35fac210}{mnist\+::read\+\_\+training\+\_\+labels} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read all training labels and return a container filled with the labels. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Label  = uint8\+\_\+t$>$ }\\std\+::vector$<$ Label $>$ \hyperlink{mnist__reader__less_8hpp_af71f24f9e80491b7ca907478086861fc}{mnist\+::read\+\_\+test\+\_\+labels} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read all test labels and return a container filled with the labels. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Pixel, Label $>$ \hyperlink{mnist__reader__less_8hpp_ad9bf1b5d88504ed00319e71dc462c659}{mnist\+::read\+\_\+dataset} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Read dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains functions to read the M\+N\+I\+ST dataset (less features, Visual Studio friendly) 
+
+This header should only be used with old compilers. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_ad9bf1b5d88504ed00319e71dc462c659}\label{mnist__reader__less_8hpp_file_ad9bf1b5d88504ed00319e71dc462c659}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+dataset@{read\+\_\+dataset}}
+\index{read\+\_\+dataset@{read\+\_\+dataset}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset()}{read\_dataset()}}
+{\footnotesize\ttfamily template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Pixel, Label$>$ mnist\+::read\+\_\+dataset (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read dataset. 
+
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_ae094b069d1f8c229a83efeb536a813e4}\label{mnist__reader__less_8hpp_file_ae094b069d1f8c229a83efeb536a813e4}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+mnist\+\_\+image\+\_\+file@{read\+\_\+mnist\+\_\+image\+\_\+file}}
+\index{read\+\_\+mnist\+\_\+image\+\_\+file@{read\+\_\+mnist\+\_\+image\+\_\+file}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+image\+\_\+file()}{read\_mnist\_image\_file()}}
+{\footnotesize\ttfamily template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ \\
+std\+::vector$<$std\+::vector$<$Pixel$>$ $>$ mnist\+::read\+\_\+mnist\+\_\+image\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST image file and return a container filled with the images. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the image file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A std\+::vector filled with the read images 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_a4dccf9edf261f4251ae1e4df95487e12}\label{mnist__reader__less_8hpp_file_a4dccf9edf261f4251ae1e4df95487e12}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+mnist\+\_\+label\+\_\+file@{read\+\_\+mnist\+\_\+label\+\_\+file}}
+\index{read\+\_\+mnist\+\_\+label\+\_\+file@{read\+\_\+mnist\+\_\+label\+\_\+file}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+label\+\_\+file()}{read\_mnist\_label\_file()}}
+{\footnotesize\ttfamily template$<$typename Label  = uint8\+\_\+t$>$ \\
+std\+::vector$<$Label$>$ mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST label file and return a container filled with the labels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the image file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A std\+::vector filled with the read labels 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_a3218d2de4b62fd0e570c3cb02ab49cf2}\label{mnist__reader__less_8hpp_file_a3218d2de4b62fd0e570c3cb02ab49cf2}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+test\+\_\+images@{read\+\_\+test\+\_\+images}}
+\index{read\+\_\+test\+\_\+images@{read\+\_\+test\+\_\+images}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+test\+\_\+images()}{read\_test\_images()}}
+{\footnotesize\ttfamily template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ \\
+std\+::vector$<$std\+::vector$<$Pixel$>$ $>$ mnist\+::read\+\_\+test\+\_\+images (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read all test images and return a container filled with the images. 
+
+\begin{DoxyReturn}{Returns}
+Container filled with the images 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_af71f24f9e80491b7ca907478086861fc}\label{mnist__reader__less_8hpp_file_af71f24f9e80491b7ca907478086861fc}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+test\+\_\+labels@{read\+\_\+test\+\_\+labels}}
+\index{read\+\_\+test\+\_\+labels@{read\+\_\+test\+\_\+labels}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+test\+\_\+labels()}{read\_test\_labels()}}
+{\footnotesize\ttfamily template$<$typename Label  = uint8\+\_\+t$>$ \\
+std\+::vector$<$Label$>$ mnist\+::read\+\_\+test\+\_\+labels (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read all test labels and return a container filled with the labels. 
+
+\begin{DoxyReturn}{Returns}
+Container filled with the labels 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_ac6b0996a2f78c8ee681b35d4419dfa01}\label{mnist__reader__less_8hpp_file_ac6b0996a2f78c8ee681b35d4419dfa01}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+training\+\_\+images@{read\+\_\+training\+\_\+images}}
+\index{read\+\_\+training\+\_\+images@{read\+\_\+training\+\_\+images}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+training\+\_\+images()}{read\_training\_images()}}
+{\footnotesize\ttfamily template$<$typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ \\
+std\+::vector$<$std\+::vector$<$Pixel$>$ $>$ mnist\+::read\+\_\+training\+\_\+images (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read all training images and return a container filled with the images. 
+
+\begin{DoxyReturn}{Returns}
+Container filled with the images 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__less_8hpp_file_a4da4b8702db6255a9f0ae98b35fac210}\label{mnist__reader__less_8hpp_file_a4da4b8702db6255a9f0ae98b35fac210}} 
+\index{mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}!read\+\_\+training\+\_\+labels@{read\+\_\+training\+\_\+labels}}
+\index{read\+\_\+training\+\_\+labels@{read\+\_\+training\+\_\+labels}!mnist\+\_\+reader\+\_\+less.\+hpp@{mnist\+\_\+reader\+\_\+less.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+training\+\_\+labels()}{read\_training\_labels()}}
+{\footnotesize\ttfamily template$<$typename Label  = uint8\+\_\+t$>$ \\
+std\+::vector$<$Label$>$ mnist\+::read\+\_\+training\+\_\+labels (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Read all training labels and return a container filled with the labels. 
+
+\begin{DoxyReturn}{Returns}
+Container filled with the labels 
+\end{DoxyReturn}

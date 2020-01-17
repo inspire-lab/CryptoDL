@@ -1,0 +1,68 @@
+\hypertarget{mnist__reader__common_8hpp}{}\section{src/data/mnist/include/mnist/mnist\+\_\+reader\+\_\+common.hpp File Reference}
+\label{mnist__reader__common_8hpp}\index{src/data/mnist/include/mnist/mnist\+\_\+reader\+\_\+common.\+hpp@{src/data/mnist/include/mnist/mnist\+\_\+reader\+\_\+common.\+hpp}}
+
+
+Contains common functions to read the M\+N\+I\+ST dataset.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mnist__reader__common_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{mnist__reader__common_8hpp_ae23bbb05e2acb0f4fb36edf42431cea7}{mnist\+::read\+\_\+header} (const std\+::unique\+\_\+ptr$<$ char\mbox{[}$\,$\mbox{]}$>$ \&buffer, size\+\_\+t position)
+\begin{DoxyCompactList}\small\item\em Extract the M\+N\+I\+ST header from the given buffer. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ char\mbox{[}$\,$\mbox{]}$>$ \hyperlink{mnist__reader__common_8hpp_a8061847f8ead32e07e1a343f29c03671}{mnist\+::read\+\_\+mnist\+\_\+file} (const std\+::string \&path, uint32\+\_\+t key)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST file inside a raw buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains common functions to read the M\+N\+I\+ST dataset. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{mnist__reader__common_8hpp_file_ae23bbb05e2acb0f4fb36edf42431cea7}\label{mnist__reader__common_8hpp_file_ae23bbb05e2acb0f4fb36edf42431cea7}} 
+\index{mnist\+\_\+reader\+\_\+common.\+hpp@{mnist\+\_\+reader\+\_\+common.\+hpp}!read\+\_\+header@{read\+\_\+header}}
+\index{read\+\_\+header@{read\+\_\+header}!mnist\+\_\+reader\+\_\+common.\+hpp@{mnist\+\_\+reader\+\_\+common.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+header()}{read\_header()}}
+{\footnotesize\ttfamily uint32\+\_\+t mnist\+::read\+\_\+header (\begin{DoxyParamCaption}\item[{const std\+::unique\+\_\+ptr$<$ char\mbox{[}$\,$\mbox{]}$>$ \&}]{buffer,  }\item[{size\+\_\+t}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Extract the M\+N\+I\+ST header from the given buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The current buffer \\
+\hline
+{\em position} & The current reading positoin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the mnist header 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader__common_8hpp_file_a8061847f8ead32e07e1a343f29c03671}\label{mnist__reader__common_8hpp_file_a8061847f8ead32e07e1a343f29c03671}} 
+\index{mnist\+\_\+reader\+\_\+common.\+hpp@{mnist\+\_\+reader\+\_\+common.\+hpp}!read\+\_\+mnist\+\_\+file@{read\+\_\+mnist\+\_\+file}}
+\index{read\+\_\+mnist\+\_\+file@{read\+\_\+mnist\+\_\+file}!mnist\+\_\+reader\+\_\+common.\+hpp@{mnist\+\_\+reader\+\_\+common.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+file()}{read\_mnist\_file()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$char\mbox{[}$\,$\mbox{]}$>$ mnist\+::read\+\_\+mnist\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{uint32\+\_\+t}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read a M\+N\+I\+ST file inside a raw buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the image file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The buffer of byte on success, a nullptr-\/unique\+\_\+ptr otherwise 
+\end{DoxyReturn}

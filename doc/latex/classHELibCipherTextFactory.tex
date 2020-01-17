@@ -1,0 +1,124 @@
+\hypertarget{classHELibCipherTextFactory}{}\section{H\+E\+Lib\+Cipher\+Text\+Factory Class Reference}
+\label{classHELibCipherTextFactory}\index{H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}}
+
+
+{\ttfamily \#include $<$H\+E\+L\+Ib\+Cipher\+Text.\+h$>$}
+
+
+
+Inheritance diagram for H\+E\+Lib\+Cipher\+Text\+Factory\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classHELibCipherTextFactory__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for H\+E\+Lib\+Cipher\+Text\+Factory\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classHELibCipherTextFactory__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHELibCipherTextFactory_a097caa3314d257038989d27258cc9daf}{H\+E\+Lib\+Cipher\+Text\+Factory} (long seed=0, bool use\+B\+FV=true)
+\item 
+\hyperlink{classHELibCipherTextFactory_a725b27d7e0a60a6d2a9af33678f657be}{H\+E\+Lib\+Cipher\+Text\+Factory} (long L, long m, long r, long c=2)
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_aa262d2d08568dec07604be04f514bffd}\label{classHELibCipherTextFactory_aa262d2d08568dec07604be04f514bffd}} 
+virtual \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} {\bfseries empty} () override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a438737fdf18c80a7552c15ad335217d4}\label{classHELibCipherTextFactory_a438737fdf18c80a7552c15ad335217d4}} 
+virtual \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} {\bfseries create\+Cipher\+Text} (long x) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a41b3d0604490f6135e0e729be22f28cb}\label{classHELibCipherTextFactory_a41b3d0604490f6135e0e729be22f28cb}} 
+virtual \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} {\bfseries create\+Cipher\+Text} (const std\+::vector$<$ long $>$ \&in) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_af6fe83a8629c090430952229ec25b32c}\label{classHELibCipherTextFactory_af6fe83a8629c090430952229ec25b32c}} 
+virtual \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} {\bfseries create\+Cipher\+Text} (const std\+::vector$<$ double $>$ \&in) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_afbd76ff874f2a66161ada236ca7652e4}\label{classHELibCipherTextFactory_afbd76ff874f2a66161ada236ca7652e4}} 
+virtual \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} {\bfseries create\+Cipher\+Text} (const std\+::vector$<$ float $>$ \&in) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a9f5ff1d324a4c4eab822ac2bbce2f12b}\label{classHELibCipherTextFactory_a9f5ff1d324a4c4eab822ac2bbce2f12b}} 
+virtual std\+::vector$<$ long $>$ {\bfseries decrypt\+Long} (const \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} \&ctx) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_afce0ddd6b5d8215291b5a7d900010b1d}\label{classHELibCipherTextFactory_afce0ddd6b5d8215291b5a7d900010b1d}} 
+virtual std\+::vector$<$ double $>$ {\bfseries decrypt\+Double} (const \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} \&ctx) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a989b38ed86ad24c4c1da3d73b528af28}\label{classHELibCipherTextFactory_a989b38ed86ad24c4c1da3d73b528af28}} 
+virtual void {\bfseries set\+As\+Default\+Factory} () override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a4cf13021fcce822cd1f0b5f08452cbbf}\label{classHELibCipherTextFactory_a4cf13021fcce822cd1f0b5f08452cbbf}} 
+virtual TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ \hyperlink{classHELibCipherTextFactory_a4cf13021fcce822cd1f0b5f08452cbbf}{create\+Cipher\+Tensor} (const std\+::vector$<$ double $>$ \&in, const \hyperlink{classShape}{Shape} \&shape, \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ $\ast$hetf) override
+\begin{DoxyCompactList}\small\item\em Take a 1D vector transform into the given shape and encrypt it. The 1st dimension of the same needs to line up with the batch\+Size supported by the encryption scheme. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a0c414fd65bc9d49c7a6ab349da26522d}\label{classHELibCipherTextFactory_a0c414fd65bc9d49c7a6ab349da26522d}} 
+virtual TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ {\bfseries create\+Cipher\+Tensor} (const std\+::vector$<$ float $>$ \&in, const \hyperlink{classShape}{Shape} \&shape, \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ $\ast$hetf) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a9bdb6c404006f7876a7218a6fa48ba98}\label{classHELibCipherTextFactory_a9bdb6c404006f7876a7218a6fa48ba98}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const std\+::vector$<$ double $>$ \&in, TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ tensor) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_ae445259d96707e99490045ebb90b67d2}\label{classHELibCipherTextFactory_ae445259d96707e99490045ebb90b67d2}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const std\+::vector$<$ float $>$ \&in, TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ tensor) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a4a2d8cbb37e7875a8b155f746852a244}\label{classHELibCipherTextFactory_a4a2d8cbb37e7875a8b155f746852a244}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const TensorP$<$ double $>$ in, TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ tensor) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a609fb203aa9f501cc40394ba493c3d7c}\label{classHELibCipherTextFactory_a609fb203aa9f501cc40394ba493c3d7c}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const TensorP$<$ double $>$ in, \hyperlink{classTensor}{Tensor}$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ \&tensor) override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a0a1fe02c7af26a6fbcbfe2e6e1f362af}\label{classHELibCipherTextFactory_a0a1fe02c7af26a6fbcbfe2e6e1f362af}} 
+virtual uint {\bfseries batchsize} () override
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_aa34268733c1b1497835d0014db8d13cd}\label{classHELibCipherTextFactory_aa34268733c1b1497835d0014db8d13cd}} 
+std\+::shared\+\_\+ptr$<$ Ctxt $>$ {\bfseries create\+Raw\+Empty} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_a73742cada3eb2d6e1d6ac834de1b3ad0}\label{classHELibCipherTextFactory_a73742cada3eb2d6e1d6ac834de1b3ad0}} 
+const bool {\bfseries use\+B\+FV}
+\item 
+\mbox{\Hypertarget{classHELibCipherTextFactory_aeb8b7ecb78a46467b70d0af21dbcc4ed}\label{classHELibCipherTextFactory_aeb8b7ecb78a46467b70d0af21dbcc4ed}} 
+std\+::shared\+\_\+ptr$<$ F\+H\+E\+Sec\+Key $>$ {\bfseries secret\+Key}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Factory to create {\ttfamily \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text}}
+
+Supports both B\+FV and C\+K\+KS crypto schemes. B\+FV is not properly tested and might be removed in the future. The big drawback of B\+FV is that it does not supoort float numbers 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHELibCipherTextFactory_a097caa3314d257038989d27258cc9daf}\label{classHELibCipherTextFactory_a097caa3314d257038989d27258cc9daf}} 
+\index{H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}!H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}}
+\index{H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}!H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}}
+\subsubsection{\texorpdfstring{H\+E\+Lib\+Cipher\+Text\+Factory()}{HELibCipherTextFactory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+E\+Lib\+Cipher\+Text\+Factory\+::\+H\+E\+Lib\+Cipher\+Text\+Factory (\begin{DoxyParamCaption}\item[{long}]{seed = {\ttfamily 0},  }\item[{bool}]{use\+B\+FV = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Number of levels in the modulus chain \mbox{[}default=heuristic\mbox{]} if used with out the FindM function it is Number of bits of the modulus chain
+
+the ring we work on needs to a power of 2 Defines the batch\+Size. The batchsize is m/4
+
+m specific the ring p = -\/1 means C\+K\+KS r is the number of bits after the decimal aka precision
+
+just using the examples given by H\+E\+Lib docu. \mbox{\Hypertarget{classHELibCipherTextFactory_a725b27d7e0a60a6d2a9af33678f657be}\label{classHELibCipherTextFactory_a725b27d7e0a60a6d2a9af33678f657be}} 
+\index{H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}!H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}}
+\index{H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}!H\+E\+Lib\+Cipher\+Text\+Factory@{H\+E\+Lib\+Cipher\+Text\+Factory}}
+\subsubsection{\texorpdfstring{H\+E\+Lib\+Cipher\+Text\+Factory()}{HELibCipherTextFactory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+E\+Lib\+Cipher\+Text\+Factory\+::\+H\+E\+Lib\+Cipher\+Text\+Factory (\begin{DoxyParamCaption}\item[{long}]{L,  }\item[{long}]{m,  }\item[{long}]{r,  }\item[{long}]{c = {\ttfamily 2} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+m specific the ring p = -\/1 means C\+K\+KS r is the number of bits after the decimal aka precision
+
+just using the examples given by H\+E\+Lib docu. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/\+H\+E\+Backend/helib/H\+E\+L\+Ib\+Cipher\+Text.\+h\item 
+src/architecture/\+H\+E\+Backend/helib/H\+E\+L\+Ib\+Cipher\+Text.\+cpp\end{DoxyCompactItemize}

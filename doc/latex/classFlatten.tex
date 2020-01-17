@@ -1,0 +1,90 @@
+\hypertarget{classFlatten}{}\section{Flatten$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$ Class Template Reference}
+\label{classFlatten}\index{Flatten$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$@{Flatten$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}}
+
+
+Inheritance diagram for Flatten$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classFlatten__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Flatten$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classFlatten__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFlatten_a5ceaa436f4896997a0867a95c995ae23}\label{classFlatten_a5ceaa436f4896997a0867a95c995ae23}} 
+{\bfseries Flatten} (std\+::string name, TensorP$<$ Value\+Type $>$ input, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory, bool channels\+First=false)
+\item 
+\mbox{\Hypertarget{classFlatten_ae9f1c432597e0d7443838fb71a29599e}\label{classFlatten_ae9f1c432597e0d7443838fb71a29599e}} 
+{\bfseries Flatten} (std\+::string name, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weight\+Tensor\+Factory, bool channels\+First=false)
+\item 
+\mbox{\Hypertarget{classFlatten_a299432e9970733685ded27755243c38b}\label{classFlatten_a299432e9970733685ded27755243c38b}} 
+{\bfseries Flatten} (std\+::string name, TensorP$<$ Value\+Type $>$ input, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory, bool channels\+First=false)
+\item 
+\mbox{\Hypertarget{classFlatten_a0b39a1367b64fc6f1ac5feb4a2729f89}\label{classFlatten_a0b39a1367b64fc6f1ac5feb4a2729f89}} 
+{\bfseries Flatten} (std\+::string name, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weight\+Tensor\+Factory, Tensor\+FactoryP$<$ Value\+Type $>$ dtf, Tensor\+FactoryP$<$ Weight\+Type $>$ wtf, bool channels\+First=false)
+\item 
+\mbox{\Hypertarget{classFlatten_a11b0e0195b339da71b69f55c97fb39a4}\label{classFlatten_a11b0e0195b339da71b69f55c97fb39a4}} 
+{\bfseries Flatten} (std\+::string name, TensorP$<$ Value\+Type $>$ input, bool channels\+First=false)
+\item 
+\mbox{\Hypertarget{classFlatten_a957a897da50de0eb06450b39323c9616}\label{classFlatten_a957a897da50de0eb06450b39323c9616}} 
+{\bfseries Flatten} (std\+::string name, bool channels\+First=false)
+\item 
+\mbox{\Hypertarget{classFlatten_a263fe8a5f24154851f64fdb64520e40a}\label{classFlatten_a263fe8a5f24154851f64fdb64520e40a}} 
+\hyperlink{classShape}{Shape} {\bfseries output\+Shape} () override
+\item 
+\mbox{\Hypertarget{classFlatten_aed12736c802bdf7cb6b3530f1e581b35}\label{classFlatten_aed12736c802bdf7cb6b3530f1e581b35}} 
+void {\bfseries feed\+Forward} () override
+\item 
+bool \hyperlink{classFlatten_a53379945e182152effef9456b32eb65a}{builds\+Own\+Output\+Tensor} () override
+\begin{DoxyCompactList}\small\item\em This function is supposed to be used if a layer needs to build a special output layer. It will get called when layers gets added to the model. Build yuour own output layer in this function and return false. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFlatten_aa24e68c4f410565483161c7214556d9d}\label{classFlatten_aa24e68c4f410565483161c7214556d9d}} 
+void {\bfseries load\+Weights} (std\+::string path, std\+::string file\+Name)
+\item 
+\mbox{\Hypertarget{classFlatten_a0eee4c2e4f98bf2a4d19b9283b8f47f7}\label{classFlatten_a0eee4c2e4f98bf2a4d19b9283b8f47f7}} 
+void {\bfseries load\+Weights} (std\+::string path)
+\item 
+\mbox{\Hypertarget{classFlatten_a4c95c3512c62bc6e82d13515447515f8}\label{classFlatten_a4c95c3512c62bc6e82d13515447515f8}} 
+virtual void {\bfseries random\+Init} () override
+\item 
+\mbox{\Hypertarget{classFlatten_a8c35a22fe96db562180199193cc79b5c}\label{classFlatten_a8c35a22fe96db562180199193cc79b5c}} 
+void {\bfseries description} () override
+\item 
+\mbox{\Hypertarget{classFlatten_ac7d8cd2d0e206e1cacb71e66ec4ec3e3}\label{classFlatten_ac7d8cd2d0e206e1cacb71e66ec4ec3e3}} 
+virtual std\+::vector$<$ TensorP$<$ Weight\+Type $>$ $>$ \hyperlink{classFlatten_ac7d8cd2d0e206e1cacb71e66ec4ec3e3}{all\+Weights} () override
+\begin{DoxyCompactList}\small\item\em Returns empty vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classFlatten_a53379945e182152effef9456b32eb65a}\label{classFlatten_a53379945e182152effef9456b32eb65a}} 
+\index{Flatten@{Flatten}!builds\+Own\+Output\+Tensor@{builds\+Own\+Output\+Tensor}}
+\index{builds\+Own\+Output\+Tensor@{builds\+Own\+Output\+Tensor}!Flatten@{Flatten}}
+\subsubsection{\texorpdfstring{builds\+Own\+Output\+Tensor()}{buildsOwnOutputTensor()}}
+{\footnotesize\ttfamily template$<$class Value\+Type , class Weight\+Type , class Data\+Tensor\+Type  = Tensor\+P$<$\+Value\+Type$>$, class Weight\+Tensor\+Type  = Tensor\+P$<$\+Weight\+Type$>$, class Converted\+Weights  = float$>$ \\
+bool \hyperlink{classFlatten}{Flatten}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+::builds\+Own\+Output\+Tensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This function is supposed to be used if a layer needs to build a special output layer. It will get called when layers gets added to the model. Build yuour own output layer in this function and return false. 
+
+See \hyperlink{classFlatten}{Flatten} for an example 
+
+Reimplemented from \hyperlink{classLayer_a9a126cb372c0bd529c65a06077d8b429}{Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Layer\+Impl.\+h\end{DoxyCompactItemize}

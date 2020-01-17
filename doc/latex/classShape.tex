@@ -1,0 +1,74 @@
+\hypertarget{classShape}{}\section{Shape Class Reference}
+\label{classShape}\index{Shape@{Shape}}
+
+
+{\ttfamily \#include $<$Tensor\+Impl.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classShape_a1dccd978da66abee047a9bf1fc785301}\label{classShape_a1dccd978da66abee047a9bf1fc785301}} 
+{\bfseries Shape} (std\+::initializer\+\_\+list$<$ size\+\_\+t $>$ l)
+\item 
+\mbox{\Hypertarget{classShape_a14bcfae8246987eb3e769dfa202453ec}\label{classShape_a14bcfae8246987eb3e769dfa202453ec}} 
+{\bfseries Shape} (std\+::vector$<$ size\+\_\+t $>$ l)
+\item 
+\mbox{\Hypertarget{classShape_a02ecca3348f398577dbe72c6c0654b83}\label{classShape_a02ecca3348f398577dbe72c6c0654b83}} 
+{\bfseries Shape} (std\+::vector$<$ unsigned int $>$ l)
+\item 
+\mbox{\Hypertarget{classShape_af929eaa4d0cbd6b2fe2e9026796b9cae}\label{classShape_af929eaa4d0cbd6b2fe2e9026796b9cae}} 
+{\bfseries Shape} (const \hyperlink{classShape}{Shape} \&other)
+\item 
+size\+\_\+t \hyperlink{classShape_ad6b6d852da0d07a2423e86b4ef5ad546}{capacity} ()
+\item 
+\mbox{\Hypertarget{classShape_abec858b84a1ffedfd1124a08c3be5f1f}\label{classShape_abec858b84a1ffedfd1124a08c3be5f1f}} 
+bool {\bfseries operator==} (\hyperlink{classShape}{Shape} \&other)
+\item 
+\mbox{\Hypertarget{classShape_a2cdad1c0f6eb8e14d759fb48ad192939}\label{classShape_a2cdad1c0f6eb8e14d759fb48ad192939}} 
+bool {\bfseries operator!=} (\hyperlink{classShape}{Shape} \&other)
+\item 
+\mbox{\Hypertarget{classShape_a4723009a6d66ab16276746e214d03f10}\label{classShape_a4723009a6d66ab16276746e214d03f10}} 
+const size\+\_\+t \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t idx) const
+\item 
+\mbox{\Hypertarget{classShape_a351c54bd811d932882ee58332376e837}\label{classShape_a351c54bd811d932882ee58332376e837}} 
+size\+\_\+t \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t idx)
+\item 
+void \hyperlink{classShape_aac6c0ddc8b96c70e0e138c5ba1e70ec4}{compute\+Capacity} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classShape_a3b0d19e35bdef69d272f1d4d3d0640f2}\label{classShape_a3b0d19e35bdef69d272f1d4d3d0640f2}} 
+size\+\_\+t {\bfseries size}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classShape_a7cd20cc8b48ed5c68a5d4d9011e62760}\label{classShape_a7cd20cc8b48ed5c68a5d4d9011e62760}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&output, const \hyperlink{classShape}{Shape} \&s)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provide shape information for Tensors.
+
+Shapes that are attached to Tensors should be treated as immutable. A lot of things will break if the shape is changed. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classShape_ad6b6d852da0d07a2423e86b4ef5ad546}\label{classShape_ad6b6d852da0d07a2423e86b4ef5ad546}} 
+\index{Shape@{Shape}!capacity@{capacity}}
+\index{capacity@{capacity}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily size\+\_\+t Shape\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the number of elements a that can be stored in a \hyperlink{classTensor}{Tensor} of this shape \mbox{\Hypertarget{classShape_aac6c0ddc8b96c70e0e138c5ba1e70ec4}\label{classShape_aac6c0ddc8b96c70e0e138c5ba1e70ec4}} 
+\index{Shape@{Shape}!compute\+Capacity@{compute\+Capacity}}
+\index{compute\+Capacity@{compute\+Capacity}!Shape@{Shape}}
+\subsubsection{\texorpdfstring{compute\+Capacity()}{computeCapacity()}}
+{\footnotesize\ttfamily void Shape\+::compute\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Recompute the the capacity of \hyperlink{classShape}{Shape}. Needs to be called if a shape is ever modified 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Tensor\+Impl.\+h\end{DoxyCompactItemize}

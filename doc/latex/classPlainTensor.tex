@@ -1,0 +1,76 @@
+\hypertarget{classPlainTensor}{}\section{Plain\+Tensor$<$ Value\+Type $>$ Class Template Reference}
+\label{classPlainTensor}\index{Plain\+Tensor$<$ Value\+Type $>$@{Plain\+Tensor$<$ Value\+Type $>$}}
+
+
+Inheritance diagram for Plain\+Tensor$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classPlainTensor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plain\+Tensor$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classPlainTensor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlainTensor_a1bb7b0b08b81c1a8c5229d3e74df566d}\label{classPlainTensor_a1bb7b0b08b81c1a8c5229d3e74df566d}} 
+{\bfseries Plain\+Tensor} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classPlainTensor_ab70afe70caa153f1bcaa25b1f4c7b6db}\label{classPlainTensor_ab70afe70caa153f1bcaa25b1f4c7b6db}} 
+{\bfseries Plain\+Tensor} (\hyperlink{classShape}{Shape} s, TensorP$<$ Value\+Type $>$ other)
+\item 
+\mbox{\Hypertarget{classPlainTensor_ad93424e2501cbc3e0c8c7e5966df4eba}\label{classPlainTensor_ad93424e2501cbc3e0c8c7e5966df4eba}} 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classPlainTensor}{Plain\+Tensor}$<$ Value\+Type $>$ {\bfseries operator+} (T val)
+\item 
+\mbox{\Hypertarget{classPlainTensor_aac41de476f267e19a4264ddf7fd3a1dd}\label{classPlainTensor_aac41de476f267e19a4264ddf7fd3a1dd}} 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classPlainTensor}{Plain\+Tensor}$<$ Value\+Type $>$ {\bfseries operator-\/} (T val)
+\item 
+\mbox{\Hypertarget{classPlainTensor_a48a3bcd32cda8ef59f423753ef48309c}\label{classPlainTensor_a48a3bcd32cda8ef59f423753ef48309c}} 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classPlainTensor}{Plain\+Tensor}$<$ Value\+Type $>$ {\bfseries operator$\ast$} (T val)
+\item 
+\mbox{\Hypertarget{classPlainTensor_ac8f9b34e18baaddf1f92e6d28975b316}\label{classPlainTensor_ac8f9b34e18baaddf1f92e6d28975b316}} 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classPlainTensor}{Plain\+Tensor}$<$ Value\+Type $>$ {\bfseries operator+} (\hyperlink{classTensor}{Tensor}$<$ T $>$ other)
+\item 
+\mbox{\Hypertarget{classPlainTensor_adcf4707571654e929a390fa6315a072e}\label{classPlainTensor_adcf4707571654e929a390fa6315a072e}} 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classPlainTensor}{Plain\+Tensor}$<$ Value\+Type $>$ {\bfseries operator-\/} (\hyperlink{classTensor}{Tensor}$<$ T $>$ other)
+\item 
+\mbox{\Hypertarget{classPlainTensor_a4561c68e4dc72afbdf6731b216238dd5}\label{classPlainTensor_a4561c68e4dc72afbdf6731b216238dd5}} 
+{\footnotesize template$<$class T $>$ }\\\hyperlink{classPlainTensor}{Plain\+Tensor}$<$ Value\+Type $>$ {\bfseries operator$\ast$} (\hyperlink{classTensor}{Tensor}$<$ T $>$ other)
+\item 
+\mbox{\Hypertarget{classPlainTensor_a2dc7be63356b8e36c0077a83bfed84e5}\label{classPlainTensor_a2dc7be63356b8e36c0077a83bfed84e5}} 
+virtual Value\+Type {\bfseries empty} () override
+\item 
+\mbox{\Hypertarget{classPlainTensor_a127cced2a949308de4bbeab9448c1fa9}\label{classPlainTensor_a127cced2a949308de4bbeab9448c1fa9}} 
+virtual std\+::vector$<$ int $>$ {\bfseries argmax\+Vector} (uint axis=0) override
+\item 
+\mbox{\Hypertarget{classPlainTensor_aed8bba6b79d8898d8c605f321fb051bb}\label{classPlainTensor_aed8bba6b79d8898d8c605f321fb051bb}} 
+virtual void {\bfseries init} () override
+\item 
+\mbox{\Hypertarget{classPlainTensor_a824aea45b509e48a94576522bc968a9c}\label{classPlainTensor_a824aea45b509e48a94576522bc968a9c}} 
+virtual void \hyperlink{classPlainTensor_a824aea45b509e48a94576522bc968a9c}{init\+Random} (uint seed=7) override
+\begin{DoxyCompactList}\small\item\em allocates the memory and fills it with random values \mbox{[}0,1\mbox{]} You can pass a seed for the random generator. Default seed is 7 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPlainTensor_affbbb66a767c64926e1c5f6c7450b7e4}\label{classPlainTensor_affbbb66a767c64926e1c5f6c7450b7e4}} 
+void {\bfseries init\+Random\+Internal} (uint seed, std\+::true\+\_\+type)
+\item 
+\mbox{\Hypertarget{classPlainTensor_a3c69c17b40efc0c1c615827d15167d0a}\label{classPlainTensor_a3c69c17b40efc0c1c615827d15167d0a}} 
+void {\bfseries init\+Random\+Internal} (uint seed, std\+::false\+\_\+type)
+\item 
+\mbox{\Hypertarget{classPlainTensor_ab4005307057fb776d0521d2edd6d505e}\label{classPlainTensor_ab4005307057fb776d0521d2edd6d505e}} 
+virtual void {\bfseries create\+Storage} () override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Plain\+Tensor\+Impl.\+h\end{DoxyCompactItemize}

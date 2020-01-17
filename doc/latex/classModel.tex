@@ -1,0 +1,73 @@
+\hypertarget{classModel}{}\section{Model$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Convert\+Type $>$ Class Template Reference}
+\label{classModel}\index{Model$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Convert\+Type $>$@{Model$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Convert\+Type $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classModel_a636e9b3233a0e47d23d158b610ad2f0e}\label{classModel_a636e9b3233a0e47d23d158b610ad2f0e}} 
+{\bfseries Model} (Memory\+Usage usage, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$dtf, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$wtf, \hyperlink{classWeightConverter}{Weight\+Converter}$<$ Weight\+Type, Convert\+Type $>$ $\ast$weight\+Converter)
+\item 
+\mbox{\Hypertarget{classModel_a693cb3292d07a6c02d6079242c398e5b}\label{classModel_a693cb3292d07a6c02d6079242c398e5b}} 
+{\bfseries Model} (Memory\+Usage usage, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$dtf, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$wtf)
+\item 
+\mbox{\Hypertarget{classModel_a17ae9992a402276c43af41b7da670d57}\label{classModel_a17ae9992a402276c43af41b7da670d57}} 
+void {\bfseries add\+Layer} (LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ layer)
+\item 
+\mbox{\Hypertarget{classModel_ae6df81bb406e41fdaa6146f79c9dbc01}\label{classModel_ae6df81bb406e41fdaa6146f79c9dbc01}} 
+void {\bfseries run} ()
+\item 
+\mbox{\Hypertarget{classModel_ac2f53c166a86322149d5b3fe2789a33d}\label{classModel_ac2f53c166a86322149d5b3fe2789a33d}} 
+std\+::vector$<$ int $>$ {\bfseries classification} ()
+\item 
+\mbox{\Hypertarget{classModel_a7453264187b6ce9709dbb59eefc19dcf}\label{classModel_a7453264187b6ce9709dbb59eefc19dcf}} 
+{\footnotesize template$<$class Label\+Type $>$ }\\float {\bfseries accuracy} (std\+::vector$<$ Label\+Type $>$ labels)
+\item 
+\mbox{\Hypertarget{classModel_a2c0b8fbc2827d78b6c104196defd92c4}\label{classModel_a2c0b8fbc2827d78b6c104196defd92c4}} 
+{\footnotesize template$<$class Label\+Type $>$ }\\float {\bfseries accuracy} (std\+::vector$<$ int $>$ predictions, std\+::vector$<$ Label\+Type $>$ labels)
+\item 
+\mbox{\Hypertarget{classModel_a90a7db6321accedf88cfcbe260ac6c51}\label{classModel_a90a7db6321accedf88cfcbe260ac6c51}} 
+void {\bfseries clear\+Graph} ()
+\item 
+\mbox{\Hypertarget{classModel_a94749563652423f8e4cd78efc4717b80}\label{classModel_a94749563652423f8e4cd78efc4717b80}} 
+{\footnotesize template$<$class In\+Type , class Label\+Type $>$ }\\float {\bfseries evaluate} (std\+::vector$<$ std\+::vector$<$ In\+Type $>$$>$ \&X, std\+::vector$<$ Label\+Type $>$ \&Y)
+\item 
+\mbox{\Hypertarget{classModel_a51cbbac990dc529799bf0d6584ece019}\label{classModel_a51cbbac990dc529799bf0d6584ece019}} 
+{\footnotesize template$<$class In\+Type , class Label\+Type $>$ }\\std\+::pair$<$ uint, uint $>$ {\bfseries feed\+Input\+Tensor} (std\+::vector$<$ std\+::vector$<$ In\+Type $>$$>$ \&X, std\+::vector$<$ Label\+Type $>$ \&Y, uint instance\+Used=0)
+\item 
+\mbox{\Hypertarget{classModel_a1ba1c560ce80a98ddb4387c12ca80061}\label{classModel_a1ba1c560ce80a98ddb4387c12ca80061}} 
+void {\bfseries summary} ()
+\item 
+void \hyperlink{classModel_a10800ec7771d181bc93ea8a85206cbb0}{load\+Weights} (std\+::string path, std\+::vector$<$ std\+::string $>$ names=std\+::vector$<$ std\+::string $>$())
+\item 
+\mbox{\Hypertarget{classModel_a218d5041a6d06771ba708033a0cea1ad}\label{classModel_a218d5041a6d06771ba708033a0cea1ad}} 
+void \hyperlink{classModel_a218d5041a6d06771ba708033a0cea1ad}{random\+Weights} ()
+\begin{DoxyCompactList}\small\item\em inits all weights to a random value from \mbox{[}0,1\mbox{]} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classModel_a77e793c902a5e53134fe53259ddc110d}\label{classModel_a77e793c902a5e53134fe53259ddc110d}} 
+TensorP$<$ Value\+Type $>$ {\bfseries input} ()
+\item 
+\mbox{\Hypertarget{classModel_a6e51e106d42b7286ffc0767f6c4b96a4}\label{classModel_a6e51e106d42b7286ffc0767f6c4b96a4}} 
+TensorP$<$ Value\+Type $>$ {\bfseries output} ()
+\item 
+\mbox{\Hypertarget{classModel_aaf1a291634a6550f6f1f914efbd1f349}\label{classModel_aaf1a291634a6550f6f1f914efbd1f349}} 
+std\+::vector$<$ LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ $>$ {\bfseries layers} () const
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classModel_aeb95301bfed843425127a5994f50f208}\label{classModel_aeb95301bfed843425127a5994f50f208}} 
+std\+::vector$<$ LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ $>$ {\bfseries m\+Layers}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classModel_a10800ec7771d181bc93ea8a85206cbb0}\label{classModel_a10800ec7771d181bc93ea8a85206cbb0}} 
+\index{Model@{Model}!load\+Weights@{load\+Weights}}
+\index{load\+Weights@{load\+Weights}!Model@{Model}}
+\subsubsection{\texorpdfstring{load\+Weights()}{loadWeights()}}
+{\footnotesize\ttfamily template$<$class Value\+Type, class Weight\+Type, class Data\+Tensor\+Type = Tensor$<$\+Value\+Type$>$, class Weight\+Tensor\+Type = Tensor$<$\+Weight\+Type$>$, class Convert\+Type = float$>$ \\
+void \hyperlink{classModel}{Model}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Convert\+Type $>$\+::load\+Weights (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{std\+::vector$<$ std\+::string $>$}]{names = {\ttfamily std\+:\+:vector$<$std\+:\+:string$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Loads the weights and also inits the weight tensors of each layer 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Model\+Impl.\+h\end{DoxyCompactItemize}

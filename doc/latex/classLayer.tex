@@ -1,0 +1,173 @@
+\hypertarget{classLayer}{}\section{Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$ Class Template Reference}
+\label{classLayer}\index{Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$@{Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}}
+
+
+Inheritance diagram for Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLayer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLayer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLayer_ae51deecd48944b1e66aa3380346933ff}\label{classLayer_ae51deecd48944b1e66aa3380346933ff}} 
+{\bfseries Layer} (std\+::string name, std\+::shared\+\_\+ptr$<$ \hyperlink{classActivation}{Activation}$<$ Value\+Type $>$$>$ act, TensorP$<$ Value\+Type $>$ m\+Input, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classLayer_aa364d0b9ba81ecf20e1311233e060194}\label{classLayer_aa364d0b9ba81ecf20e1311233e060194}} 
+{\bfseries Layer} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classLayer_adc832dd81ee6309c08a1ed1dc50beceb}\label{classLayer_adc832dd81ee6309c08a1ed1dc50beceb}} 
+{\bfseries Layer} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, TensorP$<$ Value\+Type $>$ m\+Input, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classLayer_a9330e624400d416acf9db75e9ef341d5}\label{classLayer_a9330e624400d416acf9db75e9ef341d5}} 
+{\bfseries Layer} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classLayer_ab54d3d87b93c96323b1b4b24696fedb1}\label{classLayer_ab54d3d87b93c96323b1b4b24696fedb1}} 
+{\bfseries Layer} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, TensorP$<$ Value\+Type $>$ m\+Input)
+\item 
+\mbox{\Hypertarget{classLayer_a5b5fd9d3516b946740fe07798829beab}\label{classLayer_a5b5fd9d3516b946740fe07798829beab}} 
+{\bfseries Layer} (std\+::string name, ActivationP$<$ Value\+Type $>$ act)
+\item 
+\mbox{\Hypertarget{classLayer_a65b01a9ea651eecfc1aa6b4d4a90934a}\label{classLayer_a65b01a9ea651eecfc1aa6b4d4a90934a}} 
+virtual \hyperlink{classShape}{Shape} {\bfseries output\+Shape} ()=0
+\item 
+\mbox{\Hypertarget{classLayer_add81f41a5db3d11fdf26ca827a8f180d}\label{classLayer_add81f41a5db3d11fdf26ca827a8f180d}} 
+virtual void {\bfseries feed\+Forward} ()=0
+\item 
+\mbox{\Hypertarget{classLayer_a837ecbbd51ba10fd078d1cb4601f0316}\label{classLayer_a837ecbbd51ba10fd078d1cb4601f0316}} 
+void \hyperlink{classLayer_a837ecbbd51ba10fd078d1cb4601f0316}{run} ()
+\begin{DoxyCompactList}\small\item\em Wrapper around feed\+Forward that gives some nice print outs like the layer name and the execution time. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLayer_af73268db5967d16cdc6cc4429751f8f6}\label{classLayer_af73268db5967d16cdc6cc4429751f8f6}} 
+virtual void {\bfseries load\+Weights} (std\+::string path, std\+::string file\+Name)=0
+\item 
+\mbox{\Hypertarget{classLayer_a0307eae9d196694b817c51b090f2d5ea}\label{classLayer_a0307eae9d196694b817c51b090f2d5ea}} 
+virtual void {\bfseries load\+Weights} (std\+::string path)=0
+\item 
+\mbox{\Hypertarget{classLayer_acb8dda3d8e78113228862e122594dad5}\label{classLayer_acb8dda3d8e78113228862e122594dad5}} 
+virtual void {\bfseries random\+Init} ()=0
+\item 
+virtual bool \hyperlink{classLayer_a9a126cb372c0bd529c65a06077d8b429}{builds\+Own\+Output\+Tensor} ()
+\begin{DoxyCompactList}\small\item\em This function is supposed to be used if a layer needs to build a special output layer. It will get called when layers gets added to the model. Build yuour own output layer in this function and return false. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLayer_a9fafa46db51dfe6bf76dfd97ccaae831}\label{classLayer_a9fafa46db51dfe6bf76dfd97ccaae831}} 
+virtual void \hyperlink{classLayer_a9fafa46db51dfe6bf76dfd97ccaae831}{setup} ()
+\begin{DoxyCompactList}\small\item\em Call if additional setup is needed.\+Does nothing by default. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLayer_acabbce9cf07d62f052e03b268a9fce4a}\label{classLayer_acabbce9cf07d62f052e03b268a9fce4a}} 
+virtual void {\bfseries description} ()
+\item 
+\mbox{\Hypertarget{classLayer_aa51da5fc0291fa9705fb72c1a41a5a52}\label{classLayer_aa51da5fc0291fa9705fb72c1a41a5a52}} 
+std\+::string {\bfseries name} ()
+\item 
+\mbox{\Hypertarget{classLayer_aa74c666ae358b8b54ffc168a956547d7}\label{classLayer_aa74c666ae358b8b54ffc168a956547d7}} 
+TensorP$<$ Value\+Type $>$ {\bfseries input} ()
+\item 
+\mbox{\Hypertarget{classLayer_a09549351292b62e15eae035d37be8bf8}\label{classLayer_a09549351292b62e15eae035d37be8bf8}} 
+TensorP$<$ Value\+Type $>$ {\bfseries output} ()
+\item 
+\mbox{\Hypertarget{classLayer_a9f6c1e8d5763e9e27ddc0e64b64fc2b2}\label{classLayer_a9f6c1e8d5763e9e27ddc0e64b64fc2b2}} 
+void {\bfseries input} (TensorP$<$ Value\+Type $>$ input)
+\item 
+\mbox{\Hypertarget{classLayer_aa20167d8894f5b02502520848af299bc}\label{classLayer_aa20167d8894f5b02502520848af299bc}} 
+void {\bfseries output} (TensorP$<$ Value\+Type $>$ output)
+\item 
+\mbox{\Hypertarget{classLayer_aa2302c00a3b7287317ae5da65432fcdb}\label{classLayer_aa2302c00a3b7287317ae5da65432fcdb}} 
+void {\bfseries activation} (ActivationP$<$ Value\+Type $>$ act)
+\item 
+\mbox{\Hypertarget{classLayer_ab81d21a8d3a1b869ae54e4bd0d78d64f}\label{classLayer_ab81d21a8d3a1b869ae54e4bd0d78d64f}} 
+void {\bfseries weights} (TensorP$<$ Weight\+Type $>$ weights)
+\item 
+\mbox{\Hypertarget{classLayer_a14f7c89240590274d5b7e89b88c810f9}\label{classLayer_a14f7c89240590274d5b7e89b88c810f9}} 
+void {\bfseries biases} (TensorP$<$ Weight\+Type $>$ biases)
+\item 
+\mbox{\Hypertarget{classLayer_a0f5b1c4bc40bcac15704586a51253093}\label{classLayer_a0f5b1c4bc40bcac15704586a51253093}} 
+TensorP$<$ Weight\+Type $>$ {\bfseries weights} ()
+\item 
+\mbox{\Hypertarget{classLayer_a326dc233d98ee23099fe04d430585569}\label{classLayer_a326dc233d98ee23099fe04d430585569}} 
+TensorP$<$ Weight\+Type $>$ {\bfseries biases} ()
+\item 
+\mbox{\Hypertarget{classLayer_aa1f42c42ea187f6b87e60ff187c06238}\label{classLayer_aa1f42c42ea187f6b87e60ff187c06238}} 
+virtual std\+::vector$<$ TensorP$<$ Weight\+Type $>$ $>$ \hyperlink{classLayer_aa1f42c42ea187f6b87e60ff187c06238}{all\+Weights} ()=0
+\begin{DoxyCompactList}\small\item\em Returns all the weights and bias tensors of the layer. Order is up to the individual layer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLayer_abdf474948cf69d47972f1987f36d4d85}\label{classLayer_abdf474948cf69d47972f1987f36d4d85}} 
+void \hyperlink{classLayer_abdf474948cf69d47972f1987f36d4d85}{converted\+Weights} (std\+::vector$<$ TensorP$<$ Converted\+Weights $>$$>$ \&converted\+Weights)
+\begin{DoxyCompactList}\small\item\em Set the converted\+Weights vector. The order needs to be the same as returned by \hyperlink{classLayer_aa1f42c42ea187f6b87e60ff187c06238}{all\+Weights()} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLayer_a3cd949d8d56008b1c5c3273e04539bdd}\label{classLayer_a3cd949d8d56008b1c5c3273e04539bdd}} 
+void {\bfseries clear} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLayer_a8a508508fae922c38007eb8319041fb9}\label{classLayer_a8a508508fae922c38007eb8319041fb9}} 
+std\+::string {\bfseries m\+Name}
+\item 
+\mbox{\Hypertarget{classLayer_a4361c9c4065fe5c60234a6483bccb2ae}\label{classLayer_a4361c9c4065fe5c60234a6483bccb2ae}} 
+ActivationP$<$ Value\+Type $>$ {\bfseries m\+Activation}
+\item 
+\mbox{\Hypertarget{classLayer_ad067632eddb3b78c793e4db416743cb5}\label{classLayer_ad067632eddb3b78c793e4db416743cb5}} 
+TensorP$<$ Value\+Type $>$ {\bfseries m\+Input} = N\+U\+LL
+\item 
+\mbox{\Hypertarget{classLayer_a093c45677836e0eb0d340203c2b7c530}\label{classLayer_a093c45677836e0eb0d340203c2b7c530}} 
+TensorP$<$ Value\+Type $>$ {\bfseries m\+Output}
+\item 
+\mbox{\Hypertarget{classLayer_a17cfb470494dba90c0af4e0537b55792}\label{classLayer_a17cfb470494dba90c0af4e0537b55792}} 
+TensorP$<$ Weight\+Type $>$ {\bfseries m\+Weights}
+\item 
+\mbox{\Hypertarget{classLayer_a5ced22851d156d792c8790c504705d27}\label{classLayer_a5ced22851d156d792c8790c504705d27}} 
+TensorP$<$ Weight\+Type $>$ {\bfseries m\+Biases}
+\item 
+\mbox{\Hypertarget{classLayer_a8d7174f4fae221a126525ab9a106bce1}\label{classLayer_a8d7174f4fae221a126525ab9a106bce1}} 
+\hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$ {\bfseries m\+Data\+Tensor\+Factory}
+\item 
+\mbox{\Hypertarget{classLayer_ab3b6a9517c3baa451bf765c1d557a7fc}\label{classLayer_ab3b6a9517c3baa451bf765c1d557a7fc}} 
+\hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$ {\bfseries m\+Weigth\+Tensor\+Factory}
+\item 
+\mbox{\Hypertarget{classLayer_ae4202d2ab733d8d6654c9babaad1a1d9}\label{classLayer_ae4202d2ab733d8d6654c9babaad1a1d9}} 
+Tensor\+FactoryP$<$ Value\+Type $>$ {\bfseries m\+D\+TF}
+\item 
+\mbox{\Hypertarget{classLayer_aa11a9dce0ccc4c7c8a58f3c6b4a81922}\label{classLayer_aa11a9dce0ccc4c7c8a58f3c6b4a81922}} 
+Tensor\+FactoryP$<$ Weight\+Type $>$ {\bfseries m\+W\+TF}
+\item 
+\mbox{\Hypertarget{classLayer_a2141c4c8cecb1f4d07d5cbad56bf72ea}\label{classLayer_a2141c4c8cecb1f4d07d5cbad56bf72ea}} 
+std\+::vector$<$ TensorP$<$ Converted\+Weights $>$ $>$ {\bfseries m\+Converted\+Weights}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLayer_ae5f92f969812a07238aa2694e0e74be4}\label{classLayer_ae5f92f969812a07238aa2694e0e74be4}} 
+{\footnotesize template$<$class V , class W , class DT , class WT , class CT $>$ }\\class {\bfseries Model}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classLayer_a9a126cb372c0bd529c65a06077d8b429}\label{classLayer_a9a126cb372c0bd529c65a06077d8b429}} 
+\index{Layer@{Layer}!builds\+Own\+Output\+Tensor@{builds\+Own\+Output\+Tensor}}
+\index{builds\+Own\+Output\+Tensor@{builds\+Own\+Output\+Tensor}!Layer@{Layer}}
+\subsubsection{\texorpdfstring{builds\+Own\+Output\+Tensor()}{buildsOwnOutputTensor()}}
+{\footnotesize\ttfamily template$<$class Value\+Type, class Weight\+Type, class Data\+Tensor\+Type = Tensor\+P$<$\+Value\+Type$>$, class Weight\+Tensor\+Type = Tensor\+P$<$\+Weight\+Type$>$, class Converted\+Weights = float$>$ \\
+virtual bool \hyperlink{classLayer}{Layer}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+::builds\+Own\+Output\+Tensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function is supposed to be used if a layer needs to build a special output layer. It will get called when layers gets added to the model. Build yuour own output layer in this function and return false. 
+
+See \hyperlink{classFlatten}{Flatten} for an example 
+
+Reimplemented in \hyperlink{classFlatten_a53379945e182152effef9456b32eb65a}{Flatten$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Layer\+Impl.\+h\end{DoxyCompactItemize}

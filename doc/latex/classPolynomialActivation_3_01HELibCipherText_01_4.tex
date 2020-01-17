@@ -1,0 +1,84 @@
+\hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4}{}\section{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$ Class Template Reference}
+\label{classPolynomialActivation_3_01HELibCipherText_01_4}\index{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$@{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}}
+
+
+{\ttfamily \#include $<$H\+E\+L\+Ib\+Cipher\+Text.\+h$>$}
+
+
+
+Inheritance diagram for Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classPolynomialActivation_3_01HELibCipherText_01_4__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classPolynomialActivation_3_01HELibCipherText_01_4__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_ac2bd62e9d405fed932bc30dd87f85236}\label{classPolynomialActivation_3_01HELibCipherText_01_4_ac2bd62e9d405fed932bc30dd87f85236}} 
+{\bfseries Polynomial\+Activation} (float a, float b, float c, TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ tensor)
+\item 
+void \hyperlink{classPolynomialActivation_3_01HELibCipherText_01_4_a5d20f2ff5f59bcafe437d20942af7bec}{activate} (\hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} \&in)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \hyperlink{classActivation}{Activation}$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ $>$ \hyperlink{classPolynomialActivation_3_01HELibCipherText_01_4_a1b8454b2fa856410cbc7619dba7e1b52}{get\+Shared\+Pointer} (float a, float b, float c, TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ tensor)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_aed3a7116977caa5a97491582c0d57bf6}\label{classPolynomialActivation_3_01HELibCipherText_01_4_aed3a7116977caa5a97491582c0d57bf6}} 
+const float {\bfseries a}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_a4da9ba91b618c98fdbe11544e5698f02}\label{classPolynomialActivation_3_01HELibCipherText_01_4_a4da9ba91b618c98fdbe11544e5698f02}} 
+const float {\bfseries b}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_a2ec2ebd2ef37bf139b954957127b60a0}\label{classPolynomialActivation_3_01HELibCipherText_01_4_a2ec2ebd2ef37bf139b954957127b60a0}} 
+const float {\bfseries c}
+\item 
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_a12de3ad576ceb880577becc3d9317235}\label{classPolynomialActivation_3_01HELibCipherText_01_4_a12de3ad576ceb880577becc3d9317235}} 
+const TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$ {\bfseries tensor}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$$>$\newline
+class Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}
+
+Degree 2 ax$^\wedge$2+bx+c 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_a5d20f2ff5f59bcafe437d20942af7bec}\label{classPolynomialActivation_3_01HELibCipherText_01_4_a5d20f2ff5f59bcafe437d20942af7bec}} 
+\index{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$@{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}!activate@{activate}}
+\index{activate@{activate}!Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$@{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}}
+\subsubsection{\texorpdfstring{activate()}{activate()}}
+{\footnotesize\ttfamily void \hyperlink{classPolynomialActivation}{Polynomial\+Activation}$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$\+::activate (\begin{DoxyParamCaption}\item[{\hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Need to calculate the invidual parts and then sum it up at the end 
+
+Implements \hyperlink{classActivation}{Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}.
+
+\mbox{\Hypertarget{classPolynomialActivation_3_01HELibCipherText_01_4_a1b8454b2fa856410cbc7619dba7e1b52}\label{classPolynomialActivation_3_01HELibCipherText_01_4_a1b8454b2fa856410cbc7619dba7e1b52}} 
+\index{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$@{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}!get\+Shared\+Pointer@{get\+Shared\+Pointer}}
+\index{get\+Shared\+Pointer@{get\+Shared\+Pointer}!Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$@{Polynomial\+Activation$<$ H\+E\+Lib\+Cipher\+Text $>$}}
+\subsubsection{\texorpdfstring{get\+Shared\+Pointer()}{getSharedPointer()}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\hyperlink{classActivation}{Activation}$<$\hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text}$>$ $>$ \hyperlink{classPolynomialActivation}{Polynomial\+Activation}$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$\+::get\+Shared\+Pointer (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b,  }\item[{float}]{c,  }\item[{TensorP$<$ \hyperlink{classHELibCipherText}{H\+E\+Lib\+Cipher\+Text} $>$}]{tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Needs coeffecients a,b,c for ax$^\wedge$2+bx+c and Tensor\+P$<$\+T$>$ that can provide an empty T. It does not need initialized storage. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/\+H\+E\+Backend/helib/H\+E\+L\+Ib\+Cipher\+Text.\+h\end{DoxyCompactItemize}

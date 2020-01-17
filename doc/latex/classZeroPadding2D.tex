@@ -1,0 +1,64 @@
+\hypertarget{classZeroPadding2D}{}\section{Zero\+Padding2D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$ Class Template Reference}
+\label{classZeroPadding2D}\index{Zero\+Padding2\+D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$@{Zero\+Padding2\+D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}}
+
+
+Inheritance diagram for Zero\+Padding2D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classZeroPadding2D__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Zero\+Padding2D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classZeroPadding2D__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_a60ab0775e896e530af48533a3e17c689}\label{classZeroPadding2D_a60ab0775e896e530af48533a3e17c689}} 
+{\bfseries Zero\+Padding2D} (std\+::string name, uint padding, TensorP$<$ Value\+Type $>$ input, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_a337936cbafd4d7de12d3ee83cf2e206d}\label{classZeroPadding2D_a337936cbafd4d7de12d3ee83cf2e206d}} 
+{\bfseries Zero\+Padding2D} (std\+::string name, uint padding, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_ab5b9cf645be4db0934e187cd7c106cd5}\label{classZeroPadding2D_ab5b9cf645be4db0934e187cd7c106cd5}} 
+{\bfseries Zero\+Padding2D} (std\+::string name, uint padding, TensorP$<$ Value\+Type $>$ input)
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_a751dcce114778af2fa14264df69d32f2}\label{classZeroPadding2D_a751dcce114778af2fa14264df69d32f2}} 
+{\bfseries Zero\+Padding2D} (std\+::string name, uint padding)
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_ad69fd55388647abe6da3fbd13276345f}\label{classZeroPadding2D_ad69fd55388647abe6da3fbd13276345f}} 
+\hyperlink{classShape}{Shape} {\bfseries output\+Shape} () override
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_acea530d6eda8b20a8bbf2999fa8b2a2c}\label{classZeroPadding2D_acea530d6eda8b20a8bbf2999fa8b2a2c}} 
+void {\bfseries feed\+Forward} () override
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_a4ce4764406efbdb3e6682edb6514b3af}\label{classZeroPadding2D_a4ce4764406efbdb3e6682edb6514b3af}} 
+void {\bfseries load\+Weights} (std\+::string path, std\+::string file\+Name)
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_a443b3a6de288bab8dc27e97ba838ebb7}\label{classZeroPadding2D_a443b3a6de288bab8dc27e97ba838ebb7}} 
+void {\bfseries load\+Weights} (std\+::string path)
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_af58799e893355789f437a3e945f9d59b}\label{classZeroPadding2D_af58799e893355789f437a3e945f9d59b}} 
+virtual void {\bfseries random\+Init} () override
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_ad7240edbd88c790da7f9caae354164d5}\label{classZeroPadding2D_ad7240edbd88c790da7f9caae354164d5}} 
+void {\bfseries description} () override
+\item 
+\mbox{\Hypertarget{classZeroPadding2D_a96419962471edc0e25d594a497dfddb8}\label{classZeroPadding2D_a96419962471edc0e25d594a497dfddb8}} 
+virtual std\+::vector$<$ TensorP$<$ Weight\+Type $>$ $>$ \hyperlink{classZeroPadding2D_a96419962471edc0e25d594a497dfddb8}{all\+Weights} () override
+\begin{DoxyCompactList}\small\item\em Returns empty vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Layer\+Impl.\+h\end{DoxyCompactItemize}

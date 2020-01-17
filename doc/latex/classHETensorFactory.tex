@@ -1,0 +1,76 @@
+\hypertarget{classHETensorFactory}{}\section{H\+E\+Tensor\+Factory$<$ T $>$ Class Template Reference}
+\label{classHETensorFactory}\index{H\+E\+Tensor\+Factory$<$ T $>$@{H\+E\+Tensor\+Factory$<$ T $>$}}
+
+
+Inheritance diagram for H\+E\+Tensor\+Factory$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classHETensorFactory__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for H\+E\+Tensor\+Factory$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classHETensorFactory__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHETensorFactory_a5bc8ec357ccf999794e32e8e98ee8b01}\label{classHETensorFactory_a5bc8ec357ccf999794e32e8e98ee8b01}} 
+{\bfseries H\+E\+Tensor\+Factory} (\hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}$<$ T $>$ $\ast$factory)
+\item 
+virtual TensorP$<$ T $>$ \hyperlink{classHETensorFactory_a7becf968bdd7110f8f1ba7c2d212a69f}{create} (\hyperlink{classShape}{Shape} s) override
+\item 
+virtual TensorP$<$ T $>$ \hyperlink{classHETensorFactory_a9c8d6f82f1cbbdf497eb784b0c417f03}{create\+View} (\hyperlink{classShape}{Shape} s, TensorP$<$ T $>$ other) override
+\begin{DoxyCompactList}\small\item\em Creates a different view on the same datastorage. Shapes must match. Views can alter the underlying data just as the original \hyperlink{classTensor}{Tensor}. After the creation they share equal ownership of the data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHETensorFactory_a73bfc12f4c1b6066da183e469dbb1d2c}\label{classHETensorFactory_a73bfc12f4c1b6066da183e469dbb1d2c}} 
+\hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}$<$ T $>$ $\ast$ {\bfseries ciphertext\+Factory} () const
+\item 
+\mbox{\Hypertarget{classHETensorFactory_abc9704a42a96acc8b195853c8c2e9a9a}\label{classHETensorFactory_abc9704a42a96acc8b195853c8c2e9a9a}} 
+virtual TensorP$<$ T $>$ {\bfseries ones\+And\+Init} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classHETensorFactory_a7793cc289ab6ab739ed9e3b416dd4b22}\label{classHETensorFactory_a7793cc289ab6ab739ed9e3b416dd4b22}} 
+virtual TensorP$<$ T $>$ {\bfseries arange\+And\+Init} (\hyperlink{classShape}{Shape} s, int start=1, int step=1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classHETensorFactory_a7becf968bdd7110f8f1ba7c2d212a69f}\label{classHETensorFactory_a7becf968bdd7110f8f1ba7c2d212a69f}} 
+\index{H\+E\+Tensor\+Factory@{H\+E\+Tensor\+Factory}!create@{create}}
+\index{create@{create}!H\+E\+Tensor\+Factory@{H\+E\+Tensor\+Factory}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+virtual TensorP$<$T$>$ \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}$<$ T $>$\+::create (\begin{DoxyParamCaption}\item[{\hyperlink{classShape}{Shape}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Store the plain text shape for convience 
+
+Implements \hyperlink{classTensorFactory}{Tensor\+Factory$<$ T $>$}.
+
+\mbox{\Hypertarget{classHETensorFactory_a9c8d6f82f1cbbdf497eb784b0c417f03}\label{classHETensorFactory_a9c8d6f82f1cbbdf497eb784b0c417f03}} 
+\index{H\+E\+Tensor\+Factory@{H\+E\+Tensor\+Factory}!create\+View@{create\+View}}
+\index{create\+View@{create\+View}!H\+E\+Tensor\+Factory@{H\+E\+Tensor\+Factory}}
+\subsubsection{\texorpdfstring{create\+View()}{createView()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+virtual TensorP$<$T$>$ \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}$<$ T $>$\+::create\+View (\begin{DoxyParamCaption}\item[{\hyperlink{classShape}{Shape}}]{s,  }\item[{TensorP$<$ T $>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Creates a different view on the same datastorage. Shapes must match. Views can alter the underlying data just as the original \hyperlink{classTensor}{Tensor}. After the creation they share equal ownership of the data. 
+
+Store the plain text shape for convience 
+
+Implements \hyperlink{classTensorFactory_ad14cbf4066594cc77f2fb75ee0a6ca74}{Tensor\+Factory$<$ T $>$}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/\+H\+E\+Backend/Cipher\+Text\+Wrapper.\+h\item 
+src/architecture/\+H\+E\+Backend/H\+E\+Tensor.\+h\end{DoxyCompactItemize}

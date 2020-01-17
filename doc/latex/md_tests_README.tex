@@ -1,0 +1,65 @@
+\#\# \hyperlink{CompleteNetworkTests_8h_source}{Complete\+Network\+Tests.\+h}$\ast$ 
+\begin{DoxyCode}
+Files that handle the execution of a complete plain network test through various types, including:
+       mpz\_class, long, and float. Some of the functions also use 'all-ones' for the filters and biases.
+\end{DoxyCode}
+
+
+\#\# \hyperlink{ConvTest_8h_source}{Conv\+Test.\+h} 
+\begin{DoxyCode}
+A file that prototypes convolutional testing functions on same padding, valid padding, and other
+       attributes.
+\end{DoxyCode}
+
+
+\#\# Conv\+Test\+Same\+Padding.\+cpp 
+\begin{DoxyCode}
+A file that defines the prototypes for the same-padding test functions in ConvTest.h
+\end{DoxyCode}
+
+
+\#\# Conv\+Test\+Valid\+Padding.\+cpp 
+\begin{DoxyCode}
+A file that defines the prototypes for the valid-padding test functions in ConvTest.h
+Also defines a convolutional layer 2 test where the second conv. layer is tested through the use of Keras'
+       actual output. 
+\end{DoxyCode}
+
+
+\#\# Dense\+Test.$\ast$ 
+\begin{DoxyCode}
+Files that contain the functions used to run tests on the flattenImages function which takes a templated
+       2-d vector and compares each element.
+\end{DoxyCode}
+
+
+\#\# Plain\+Network.\+h 
+\begin{DoxyCode}
+A file that contains templated functions that compare datasets, load filters, compute the average on
+       magnitude, and run a plain-image network from our model and prints the accuracy.
+\end{DoxyCode}
+
+
+\#\# \hyperlink{TestCommons_8h_source}{Test\+Commons.\+h} 
+\begin{DoxyCode}
+The file that contains comparing, and finishTest functions used in the majority of test definitions.
+compareOutput traverses two 3-dimensional vectors of longs, comparing each element and returns a bool that
+       states whether test succeeded or not.
+finishTest uses the compareOutput, and prints the results.
+\end{DoxyCode}
+
+
+\#\# Test\+Commons\+Impl.\+h 
+\begin{DoxyCode}
+File that contains templated functions for comparing output, finishing tests, and printing results.
+\end{DoxyCode}
+
+
+\subsection*{Tests.\+h}
+
+
+\begin{DoxyCode}
+File that executes the tests defined in this folder. On the successful execution of all tests, it prints
+       'success', and prints an error otherwise. The function terminates the program regardless of the result.
+\end{DoxyCode}
+ 

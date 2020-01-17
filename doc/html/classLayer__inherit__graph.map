@@ -1,0 +1,4 @@
+<map id="Layer&lt; ValueType, WeightType, DataTensorType, WeightTensorType, ConvertedWeights &gt;" name="Layer&lt; ValueType, WeightType, DataTensorType, WeightTensorType, ConvertedWeights &gt;">
+<area shape="rect" id="node2" href="$classConvolution2D.html" title="Convolution2D\&lt; ValueType,\l WeightType, DataTensorType,\l WeightTensorType, ConvertedWeights \&gt;" alt="" coords="317,5,581,61"/>
+<area shape="rect" id="node3" href="$classDense.html" title="Dense\&lt; ValueType, Weight\lType, DataTensorType,\l WeightTensorType, ConvertedWeights \&gt;" alt="" coords="317,85,581,141"/>
+</map>

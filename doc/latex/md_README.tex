@@ -1,0 +1,127 @@
+v.\+0.\+2.\+2
+
+\subsection*{What is this repository for?}
+
+This project aims to provide Deep Learning with a privacy preserving computation backend. The privacy preserving computation is based on homomorphic encryption (HE). Homomorphic encryption allows for computation on encrypted data, get an encrypted result without the need to decrypt the data for any of the computation. These properties come with a number of restrictions and things to look out for. We aim to provide a library that provides privacy preserving deep learning for people with a deep learning background without needing to dig into HE, aswell as the abiltity to easily integrate different HE libraries as computation backends.
+
+\subsection*{Things to be aware of and look out for}
+
+\subsubsection*{Image data format and channels}
+
+Out system currently assumes that the image data format is {\bfseries channels first}. This means the contains the inputs are of the following form {\ttfamily \mbox{[}batch, channel, y, x\mbox{]}}.
+
+\paragraph*{Keras 2.\+0.\+6 and later}
+
+In Keras 2.\+0.\+6 the {\ttfamily \hyperlink{classFlatten}{Flatten}} layer became aware of the image data format. In prior versions it was always assuming channels last. Our implementation does not suport channels first flattening in the same way that Keras does. So make sure that your {\ttfamily \hyperlink{classFlatten}{Flatten}} layers contains the correct data format like this\+:
+
+
+\begin{DoxyCode}
+Flatten(data\_format="channels\_last")
+\end{DoxyCode}
+
+
+\paragraph*{Supported version of H\+E\+Lib}
+
+The last none version of H\+E\+Lib supported is\+: {\ttfamily ac0308715e5ae6bf5e750e8701e736d855550fc8} To obtain it use\+:
+
+
+\begin{DoxyCode}
+git checkout ac0308715e5ae6bf5e750e8701e736d855550fc8
+\end{DoxyCode}
+ \paragraph*{H\+E\+Lib build issues}
+
+There are issues witht he new H\+E\+Lib build system. It produces a way slower library. See the build section how to use the old system.
+
+\subsection*{What is supported at the moment?}
+
+\subsubsection*{Deep Learning}
+
+So far we support two types of layers\+:
+
+
+\begin{DoxyItemize}
+\item 2D Convolutional
+\item Fully Connected
+\end{DoxyItemize}
+
+We support a number of activation functions\+:
+\begin{DoxyItemize}
+\item Linear
+\item Square
+\item Re\+LU ( not useable with the HE backend )
+\end{DoxyItemize}
+
+We {\bfseries only} support inference. Training is not supported and needs to be done with other tools/frameworks. As of now there is no automated way of importing pretrained models. The current suggested workflow is\+:
+\begin{DoxyEnumerate}
+\item Train model using \href{https://keras.io/}{\tt keras}
+\item Use provided tools to extract weights
+\item Define model in C++ and import weights Models that are supposed to used with our code may only use these layers and activation functions.
+\end{DoxyEnumerate}
+
+\subsubsection*{HE Backend}
+
+Currently we only support \href{https://github.com/shaih/HElib}{\tt H\+E\+Lib} library as a computational backend (other than plaintext).
+
+\paragraph*{Limitations}
+
+HE places a number of constraints and limitations on the type of computation that can be performed. This is supposed to be a list of the main points to be aware off. It is not meant to be comprehenisve.
+
+
+\begin{DoxyItemize}
+\item {\bfseries No Division} Division of ciphertexts is not supported
+\item {\bfseries No comparison} There is no comparison between ciphertext, e.\+g. no max, min, etc. This means we can not use Re\+LU, Max\+Pooling, etc.
+\item {\bfseries Limited number of computations} Every computation performed on a ciphertext adds some additional noise to the ciphertext. If the noise exceeds some threshold we can not decrypt it correctly anymore. Therefore we can not run an arbitrary number of computations
+\item {\bfseries Limited support of \hyperlink{classActivation}{Activation} functions, Layers} Due the constraints mentioned above we can not use every activation function or layer that we normally can. We suggest using poynomials as activation functions.
+\end{DoxyItemize}
+
+\subsection*{How do I get set up?}
+
+\subsubsection*{Dependencies}
+
+
+\begin{DoxyItemize}
+\item H\+E\+Lib
+\item boost 1.\+67
+\end{DoxyItemize}
+
+At the moment only Linux is supported. We have run it succesfully on Ubuntu 16.\+04, Ubuntu 17.\+10, and Ubuntu 18.\+10. Other versions might work as well. Our project is based on \href{https://github.com/shaih/HElib}{\tt H\+E\+Lib} which needs to be built.
+
+Our project currently setup up as an eclipse project. The best way to build it is using \href{https://www.eclipse.org/cdt/}{\tt eclipse cdt}. If you choose not to use eclipse you can find the makefiles in the {\ttfamily build} directory. The problem is that these files need to be updated manualy and will only be updated for a new release.
+
+\subsubsection*{Building without eclipse}
+
+\subsection*{I\+M\+P\+O\+R\+T\+A\+NT C\+H\+A\+N\+G\+ES F\+OP V\+E\+R\+S\+I\+ON v.\+0.\+2.\+2}
+
+The build instructions have changed. There are performance issue with the libary file that is produced by the new H\+Elib build system. Use the legacy system for now.
+
+
+\begin{DoxyEnumerate}
+\item Follow the instructions here\+: \href{https://github.com/shaih/HElib/blob/master/OLD_INSTALL.txt}{\tt https\+://github.\+com/shaih/\+H\+Elib/blob/master/\+O\+L\+D\+\_\+\+I\+N\+S\+T\+A\+L\+L.\+txt} When installling {\ttfamily gmp} make sure to include the c++ interface by using {\ttfamily ./configure -\/-\/enable-\/cxx}
+\item We expect to find the H\+Elib headers in the systems include path. Typically {\ttfamily /usr/local/include}. To make sure they can be found there create a directory called {\ttfamily helib} in {\ttfamily /usr/local/include} and copy all the {\ttfamily .h} files from the {\ttfamily H\+Elib/src} directory there.
+\item After installing H\+E\+Lib go into the {\ttfamily build} directory
+\item In the {\ttfamily objects.\+mk} file make sure the path to {\ttfamily fhe.\+a} is correct for your system
+\item Call {\ttfamily make}
+\item The resulting binary {\ttfamily C\+N\+N\+E\+NC} needs to be copied to the project to be run correctly
+\end{DoxyEnumerate}
+
+$\sim$$\sim$1. Install \href{https://github.com/shaih/HElib}{\tt H\+E\+Lib} and its dependencies. Follow the instrutctions for Option 2 library installation.$\sim$$\sim$
+
+\subsubsection*{How do I build in eclipse ?}
+
+
+\begin{DoxyEnumerate}
+\item Install \href{https://www.eclipse.org/cdt/}{\tt eclipse cdt}
+\item Start eclipse and choose a workspace folder( we\textquotesingle{}ll refere to that from now on as {\ttfamily \$\+W\+O\+R\+K\+S\+P\+A\+CE}
+\item {\ttfamily clone} this project to some folder that is not in {\ttfamily \$\+W\+O\+R\+K\+S\+P\+A\+CE}
+\item In eclipse use File $>$ Import... $>$ General $>$ Existing Projects into worksapce . Select the folder that you cloned this project into. Make sure to check \textquotesingle{}Copy Project into workspace\textquotesingle{}
+\item Follow the \mbox{[}\href{https://github.com/shaih/HElib/blob/master/INSTALL.md}{\tt https\+://github.\+com/shaih/\+H\+Elib/blob/master/\+I\+N\+S\+T\+A\+L\+L.\+md}\mbox{]}(installation instructions) for H\+E\+Lib, use the default installation path (/usr/local).
+\item In eclipse hit Project $>$ Build all 6.\+1 If the project build fails on the H\+E\+Lib include, run the following commands\+: {\ttfamily \$ sudo cp -\/r /usr/local/helib\+\_\+pack/include/helib /usr/local/include/} {\ttfamily \$ sudo cp -\/r /usr/local/helib\+\_\+pack/lib /lib/}
+\end{DoxyEnumerate}
+
+\subsection*{Contribution guidelines}
+
+T\+BD
+
+\subsection*{Who do I talk to?}
+
+Contact\+: \href{mailto:robertpodschwadt@my.unt.edu}{\tt robertpodschwadt@my.\+unt.\+edu} 

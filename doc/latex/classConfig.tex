@@ -1,0 +1,59 @@
+\hypertarget{classConfig}{}\section{Config Class Reference}
+\label{classConfig}\index{Config@{Config}}
+
+
+Global config. Values can be retrieved with the get function. The config file will be loaded automically when the get function is called the first time. If you want it to be efficient cache the values instead of reading getting them from the config over and over.  
+
+
+
+
+{\ttfamily \#include $<$Config.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classConfig_a7f80dce3d79f5987b9e1e0073ab19795}\label{classConfig_a7f80dce3d79f5987b9e1e0073ab19795}} 
+{\footnotesize template$<$class T $>$ }\\T {\bfseries get} (const std\+::string \&section, const std\+::string \&key)
+\item 
+\mbox{\Hypertarget{classConfig_aaef650a441e006c24120aae8e78b6c64}\label{classConfig_aaef650a441e006c24120aae8e78b6c64}} 
+void {\bfseries operator=} (\hyperlink{classConfig}{Config} const \&)=delete
+\item 
+\mbox{\Hypertarget{classConfig_ad2e93ef08a872f46ca139ad28d64e2f9}\label{classConfig_ad2e93ef08a872f46ca139ad28d64e2f9}} 
+{\bfseries Config} (\hyperlink{classConfig}{Config} const \&)=delete
+\item 
+\mbox{\Hypertarget{classConfig_a213d65cd156ab1be0697b96414cd625d}\label{classConfig_a213d65cd156ab1be0697b96414cd625d}} 
+{\footnotesize template$<$$>$ }\\bool {\bfseries get} (const std\+::string \&section, const std\+::string \&key)
+\item 
+\mbox{\Hypertarget{classConfig_a53270a0ef7ad1e113c5af3e78579f6d6}\label{classConfig_a53270a0ef7ad1e113c5af3e78579f6d6}} 
+{\footnotesize template$<$$>$ }\\long {\bfseries get} (const std\+::string \&section, const std\+::string \&key)
+\item 
+\mbox{\Hypertarget{classConfig_a0ae95b2baf456ffb7f7292bc094a3e2a}\label{classConfig_a0ae95b2baf456ffb7f7292bc094a3e2a}} 
+{\footnotesize template$<$$>$ }\\double {\bfseries get} (const std\+::string \&section, const std\+::string \&key)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classConfig}{Config} $\ast$ \hyperlink{classConfig_a8b276bc712a71bc2febd789071974c44}{get\+Config} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Global config. Values can be retrieved with the get function. The config file will be loaded automically when the get function is called the first time. If you want it to be efficient cache the values instead of reading getting them from the config over and over. 
+
+Supported datatypes and default values if the key can not be found in the config
+
+string = \char`\"{}\char`\"{} long = 0 double = 0.\+0 bool = false 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classConfig_a8b276bc712a71bc2febd789071974c44}\label{classConfig_a8b276bc712a71bc2febd789071974c44}} 
+\index{Config@{Config}!get\+Config@{get\+Config}}
+\index{get\+Config@{get\+Config}!Config@{Config}}
+\subsubsection{\texorpdfstring{get\+Config()}{getConfig()}}
+{\footnotesize\ttfamily \hyperlink{classConfig}{Config} $\ast$ Config\+::get\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Defaults to config.\+ini 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/tools/Config.\+h\item 
+src/tools/Config.\+cpp\end{DoxyCompactItemize}

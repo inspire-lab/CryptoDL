@@ -1,0 +1,50 @@
+\hypertarget{classModelLoader}{}\section{Model\+Loader$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ Class Template Reference}
+\label{classModelLoader}\index{Model\+Loader$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$@{Model\+Loader$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classModelLoader_a1ddd4fb9b24a275f6a734760fc167c1b}\label{classModelLoader_a1ddd4fb9b24a275f6a734760fc167c1b}} 
+{\bfseries Model\+Loader} (Tensor\+FactoryP$<$ Value\+Type $>$ dtf, Tensor\+FactoryP$<$ Weight\+Type $>$ wtf, std\+::map$<$ std\+::string, ActivationP$<$ Value\+Type $>$$>$ activation\+Map=std\+::map$<$ std\+::string, ActivationP$<$ Value\+Type $>$$>$(), bool skip\+Unknown=true)
+\item 
+\hyperlink{classModel}{Model}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ \hyperlink{classModelLoader_a0cf2360378b206d4ca67c082510eab44}{load} (std\+::string file\+Path, std\+::string outdir)
+\begin{DoxyCompactList}\small\item\em Takes a filename. Extracts the weights and the architecture. If the output files exist already nothing is done. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classModelLoader_aefba259b2d09a28cb387797641f5f359}\label{classModelLoader_aefba259b2d09a28cb387797641f5f359}} 
+\hyperlink{classModel}{Model}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries from\+File} (std\+::string filename, Memory\+Usage usage=Memory\+Usage\+::greedy)
+\item 
+\mbox{\Hypertarget{classModelLoader_ab514eb7bde463092897e6fc9590abbc5}\label{classModelLoader_ab514eb7bde463092897e6fc9590abbc5}} 
+LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries grab\+Conv2D} (\hyperlink{classnlohmann_1_1basic__json}{json} conv2d)
+\item 
+\mbox{\Hypertarget{classModelLoader_ad6e29d7692f71137b217d35d68995930}\label{classModelLoader_ad6e29d7692f71137b217d35d68995930}} 
+LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries grab\+Dense} (\hyperlink{classnlohmann_1_1basic__json}{json} dense)
+\item 
+\mbox{\Hypertarget{classModelLoader_a5a6f348ff17e0b11da8c386b13564b3b}\label{classModelLoader_a5a6f348ff17e0b11da8c386b13564b3b}} 
+LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries grab\+Flatten} (\hyperlink{classnlohmann_1_1basic__json}{json} flatten)
+\item 
+\mbox{\Hypertarget{classModelLoader_a4d1dbc276c44d4d2658b585ea6d62fa6}\label{classModelLoader_a4d1dbc276c44d4d2658b585ea6d62fa6}} 
+LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries grab\+Zero\+Padding2D} (\hyperlink{classnlohmann_1_1basic__json}{json} config)
+\item 
+\mbox{\Hypertarget{classModelLoader_a855cd4ec6f859c2b675800ec73bd16ef}\label{classModelLoader_a855cd4ec6f859c2b675800ec73bd16ef}} 
+LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries grab\+Average\+Pooling} (\hyperlink{classnlohmann_1_1basic__json}{json} config)
+\item 
+\mbox{\Hypertarget{classModelLoader_af3cf14feeb755067469f80abd612d29f}\label{classModelLoader_af3cf14feeb755067469f80abd612d29f}} 
+LayerP$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$ {\bfseries grab\+R\+NN} (\hyperlink{classnlohmann_1_1basic__json}{json} config)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classModelLoader_a0cf2360378b206d4ca67c082510eab44}\label{classModelLoader_a0cf2360378b206d4ca67c082510eab44}} 
+\index{Model\+Loader@{Model\+Loader}!load@{load}}
+\index{load@{load}!Model\+Loader@{Model\+Loader}}
+\subsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$class Value\+Type , class Weight\+Type , class Data\+Tensor\+Type , class Weight\+Tensor\+Type $>$ \\
+\hyperlink{classModel}{Model}$<$Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type$>$ \hyperlink{classModelLoader}{Model\+Loader}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$\+::load (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Path,  }\item[{std\+::string}]{outdir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Takes a filename. Extracts the weights and the architecture. If the output files exist already nothing is done. 
+
+This function runs some python code to do the actual extraction. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tools/json/J\+S\+O\+N\+Model.\+h\end{DoxyCompactItemize}

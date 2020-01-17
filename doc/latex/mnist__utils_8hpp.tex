@@ -1,0 +1,145 @@
+\hypertarget{mnist__utils_8hpp}{}\section{src/data/mnist/include/mnist/mnist\+\_\+utils.hpp File Reference}
+\label{mnist__utils_8hpp}\index{src/data/mnist/include/mnist/mnist\+\_\+utils.\+hpp@{src/data/mnist/include/mnist/mnist\+\_\+utils.\+hpp}}
+
+
+Contains utility functions to manipulate the M\+N\+I\+ST dataset.  
+
+
+{\ttfamily \#include $<$cmath$>$}\newline
+Include dependency graph for mnist\+\_\+utils.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{mnist__utils_8hpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Container $>$ }\\void \hyperlink{mnist__utils_8hpp_a2bedd0aca9c4b0b6ff22abde253c16b9}{mnist\+::binarize\+\_\+each} (Container \&values, double threshold=30.\+0)
+\begin{DoxyCompactList}\small\item\em Binarize each sub range inside the given range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container $>$ }\\double \hyperlink{mnist__utils_8hpp_a2dcb2e257557345356d75a4b41df652a}{mnist\+::mean} (const Container \&container)
+\begin{DoxyCompactList}\small\item\em Return the mean value of the elements inside the given range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container $>$ }\\double \hyperlink{mnist__utils_8hpp_a711f59c10ffe748decf24c2752a2945a}{mnist\+::stddev} (const Container \&container, double mean)
+\begin{DoxyCompactList}\small\item\em Return the standard deviation of the elements inside the given range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container $>$ }\\void \hyperlink{mnist__utils_8hpp_acdb2a501db8e749c8ce4d971d69fea22}{mnist\+::normalize\+\_\+each} (Container \&values)
+\begin{DoxyCompactList}\small\item\em Normalize each sub range inside the given range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Dataset $>$ }\\void \hyperlink{mnist__utils_8hpp_a3bdbbaaf793e3a56e1d50fa164bce785}{mnist\+::binarize\+\_\+dataset} (Dataset \&dataset)
+\begin{DoxyCompactList}\small\item\em Binarize the given M\+N\+I\+ST dataset. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Dataset $>$ }\\void \hyperlink{mnist__utils_8hpp_a57e77c5aa9ea4390cceec6aa6d3ee922}{mnist\+::normalize\+\_\+dataset} (Dataset \&dataset)
+\begin{DoxyCompactList}\small\item\em Normalize the given M\+N\+I\+ST dataset to zero-\/mean and unit variance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains utility functions to manipulate the M\+N\+I\+ST dataset. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{mnist__utils_8hpp_file_a3bdbbaaf793e3a56e1d50fa164bce785}\label{mnist__utils_8hpp_file_a3bdbbaaf793e3a56e1d50fa164bce785}} 
+\index{mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}!binarize\+\_\+dataset@{binarize\+\_\+dataset}}
+\index{binarize\+\_\+dataset@{binarize\+\_\+dataset}!mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}}
+\subsubsection{\texorpdfstring{binarize\+\_\+dataset()}{binarize\_dataset()}}
+{\footnotesize\ttfamily template$<$typename Dataset $>$ \\
+void mnist\+::binarize\+\_\+dataset (\begin{DoxyParamCaption}\item[{Dataset \&}]{dataset }\end{DoxyParamCaption})}
+
+
+
+Binarize the given M\+N\+I\+ST dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & The dataset to binarize \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__utils_8hpp_file_a2bedd0aca9c4b0b6ff22abde253c16b9}\label{mnist__utils_8hpp_file_a2bedd0aca9c4b0b6ff22abde253c16b9}} 
+\index{mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}!binarize\+\_\+each@{binarize\+\_\+each}}
+\index{binarize\+\_\+each@{binarize\+\_\+each}!mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}}
+\subsubsection{\texorpdfstring{binarize\+\_\+each()}{binarize\_each()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+void mnist\+::binarize\+\_\+each (\begin{DoxyParamCaption}\item[{Container \&}]{values,  }\item[{double}]{threshold = {\ttfamily 30.0} }\end{DoxyParamCaption})}
+
+
+
+Binarize each sub range inside the given range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & The collection of ranges to binarize \\
+\hline
+{\em threshold} & The threshold for binarization \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__utils_8hpp_file_a2dcb2e257557345356d75a4b41df652a}\label{mnist__utils_8hpp_file_a2dcb2e257557345356d75a4b41df652a}} 
+\index{mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}!mean@{mean}}
+\index{mean@{mean}!mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}}
+\subsubsection{\texorpdfstring{mean()}{mean()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+double mnist\+::mean (\begin{DoxyParamCaption}\item[{const Container \&}]{container }\end{DoxyParamCaption})}
+
+
+
+Return the mean value of the elements inside the given range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The range to compute the average from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The average value of the range 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__utils_8hpp_file_a57e77c5aa9ea4390cceec6aa6d3ee922}\label{mnist__utils_8hpp_file_a57e77c5aa9ea4390cceec6aa6d3ee922}} 
+\index{mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}!normalize\+\_\+dataset@{normalize\+\_\+dataset}}
+\index{normalize\+\_\+dataset@{normalize\+\_\+dataset}!mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}}
+\subsubsection{\texorpdfstring{normalize\+\_\+dataset()}{normalize\_dataset()}}
+{\footnotesize\ttfamily template$<$typename Dataset $>$ \\
+void mnist\+::normalize\+\_\+dataset (\begin{DoxyParamCaption}\item[{Dataset \&}]{dataset }\end{DoxyParamCaption})}
+
+
+
+Normalize the given M\+N\+I\+ST dataset to zero-\/mean and unit variance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & The dataset to normalize \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__utils_8hpp_file_acdb2a501db8e749c8ce4d971d69fea22}\label{mnist__utils_8hpp_file_acdb2a501db8e749c8ce4d971d69fea22}} 
+\index{mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}!normalize\+\_\+each@{normalize\+\_\+each}}
+\index{normalize\+\_\+each@{normalize\+\_\+each}!mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}}
+\subsubsection{\texorpdfstring{normalize\+\_\+each()}{normalize\_each()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+void mnist\+::normalize\+\_\+each (\begin{DoxyParamCaption}\item[{Container \&}]{values }\end{DoxyParamCaption})}
+
+
+
+Normalize each sub range inside the given range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & The collection of ranges to normalize \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__utils_8hpp_file_a711f59c10ffe748decf24c2752a2945a}\label{mnist__utils_8hpp_file_a711f59c10ffe748decf24c2752a2945a}} 
+\index{mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}!stddev@{stddev}}
+\index{stddev@{stddev}!mnist\+\_\+utils.\+hpp@{mnist\+\_\+utils.\+hpp}}
+\subsubsection{\texorpdfstring{stddev()}{stddev()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+double mnist\+::stddev (\begin{DoxyParamCaption}\item[{const Container \&}]{container,  }\item[{double}]{mean }\end{DoxyParamCaption})}
+
+
+
+Return the standard deviation of the elements inside the given range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The range to compute the standard deviation from \\
+\hline
+{\em mean} & The mean of the given range \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The standard deviation of the range 
+\end{DoxyReturn}

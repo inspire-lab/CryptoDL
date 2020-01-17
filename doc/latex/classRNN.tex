@@ -1,0 +1,93 @@
+\hypertarget{classRNN}{}\section{R\+NN$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$ Class Template Reference}
+\label{classRNN}\index{R\+N\+N$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$@{R\+N\+N$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}}
+
+
+Inheritance diagram for R\+NN$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classRNN__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for R\+NN$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classRNN__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRNN_aa982bcc0e03a1f4585a01dd651649f5d}\label{classRNN_aa982bcc0e03a1f4585a01dd651649f5d}} 
+{\bfseries R\+NN} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint units, bool return\+Sequences, TensorP$<$ Value\+Type $>$ input, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classRNN_a2baf8d9ce31102e38b5f5d139025c557}\label{classRNN_a2baf8d9ce31102e38b5f5d139025c557}} 
+{\bfseries R\+NN} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint units, bool return\+Sequences, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classRNN_a1f6d7f43c4155d0bbaf063cb031edeab}\label{classRNN_a1f6d7f43c4155d0bbaf063cb031edeab}} 
+{\bfseries R\+NN} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint units, bool return\+Sequences, TensorP$<$ Value\+Type $>$ input)
+\item 
+\mbox{\Hypertarget{classRNN_a3488c2dcc7243fedf7083bec0a27c617}\label{classRNN_a3488c2dcc7243fedf7083bec0a27c617}} 
+{\bfseries R\+NN} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint units, bool return\+Sequences)
+\item 
+\mbox{\Hypertarget{classRNN_a5f113c19ffdc04b65eed9bb0b592a58f}\label{classRNN_a5f113c19ffdc04b65eed9bb0b592a58f}} 
+\hyperlink{classShape}{Shape} {\bfseries output\+Shape} () override
+\item 
+void \hyperlink{classRNN_a890f6b8ea11485596a26f7fc5f42bfea}{setup} ()
+\begin{DoxyCompactList}\small\item\em Setup the innerstates tensor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRNN_aa9b9694c91c83497b537b170526e8927}\label{classRNN_aa9b9694c91c83497b537b170526e8927}} 
+void {\bfseries feed\+Forward} () override
+\item 
+\mbox{\Hypertarget{classRNN_adf49a6020139ee133005c8e0ae624575}\label{classRNN_adf49a6020139ee133005c8e0ae624575}} 
+void {\bfseries load\+Weights} (std\+::string path, std\+::string file\+Name)
+\item 
+\mbox{\Hypertarget{classRNN_a0e7af5b35e64b088cd2e36c4eaaa025c}\label{classRNN_a0e7af5b35e64b088cd2e36c4eaaa025c}} 
+void {\bfseries load\+Weights} (std\+::string path)
+\item 
+\mbox{\Hypertarget{classRNN_a24a32b96c421a0326ee4eba259e1a54d}\label{classRNN_a24a32b96c421a0326ee4eba259e1a54d}} 
+virtual void {\bfseries random\+Init} () override
+\item 
+\mbox{\Hypertarget{classRNN_a454e36c174128529564d6262bca1597a}\label{classRNN_a454e36c174128529564d6262bca1597a}} 
+void {\bfseries description} () override
+\item 
+\mbox{\Hypertarget{classRNN_a4d27b40893532d971f1023fd078572af}\label{classRNN_a4d27b40893532d971f1023fd078572af}} 
+uint {\bfseries units} () const
+\item 
+\mbox{\Hypertarget{classRNN_a072f6d8d440b25690ac2b2b9d1838655}\label{classRNN_a072f6d8d440b25690ac2b2b9d1838655}} 
+TensorP$<$ Weight\+Type $>$ {\bfseries recurrent\+Weights} () const
+\item 
+\mbox{\Hypertarget{classRNN_a5d9baee1f9014bc9fdfbe60d9ebfe91c}\label{classRNN_a5d9baee1f9014bc9fdfbe60d9ebfe91c}} 
+void {\bfseries recurrent\+Weights} (const TensorP$<$ Weight\+Type $>$ \&recurrent\+Weights)
+\item 
+\mbox{\Hypertarget{classRNN_ae5f39545d8e0ced2fa43d52eca5dabd1}\label{classRNN_ae5f39545d8e0ced2fa43d52eca5dabd1}} 
+virtual std\+::vector$<$ TensorP$<$ Weight\+Type $>$ $>$ \hyperlink{classRNN_ae5f39545d8e0ced2fa43d52eca5dabd1}{all\+Weights} () override
+\begin{DoxyCompactList}\small\item\em Returns weights, biases, recurrent\+Weights. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classRNN_a890f6b8ea11485596a26f7fc5f42bfea}\label{classRNN_a890f6b8ea11485596a26f7fc5f42bfea}} 
+\index{R\+NN@{R\+NN}!setup@{setup}}
+\index{setup@{setup}!R\+NN@{R\+NN}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily template$<$class Value\+Type , class Weight\+Type , class Data\+Tensor\+Type  = Tensor\+P$<$\+Value\+Type$>$, class Weight\+Tensor\+Type  = Tensor\+P$<$\+Weight\+Type$>$, class Converted\+Weights  = float$>$ \\
+void \hyperlink{classRNN}{R\+NN}$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Setup the innerstates tensor. 
+
+
+
+Reimplemented from \hyperlink{classLayer_a9fafa46db51dfe6bf76dfd97ccaae831}{Layer$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Layer\+Impl.\+h\end{DoxyCompactItemize}

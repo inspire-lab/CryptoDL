@@ -1,0 +1,8 @@
+<map id="Activation&lt; T &gt;" name="Activation&lt; T &gt;">
+<area shape="rect" id="node2" href="$classLinearActivation.html" title="LinearActivation\&lt; T \&gt;" alt="" coords="205,5,351,32"/>
+<area shape="rect" id="node3" href="$classPolynomialActivation.html" title="PolynomialActivation\&lt; T \&gt;" alt="" coords="190,56,366,83"/>
+<area shape="rect" id="node4" href="$classPolynomialActivationDegree3.html" title="PolynomialActivationDegree3\&lt; T \&gt;" alt="" coords="165,107,391,133"/>
+<area shape="rect" id="node5" href="$classPolynomialActivationDegree4.html" title="PolynomialActivationDegree4\&lt; T \&gt;" alt="" coords="165,157,391,184"/>
+<area shape="rect" id="node6" href="$classReluActivation.html" title="ReluActivation\&lt; T \&gt;" alt="" coords="209,208,347,235"/>
+<area shape="rect" id="node7" href="$classSquareActivation.html" title="SquareActivation\&lt; T \&gt;" alt="" coords="201,259,355,285"/>
+</map>

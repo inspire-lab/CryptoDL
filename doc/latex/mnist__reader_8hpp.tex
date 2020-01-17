@@ -1,0 +1,398 @@
+\hypertarget{mnist__reader_8hpp}{}\section{src/data/mnist/include/mnist/mnist\+\_\+reader.hpp File Reference}
+\label{mnist__reader_8hpp}\index{src/data/mnist/include/mnist/mnist\+\_\+reader.\+hpp@{src/data/mnist/include/mnist/mnist\+\_\+reader.\+hpp}}
+
+
+Contains functions to read the M\+N\+I\+ST dataset.  
+
+
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include \char`\"{}mnist\+\_\+reader\+\_\+common.\+hpp\char`\"{}}\newline
+Include dependency graph for mnist\+\_\+reader.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mnist__reader_8hpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmnist_1_1MNIST__dataset}{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$}
+\begin{DoxyCompactList}\small\item\em Represents a complete mnist dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Container $>$ }\\bool \hyperlink{mnist__reader_8hpp_a68f2fd3588c98263664cc3104db6bf1d}{mnist\+::read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat} (Container \&images, const std\+::string \&path, std\+::size\+\_\+t limit, std\+::size\+\_\+t start=0)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST image file inside the given flat container (E\+TL) \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Image , typename Functor $>$ }\\void \hyperlink{mnist__reader_8hpp_a4fec64596242e82d43d74b1292ff02bc}{mnist\+::read\+\_\+mnist\+\_\+image\+\_\+file} (Container$<$ Image $>$ \&images, const std\+::string \&path, std\+::size\+\_\+t limit, Functor func)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST image file inside the given container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Label  = uint8\+\_\+t$>$ }\\void \hyperlink{mnist__reader_8hpp_a37029382da3204281a341d952eeb73c2}{mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file} (Container$<$ Label $>$ \&labels, const std\+::string \&path, std\+::size\+\_\+t limit=0)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST label file inside the given container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container $>$ }\\bool \hyperlink{mnist__reader_8hpp_a7476167e6838245e2faeb8509da11ec7}{mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat} (Container \&labels, const std\+::string \&path, std\+::size\+\_\+t limit=0)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST label file inside the given flat container (E\+TL). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container $>$ }\\bool \hyperlink{mnist__reader_8hpp_af8e9171a6e45a5619615201a07ffe85a}{mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical} (Container \&labels, const std\+::string \&path, std\+::size\+\_\+t limit=0, std\+::size\+\_\+t start=0)
+\begin{DoxyCompactList}\small\item\em Read a M\+N\+I\+ST label file inside the given flat categorical container (E\+TL). \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Image , typename Functor $>$ }\\Container$<$ Image $>$ \hyperlink{mnist__reader_8hpp_a7d9591aaa349428a217eebd27faf887c}{mnist\+::read\+\_\+training\+\_\+images} (const std\+::string \&folder, std\+::size\+\_\+t limit, Functor func)
+\begin{DoxyCompactList}\small\item\em Read all training images and return a container filled with the images. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Image , typename Functor $>$ }\\Container$<$ Image $>$ \hyperlink{mnist__reader_8hpp_a2f2d11fe66e0384fbdabd4a539394a95}{mnist\+::read\+\_\+test\+\_\+images} (const std\+::string \&folder, std\+::size\+\_\+t limit, Functor func)
+\begin{DoxyCompactList}\small\item\em Read all test images and return a container filled with the images. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Label  = uint8\+\_\+t$>$ }\\Container$<$ Label $>$ \hyperlink{mnist__reader_8hpp_a80562b02734bc452131efd8fbfed8879}{mnist\+::read\+\_\+training\+\_\+labels} (const std\+::string \&folder, std\+::size\+\_\+t limit)
+\begin{DoxyCompactList}\small\item\em Read all training label and return a container filled with the labels. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Label  = uint8\+\_\+t$>$ }\\Container$<$ Label $>$ \hyperlink{mnist__reader_8hpp_a3d4cafba113c833acb2ab329216287a8}{mnist\+::read\+\_\+test\+\_\+labels} (const std\+::string \&folder, std\+::size\+\_\+t limit)
+\begin{DoxyCompactList}\small\item\em Read all test label and return a container filled with the labels. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$ \hyperlink{mnist__reader_8hpp_a0b9c83cc5d46aea0c8f07531297e3a8f}{mnist\+::read\+\_\+dataset\+\_\+3d} (const std\+::string \&folder, std\+::size\+\_\+t training\+\_\+limit=0, std\+::size\+\_\+t test\+\_\+limit=0)
+\begin{DoxyCompactList}\small\item\em Read dataset and assume images in 3D (1x28x28) \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$ \hyperlink{mnist__reader_8hpp_a2c4f82142c3853a9853f3df1068f1896}{mnist\+::read\+\_\+dataset\+\_\+3d} (std\+::size\+\_\+t training\+\_\+limit=0, std\+::size\+\_\+t test\+\_\+limit=0)
+\begin{DoxyCompactList}\small\item\em Read dataset and assume images in 3D (1x28x28) \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$ \hyperlink{mnist__reader_8hpp_a7114ef822bb58616b757cbdebe73f50c}{mnist\+::read\+\_\+dataset\+\_\+direct} (const std\+::string \&folder, std\+::size\+\_\+t training\+\_\+limit=0, std\+::size\+\_\+t test\+\_\+limit=0)
+\begin{DoxyCompactList}\small\item\em Read dataset from some location. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$ \hyperlink{mnist__reader_8hpp_a0e9039816385ed13bc9cae1f7b45e119}{mnist\+::read\+\_\+dataset\+\_\+direct} (std\+::size\+\_\+t training\+\_\+limit=0, std\+::size\+\_\+t test\+\_\+limit=0)
+\begin{DoxyCompactList}\small\item\em Read dataset. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, template$<$ typename... $>$ class Sub = std\+::vector, typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Sub$<$ Pixel $>$, Label $>$ \hyperlink{mnist__reader_8hpp_a3d8ad6fb60af1bdd9ae76f2869cf7599}{mnist\+::read\+\_\+dataset} (std\+::size\+\_\+t training\+\_\+limit=0, std\+::size\+\_\+t test\+\_\+limit=0)
+\begin{DoxyCompactList}\small\item\em Read dataset. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename... $>$ class Container = std\+::vector, template$<$ typename... $>$ class Sub = std\+::vector, typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ }\\M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Sub$<$ Pixel $>$, Label $>$ \hyperlink{mnist__reader_8hpp_a81c6789dbabfe337783c8addc7ae750e}{mnist\+::read\+\_\+dataset} (const std\+::string \&folder, std\+::size\+\_\+t training\+\_\+limit=0, std\+::size\+\_\+t test\+\_\+limit=0)
+\begin{DoxyCompactList}\small\item\em Read dataset from some location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains functions to read the M\+N\+I\+ST dataset. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a3d8ad6fb60af1bdd9ae76f2869cf7599}\label{mnist__reader_8hpp_file_a3d8ad6fb60af1bdd9ae76f2869cf7599}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+dataset@{read\+\_\+dataset}}
+\index{read\+\_\+dataset@{read\+\_\+dataset}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset()}{read\_dataset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, template$<$ typename... $>$ class Sub = std\+::vector, typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Container, Sub$<$Pixel$>$, Label$>$ mnist\+::read\+\_\+dataset (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{training\+\_\+limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{test\+\_\+limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read dataset. 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em training\+\_\+limit} & The maximum number of elements to read from training set (0\+: no limit) \\
+\hline
+{\em test\+\_\+limit} & The maximum number of elements to read from test set (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a81c6789dbabfe337783c8addc7ae750e}\label{mnist__reader_8hpp_file_a81c6789dbabfe337783c8addc7ae750e}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+dataset@{read\+\_\+dataset}}
+\index{read\+\_\+dataset@{read\+\_\+dataset}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset()}{read\_dataset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, template$<$ typename... $>$ class Sub = std\+::vector, typename Pixel  = uint8\+\_\+t, typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Container, Sub$<$Pixel$>$, Label$>$ mnist\+::read\+\_\+dataset (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{training\+\_\+limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{test\+\_\+limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read dataset from some location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em training\+\_\+limit} & The maximum number of elements to read from training set (0\+: no limit) \\
+\hline
+{\em test\+\_\+limit} & The maximum number of elements to read from test set (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a0b9c83cc5d46aea0c8f07531297e3a8f}\label{mnist__reader_8hpp_file_a0b9c83cc5d46aea0c8f07531297e3a8f}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+dataset\+\_\+3d@{read\+\_\+dataset\+\_\+3d}}
+\index{read\+\_\+dataset\+\_\+3d@{read\+\_\+dataset\+\_\+3d}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset\+\_\+3d()}{read\_dataset\_3d()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Container, Image, Label$>$ mnist\+::read\+\_\+dataset\+\_\+3d (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{training\+\_\+limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{test\+\_\+limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read dataset and assume images in 3D (1x28x28) 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em training\+\_\+limit} & The maximum number of elements to read from training set (0\+: no limit) \\
+\hline
+{\em test\+\_\+limit} & The maximum number of elements to read from test set (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a2c4f82142c3853a9853f3df1068f1896}\label{mnist__reader_8hpp_file_a2c4f82142c3853a9853f3df1068f1896}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+dataset\+\_\+3d@{read\+\_\+dataset\+\_\+3d}}
+\index{read\+\_\+dataset\+\_\+3d@{read\+\_\+dataset\+\_\+3d}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset\+\_\+3d()}{read\_dataset\_3d()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Container, Image, Label$>$ mnist\+::read\+\_\+dataset\+\_\+3d (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{training\+\_\+limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{test\+\_\+limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read dataset and assume images in 3D (1x28x28) 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em training\+\_\+limit} & The maximum number of elements to read from training set (0\+: no limit) \\
+\hline
+{\em test\+\_\+limit} & The maximum number of elements to read from test set (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a7114ef822bb58616b757cbdebe73f50c}\label{mnist__reader_8hpp_file_a7114ef822bb58616b757cbdebe73f50c}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+dataset\+\_\+direct@{read\+\_\+dataset\+\_\+direct}}
+\index{read\+\_\+dataset\+\_\+direct@{read\+\_\+dataset\+\_\+direct}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset\+\_\+direct()}{read\_dataset\_direct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Container, Image, Label$>$ mnist\+::read\+\_\+dataset\+\_\+direct (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{training\+\_\+limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{test\+\_\+limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read dataset from some location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em training\+\_\+limit} & The maximum number of elements to read from training set (0\+: no limit) \\
+\hline
+{\em test\+\_\+limit} & The maximum number of elements to read from test set (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a0e9039816385ed13bc9cae1f7b45e119}\label{mnist__reader_8hpp_file_a0e9039816385ed13bc9cae1f7b45e119}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+dataset\+\_\+direct@{read\+\_\+dataset\+\_\+direct}}
+\index{read\+\_\+dataset\+\_\+direct@{read\+\_\+dataset\+\_\+direct}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+dataset\+\_\+direct()}{read\_dataset\_direct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container, typename Image , typename Label  = uint8\+\_\+t$>$ \\
+M\+N\+I\+S\+T\+\_\+dataset$<$Container, Image, Label$>$ mnist\+::read\+\_\+dataset\+\_\+direct (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{training\+\_\+limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{test\+\_\+limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read dataset. 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em training\+\_\+limit} & The maximum number of elements to read from training set (0\+: no limit) \\
+\hline
+{\em test\+\_\+limit} & The maximum number of elements to read from test set (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dataset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a4fec64596242e82d43d74b1292ff02bc}\label{mnist__reader_8hpp_file_a4fec64596242e82d43d74b1292ff02bc}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+mnist\+\_\+image\+\_\+file@{read\+\_\+mnist\+\_\+image\+\_\+file}}
+\index{read\+\_\+mnist\+\_\+image\+\_\+file@{read\+\_\+mnist\+\_\+image\+\_\+file}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+image\+\_\+file()}{read\_mnist\_image\_file()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Image , typename Functor $>$ \\
+void mnist\+::read\+\_\+mnist\+\_\+image\+\_\+file (\begin{DoxyParamCaption}\item[{Container$<$ Image $>$ \&}]{images,  }\item[{const std\+::string \&}]{path,  }\item[{std\+::size\+\_\+t}]{limit,  }\item[{Functor}]{func }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST image file inside the given container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em images} & The container to fill with the images \\
+\hline
+{\em path} & The path to the image file \\
+\hline
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+{\em func} & The functor to create the image object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a68f2fd3588c98263664cc3104db6bf1d}\label{mnist__reader_8hpp_file_a68f2fd3588c98263664cc3104db6bf1d}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat@{read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat}}
+\index{read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat@{read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat()}{read\_mnist\_image\_file\_flat()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+bool mnist\+::read\+\_\+mnist\+\_\+image\+\_\+file\+\_\+flat (\begin{DoxyParamCaption}\item[{Container \&}]{images,  }\item[{const std\+::string \&}]{path,  }\item[{std\+::size\+\_\+t}]{limit,  }\item[{std\+::size\+\_\+t}]{start = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST image file inside the given flat container (E\+TL) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em images} & The container to fill with the images \\
+\hline
+{\em path} & The path to the image file \\
+\hline
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+{\em start} & The elements to ignore at the beginning \\
+\hline
+{\em func} & The functor to create the image object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a37029382da3204281a341d952eeb73c2}\label{mnist__reader_8hpp_file_a37029382da3204281a341d952eeb73c2}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+mnist\+\_\+label\+\_\+file@{read\+\_\+mnist\+\_\+label\+\_\+file}}
+\index{read\+\_\+mnist\+\_\+label\+\_\+file@{read\+\_\+mnist\+\_\+label\+\_\+file}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+label\+\_\+file()}{read\_mnist\_label\_file()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Label  = uint8\+\_\+t$>$ \\
+void mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file (\begin{DoxyParamCaption}\item[{Container$<$ Label $>$ \&}]{labels,  }\item[{const std\+::string \&}]{path,  }\item[{std\+::size\+\_\+t}]{limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST label file inside the given container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em labels} & The container to fill with the labels \\
+\hline
+{\em path} & The path to the label file \\
+\hline
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_af8e9171a6e45a5619615201a07ffe85a}\label{mnist__reader_8hpp_file_af8e9171a6e45a5619615201a07ffe85a}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical@{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical}}
+\index{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical@{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical()}{read\_mnist\_label\_file\_categorical()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+bool mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+categorical (\begin{DoxyParamCaption}\item[{Container \&}]{labels,  }\item[{const std\+::string \&}]{path,  }\item[{std\+::size\+\_\+t}]{limit = {\ttfamily 0},  }\item[{std\+::size\+\_\+t}]{start = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST label file inside the given flat categorical container (E\+TL). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em labels} & The container to fill with the labels \\
+\hline
+{\em path} & The path to the label file \\
+\hline
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+{\em start} & The elements to avoid at the beginning \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a7476167e6838245e2faeb8509da11ec7}\label{mnist__reader_8hpp_file_a7476167e6838245e2faeb8509da11ec7}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat@{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat}}
+\index{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat@{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat()}{read\_mnist\_label\_file\_flat()}}
+{\footnotesize\ttfamily template$<$typename Container $>$ \\
+bool mnist\+::read\+\_\+mnist\+\_\+label\+\_\+file\+\_\+flat (\begin{DoxyParamCaption}\item[{Container \&}]{labels,  }\item[{const std\+::string \&}]{path,  }\item[{std\+::size\+\_\+t}]{limit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Read a M\+N\+I\+ST label file inside the given flat container (E\+TL). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em labels} & The container to fill with the labels \\
+\hline
+{\em path} & The path to the label file \\
+\hline
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a2f2d11fe66e0384fbdabd4a539394a95}\label{mnist__reader_8hpp_file_a2f2d11fe66e0384fbdabd4a539394a95}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+test\+\_\+images@{read\+\_\+test\+\_\+images}}
+\index{read\+\_\+test\+\_\+images@{read\+\_\+test\+\_\+images}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+test\+\_\+images()}{read\_test\_images()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Image , typename Functor $>$ \\
+Container$<$Image$>$ mnist\+::read\+\_\+test\+\_\+images (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{limit,  }\item[{Functor}]{func }\end{DoxyParamCaption})}
+
+
+
+Read all test images and return a container filled with the images. 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+{\em func} & The functor to create the image objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Container filled with the images 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a3d4cafba113c833acb2ab329216287a8}\label{mnist__reader_8hpp_file_a3d4cafba113c833acb2ab329216287a8}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+test\+\_\+labels@{read\+\_\+test\+\_\+labels}}
+\index{read\+\_\+test\+\_\+labels@{read\+\_\+test\+\_\+labels}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+test\+\_\+labels()}{read\_test\_labels()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Label  = uint8\+\_\+t$>$ \\
+Container$<$Label$>$ mnist\+::read\+\_\+test\+\_\+labels (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{limit }\end{DoxyParamCaption})}
+
+
+
+Read all test label and return a container filled with the labels. 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Container filled with the labels 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a7d9591aaa349428a217eebd27faf887c}\label{mnist__reader_8hpp_file_a7d9591aaa349428a217eebd27faf887c}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+training\+\_\+images@{read\+\_\+training\+\_\+images}}
+\index{read\+\_\+training\+\_\+images@{read\+\_\+training\+\_\+images}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+training\+\_\+images()}{read\_training\_images()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Image , typename Functor $>$ \\
+Container$<$Image$>$ mnist\+::read\+\_\+training\+\_\+images (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{limit,  }\item[{Functor}]{func }\end{DoxyParamCaption})}
+
+
+
+Read all training images and return a container filled with the images. 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+{\em func} & The functor to create the image objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Container filled with the images 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mnist__reader_8hpp_file_a80562b02734bc452131efd8fbfed8879}\label{mnist__reader_8hpp_file_a80562b02734bc452131efd8fbfed8879}} 
+\index{mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}!read\+\_\+training\+\_\+labels@{read\+\_\+training\+\_\+labels}}
+\index{read\+\_\+training\+\_\+labels@{read\+\_\+training\+\_\+labels}!mnist\+\_\+reader.\+hpp@{mnist\+\_\+reader.\+hpp}}
+\subsubsection{\texorpdfstring{read\+\_\+training\+\_\+labels()}{read\_training\_labels()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container = std\+::vector, typename Label  = uint8\+\_\+t$>$ \\
+Container$<$Label$>$ mnist\+::read\+\_\+training\+\_\+labels (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{folder,  }\item[{std\+::size\+\_\+t}]{limit }\end{DoxyParamCaption})}
+
+
+
+Read all training label and return a container filled with the labels. 
+
+The dataset is assumed to be in a mnist subfolder
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit} & The maximum number of elements to read (0\+: no limit) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Container filled with the labels 
+\end{DoxyReturn}

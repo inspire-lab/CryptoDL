@@ -1,0 +1,70 @@
+\hypertarget{classDense}{}\section{Dense$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$ Class Template Reference}
+\label{classDense}\index{Dense$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$@{Dense$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}}
+
+
+Inheritance diagram for Dense$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDense__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Dense$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDense__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDense_accea6109fab79bbd26800c7367e26857}\label{classDense_accea6109fab79bbd26800c7367e26857}} 
+{\bfseries Dense} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Neurons, TensorP$<$ Value\+Type $>$ input, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classDense_acfbc00b146e67de2f82502ee0696eeab}\label{classDense_acfbc00b146e67de2f82502ee0696eeab}} 
+{\bfseries Dense} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Neurons, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classDense_a3ee6122ece50f43ce752d244b5207aaf}\label{classDense_a3ee6122ece50f43ce752d244b5207aaf}} 
+{\bfseries Dense} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Neurons, TensorP$<$ Value\+Type $>$ input)
+\item 
+\mbox{\Hypertarget{classDense_a81f4283f40d537465f7d6da62b6749b6}\label{classDense_a81f4283f40d537465f7d6da62b6749b6}} 
+{\bfseries Dense} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Neurons)
+\item 
+\mbox{\Hypertarget{classDense_af1260b026220a907e2d97933acb3c016}\label{classDense_af1260b026220a907e2d97933acb3c016}} 
+{\bfseries Dense} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Neurons, TensorP$<$ Value\+Type $>$ input, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classDense_a7a6c03d898aa2fd991ce488bfe2badc4}\label{classDense_a7a6c03d898aa2fd991ce488bfe2badc4}} 
+{\bfseries Dense} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Neurons, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classDense_a085651662d9c97063d5ef89956b03496}\label{classDense_a085651662d9c97063d5ef89956b03496}} 
+\hyperlink{classShape}{Shape} {\bfseries output\+Shape} () override
+\item 
+\mbox{\Hypertarget{classDense_a4e443f667dc72bb595f85e7af3f3a7aa}\label{classDense_a4e443f667dc72bb595f85e7af3f3a7aa}} 
+void {\bfseries feed\+Forward} () override
+\item 
+\mbox{\Hypertarget{classDense_a6254c14c1bce21c5c1905388642160cf}\label{classDense_a6254c14c1bce21c5c1905388642160cf}} 
+void {\bfseries load\+Weights} (std\+::string path, std\+::string file\+Name)
+\item 
+\mbox{\Hypertarget{classDense_a503236232088bef7f7f4ed2902c8e32d}\label{classDense_a503236232088bef7f7f4ed2902c8e32d}} 
+void {\bfseries load\+Weights} (std\+::string path)
+\item 
+\mbox{\Hypertarget{classDense_a6a71e42b57250b30277d3a372eeae366}\label{classDense_a6a71e42b57250b30277d3a372eeae366}} 
+virtual void {\bfseries random\+Init} () override
+\item 
+\mbox{\Hypertarget{classDense_aa21053ebb51564c7761b433bcb0e9006}\label{classDense_aa21053ebb51564c7761b433bcb0e9006}} 
+void {\bfseries description} ()
+\item 
+\mbox{\Hypertarget{classDense_a03631983df825324bdf4b5e57a23bbbf}\label{classDense_a03631983df825324bdf4b5e57a23bbbf}} 
+virtual std\+::vector$<$ TensorP$<$ Weight\+Type $>$ $>$ \hyperlink{classDense_a03631983df825324bdf4b5e57a23bbbf}{all\+Weights} () override
+\begin{DoxyCompactList}\small\item\em Returns weights, biases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Layer\+Impl.\+h\end{DoxyCompactItemize}

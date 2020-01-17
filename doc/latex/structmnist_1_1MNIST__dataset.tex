@@ -1,0 +1,111 @@
+\hypertarget{structmnist_1_1MNIST__dataset}{}\section{mnist\+:\+:M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$ Struct Template Reference}
+\label{structmnist_1_1MNIST__dataset}\index{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$@{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$}}
+
+
+Represents a complete mnist dataset.  
+
+
+
+
+{\ttfamily \#include $<$mnist\+\_\+reader.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{structmnist_1_1MNIST__dataset_ad5e293ffcc26127d793307cd05b53e43}{resize\+\_\+training} (std\+::size\+\_\+t new\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Resize the training set to new\+\_\+size. \end{DoxyCompactList}\item 
+void \hyperlink{structmnist_1_1MNIST__dataset_ab742c39158c61175a7be63262f4259d4}{resize\+\_\+test} (std\+::size\+\_\+t new\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Resize the test set to new\+\_\+size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a1f7de5199e4d5422b00a5f7059fdf7fe}\label{structmnist_1_1MNIST__dataset_a1f7de5199e4d5422b00a5f7059fdf7fe}} 
+Container$<$ Image $>$ \hyperlink{structmnist_1_1MNIST__dataset_a1f7de5199e4d5422b00a5f7059fdf7fe}{training\+\_\+images}
+\begin{DoxyCompactList}\small\item\em The training images. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a860afe7317905d6a9c6acca0ae30e78e}\label{structmnist_1_1MNIST__dataset_a860afe7317905d6a9c6acca0ae30e78e}} 
+Container$<$ Image $>$ \hyperlink{structmnist_1_1MNIST__dataset_a860afe7317905d6a9c6acca0ae30e78e}{test\+\_\+images}
+\begin{DoxyCompactList}\small\item\em The test images. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_ad7462a2e89dfe0dd36e16e29f50acf06}\label{structmnist_1_1MNIST__dataset_ad7462a2e89dfe0dd36e16e29f50acf06}} 
+Container$<$ Label $>$ \hyperlink{structmnist_1_1MNIST__dataset_ad7462a2e89dfe0dd36e16e29f50acf06}{training\+\_\+labels}
+\begin{DoxyCompactList}\small\item\em The training labels. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a1091194fd30f657921556e4681b64337}\label{structmnist_1_1MNIST__dataset_a1091194fd30f657921556e4681b64337}} 
+Container$<$ Label $>$ \hyperlink{structmnist_1_1MNIST__dataset_a1091194fd30f657921556e4681b64337}{test\+\_\+labels}
+\begin{DoxyCompactList}\small\item\em The test labels. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a30aaff2a3cd0e08879ece7fd7110ba96}\label{structmnist_1_1MNIST__dataset_a30aaff2a3cd0e08879ece7fd7110ba96}} 
+std\+::vector$<$ std\+::vector$<$ Pixel $>$ $>$ \hyperlink{structmnist_1_1MNIST__dataset_a30aaff2a3cd0e08879ece7fd7110ba96}{training\+\_\+images}
+\begin{DoxyCompactList}\small\item\em The training images. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a356e1f3b4b93881fee1177457bbf19d7}\label{structmnist_1_1MNIST__dataset_a356e1f3b4b93881fee1177457bbf19d7}} 
+std\+::vector$<$ std\+::vector$<$ Pixel $>$ $>$ \hyperlink{structmnist_1_1MNIST__dataset_a356e1f3b4b93881fee1177457bbf19d7}{test\+\_\+images}
+\begin{DoxyCompactList}\small\item\em The test images. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a6ae699e19d22f5b0dc8189ae3922c852}\label{structmnist_1_1MNIST__dataset_a6ae699e19d22f5b0dc8189ae3922c852}} 
+std\+::vector$<$ Label $>$ \hyperlink{structmnist_1_1MNIST__dataset_a6ae699e19d22f5b0dc8189ae3922c852}{training\+\_\+labels}
+\begin{DoxyCompactList}\small\item\em The training labels. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_a79e464df42d7f58abcf948a342cfe751}\label{structmnist_1_1MNIST__dataset_a79e464df42d7f58abcf948a342cfe751}} 
+std\+::vector$<$ Label $>$ \hyperlink{structmnist_1_1MNIST__dataset_a79e464df42d7f58abcf948a342cfe751}{test\+\_\+labels}
+\begin{DoxyCompactList}\small\item\em The test labels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$template$<$ typename... $>$ class Container, typename Image, typename Label$>$\newline
+struct mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset$<$ Container, Image, Label $>$}
+
+Represents a complete mnist dataset. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container to use \\
+\hline
+{\em Image} & The type of image \\
+\hline
+{\em Label} & The type of label\\
+\hline
+{\em Pixel} & The type of a pixel \\
+\hline
+{\em Label} & The type of a label \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_ab742c39158c61175a7be63262f4259d4}\label{structmnist_1_1MNIST__dataset_ab742c39158c61175a7be63262f4259d4}} 
+\index{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset@{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset}!resize\+\_\+test@{resize\+\_\+test}}
+\index{resize\+\_\+test@{resize\+\_\+test}!mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset@{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset}}
+\subsubsection{\texorpdfstring{resize\+\_\+test()}{resize\_test()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container, typename Image, typename Label$>$ \\
+void \hyperlink{structmnist_1_1MNIST__dataset}{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset}$<$ Container, Image, Label $>$\+::resize\+\_\+test (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{new\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize the test set to new\+\_\+size. 
+
+If new\+\_\+size is less than the current size, this function has no effect.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+size} & The size to resize the test sets to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structmnist_1_1MNIST__dataset_ad5e293ffcc26127d793307cd05b53e43}\label{structmnist_1_1MNIST__dataset_ad5e293ffcc26127d793307cd05b53e43}} 
+\index{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset@{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset}!resize\+\_\+training@{resize\+\_\+training}}
+\index{resize\+\_\+training@{resize\+\_\+training}!mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset@{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset}}
+\subsubsection{\texorpdfstring{resize\+\_\+training()}{resize\_training()}}
+{\footnotesize\ttfamily template$<$template$<$ typename... $>$ class Container, typename Image, typename Label$>$ \\
+void \hyperlink{structmnist_1_1MNIST__dataset}{mnist\+::\+M\+N\+I\+S\+T\+\_\+dataset}$<$ Container, Image, Label $>$\+::resize\+\_\+training (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{new\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize the training set to new\+\_\+size. 
+
+If new\+\_\+size is less than the current size, this function has no effect.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+size} & The size to resize the training sets to. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/data/mnist/include/mnist/\hyperlink{mnist__reader_8hpp}{mnist\+\_\+reader.\+hpp}\item 
+src/data/mnist/include/mnist/\hyperlink{mnist__reader__less_8hpp}{mnist\+\_\+reader\+\_\+less.\+hpp}\end{DoxyCompactItemize}

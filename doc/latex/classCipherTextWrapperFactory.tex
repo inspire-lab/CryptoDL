@@ -1,0 +1,64 @@
+\hypertarget{classCipherTextWrapperFactory}{}\section{Cipher\+Text\+Wrapper\+Factory$<$ Ciphter\+Text\+Wrapper $>$ Class Template Reference}
+\label{classCipherTextWrapperFactory}\index{Cipher\+Text\+Wrapper\+Factory$<$ Ciphter\+Text\+Wrapper $>$@{Cipher\+Text\+Wrapper\+Factory$<$ Ciphter\+Text\+Wrapper $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a4fa945beadaaecaa9746b081cbef555c}\label{classCipherTextWrapperFactory_a4fa945beadaaecaa9746b081cbef555c}} 
+virtual void {\bfseries set\+As\+Default\+Factory} ()=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a74fad1164162787aa98a3d9a7c6351f3}\label{classCipherTextWrapperFactory_a74fad1164162787aa98a3d9a7c6351f3}} 
+virtual Ciphter\+Text\+Wrapper {\bfseries empty} ()=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a742c06d87256c4af89727216f732ca03}\label{classCipherTextWrapperFactory_a742c06d87256c4af89727216f732ca03}} 
+virtual Ciphter\+Text\+Wrapper {\bfseries create\+Cipher\+Text} (long x)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_afbae84b62a32db852e241c29a7b7589a}\label{classCipherTextWrapperFactory_afbae84b62a32db852e241c29a7b7589a}} 
+virtual Ciphter\+Text\+Wrapper {\bfseries create\+Cipher\+Text} (const std\+::vector$<$ long $>$ \&in)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a0781f478d2efdcd4f73b5f642f3b64a3}\label{classCipherTextWrapperFactory_a0781f478d2efdcd4f73b5f642f3b64a3}} 
+virtual Ciphter\+Text\+Wrapper {\bfseries create\+Cipher\+Text} (const std\+::vector$<$ double $>$ \&in)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a2bf5d024b47dbf24cd6da69de4490169}\label{classCipherTextWrapperFactory_a2bf5d024b47dbf24cd6da69de4490169}} 
+virtual Ciphter\+Text\+Wrapper {\bfseries create\+Cipher\+Text} (const std\+::vector$<$ float $>$ \&in)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a450db5b8bf0461a3587da2f058bd38da}\label{classCipherTextWrapperFactory_a450db5b8bf0461a3587da2f058bd38da}} 
+virtual std\+::vector$<$ long $>$ {\bfseries decrypt\+Long} (const Ciphter\+Text\+Wrapper \&ctx)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a3f82164d98d194f357f35bb556f53a88}\label{classCipherTextWrapperFactory_a3f82164d98d194f357f35bb556f53a88}} 
+virtual std\+::vector$<$ double $>$ {\bfseries decrypt\+Double} (const Ciphter\+Text\+Wrapper \&ctx)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_aabc9d4f37f99a4af26f7489507bbedaa}\label{classCipherTextWrapperFactory_aabc9d4f37f99a4af26f7489507bbedaa}} 
+virtual uint {\bfseries batchsize} ()=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a3789f51224da4d299c25c506848ef224}\label{classCipherTextWrapperFactory_a3789f51224da4d299c25c506848ef224}} 
+virtual TensorP$<$ Ciphter\+Text\+Wrapper $>$ \hyperlink{classCipherTextWrapperFactory_a3789f51224da4d299c25c506848ef224}{create\+Cipher\+Tensor} (const std\+::vector$<$ double $>$ \&in, const \hyperlink{classShape}{Shape} \&shape, \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}$<$ Ciphter\+Text\+Wrapper $>$ $\ast$hetf)=0
+\begin{DoxyCompactList}\small\item\em Take a 1D vector transform into the given shape and encrypt it. The 1st dimension of the same needs to line up with the batch\+Size supported by the encryption scheme. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_adeb6353a9a9422b1fbb9c81fd10460f6}\label{classCipherTextWrapperFactory_adeb6353a9a9422b1fbb9c81fd10460f6}} 
+virtual TensorP$<$ Ciphter\+Text\+Wrapper $>$ {\bfseries create\+Cipher\+Tensor} (const std\+::vector$<$ float $>$ \&in, const \hyperlink{classShape}{Shape} \&shape, \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}$<$ Ciphter\+Text\+Wrapper $>$ $\ast$hetf)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_ae751664fea4b4a35b8ace79c11516e14}\label{classCipherTextWrapperFactory_ae751664fea4b4a35b8ace79c11516e14}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const std\+::vector$<$ double $>$ \&in, TensorP$<$ Ciphter\+Text\+Wrapper $>$ tensor)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_af31fa14e76c55c298985dcbeb3536416}\label{classCipherTextWrapperFactory_af31fa14e76c55c298985dcbeb3536416}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const std\+::vector$<$ float $>$ \&in, TensorP$<$ Ciphter\+Text\+Wrapper $>$ tensor)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_ae6baa28f8eaee6ab89ae0d3803bdaf2e}\label{classCipherTextWrapperFactory_ae6baa28f8eaee6ab89ae0d3803bdaf2e}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const TensorP$<$ double $>$ in, TensorP$<$ Ciphter\+Text\+Wrapper $>$ tensor)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a1aae33d3536a33fac5161b862f094123}\label{classCipherTextWrapperFactory_a1aae33d3536a33fac5161b862f094123}} 
+virtual void {\bfseries feed\+Cipher\+Tensor} (const TensorP$<$ double $>$ in, \hyperlink{classTensor}{Tensor}$<$ Ciphter\+Text\+Wrapper $>$ \&tensor)=0
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_a41a57dbe2970b399e2b9c55befec9a39}\label{classCipherTextWrapperFactory_a41a57dbe2970b399e2b9c55befec9a39}} 
+void {\bfseries enable\+Refresh\+On\+High\+Noise} ()
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_af2fd9b0b79bafca9c4a46895afcc5ccb}\label{classCipherTextWrapperFactory_af2fd9b0b79bafca9c4a46895afcc5ccb}} 
+void {\bfseries disable\+Refresh\+On\+High\+Noise} ()
+\item 
+\mbox{\Hypertarget{classCipherTextWrapperFactory_ac4bbd9e27c7d4a49212c9002213668a7}\label{classCipherTextWrapperFactory_ac4bbd9e27c7d4a49212c9002213668a7}} 
+bool {\bfseries refresh\+On\+High\+Noise\+Enabled} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/\+H\+E\+Backend/Cipher\+Text\+Wrapper.\+h\end{DoxyCompactItemize}

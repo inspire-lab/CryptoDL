@@ -1,0 +1,31 @@
+At the core it all is the {\ttfamily \hyperlink{classModel}{Model}} class. A {\ttfamily \hyperlink{classModel}{Model}} is a collection of {\ttfamily \hyperlink{classLayer}{Layer}} objects. A {\ttfamily \hyperlink{classLayer}{Layer}} provides the implementation of deep learning layers. Every {\ttfamily \hyperlink{classLayer}{Layer}} has an input and output {\ttfamily \hyperlink{classTensor}{Tensor}}. The {\ttfamily \hyperlink{classShape}{Shape}} of these {\ttfamily Tensors} gets computed dynamically except for the Input {\ttfamily \hyperlink{classTensor}{Tensor}}. The implemenation of the {\ttfamily \hyperlink{classLayer}{Layer}} is based on the abstract {\ttfamily \hyperlink{classTensor}{Tensor}}. This allows for the HE functionallity to be encapsulated in the H\+E\+Backend. The H\+E\+Backend provides its own implementation of {\ttfamily \hyperlink{classTensor}{Tensor}} {\ttfamily \hyperlink{classHETensor}{H\+E\+Tensor}}. {\ttfamily H\+E\+Tensors} operate on {\ttfamily Cipher\+Text\+Wrapper} which encapsulate the actuall ciphertexts of the HE library and provide the arithmetic interface. The creation of specific {\ttfamily Cipher\+Text\+Wrappers} fall to the {\ttfamily \hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}}. This is the place where the encryption, decryption and crypto parameters are being stored. For an example see {\ttfamily H\+E\+Backend/helib/\+H\+E\+Lib\+Ciphertext.\+h}.
+
+{\ttfamily \hyperlink{classTensor}{Tensor}} and {\ttfamily Cipher\+Text\+Wrapper} objects are created by there respective factories. This is meant to hide the details of the crypto systems from higher leve code. The {\ttfamily \hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}} is encapsulated in the {\ttfamily \hyperlink{classHETensorFactory}{H\+E\+Tensor\+Factory}}. The high level deep learning code should work with abstract {\ttfamily \hyperlink{classTensor}{Tensor}} and {\ttfamily \hyperlink{classTensorFactory}{Tensor\+Factory}} objects only.
+
+\section*{architecture Files}
+
+\subsection*{activations/}
+
+This folder contains the implementations of activation functions the solution requires.
+
+\subsection*{\hyperlink{ActivationFunction_8h_source}{Activation\+Function.\+h}}
+
+Serves as an abstract class for any activation function the solution requires. Currently, the activations are in activations/ and consist of the Relu, Square, and Linear activation functions.
+
+\subsection*{\hyperlink{classLayer}{Layer}.$\ast$}
+
+Contains the layer class which implements feed-\/forward on an input tensor, setting the activation, and printing a description of the layer.
+
+\subsection*{\hyperlink{classModel}{Model}.$\ast$}
+
+Contains the \hyperlink{classModel}{Model} class which houses a container of layers, inputs/outputs, and generates the required memory. The class also handles printing of relevant model information.
+
+\subsection*{\hyperlink{PlainTensor_8h_source}{Plain\+Tensor.\+h}}
+
+\subsection*{\hyperlink{PlainTensorImpl_8h_source}{Plain\+Tensor\+Impl.\+h}}
+
+\subsection*{Tensor.\+cpp}
+
+\subsection*{\hyperlink{Tensor_8h_source}{Tensor.\+h}}
+
+\subsection*{\hyperlink{TensorImpl_8h_source}{Tensor\+Impl.\+h}}

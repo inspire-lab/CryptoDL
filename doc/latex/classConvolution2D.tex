@@ -1,0 +1,70 @@
+\hypertarget{classConvolution2D}{}\section{Convolution2D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$ Class Template Reference}
+\label{classConvolution2D}\index{Convolution2\+D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$@{Convolution2\+D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$}}
+
+
+Inheritance diagram for Convolution2D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classConvolution2D__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Convolution2D$<$ Value\+Type, Weight\+Type, Data\+Tensor\+Type, Weight\+Tensor\+Type, Converted\+Weights $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classConvolution2D__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classConvolution2D_ad8c19607c1be356df2aca05117e33b96}\label{classConvolution2D_ad8c19607c1be356df2aca05117e33b96}} 
+{\bfseries Convolution2D} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Filters, uint filter\+Size, uint stride, P\+A\+D\+D\+I\+N\+G\+\_\+\+M\+O\+DE pad, TensorP$<$ Value\+Type $>$ input, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classConvolution2D_a54909b2da5a3fa4436d42a4d40135649}\label{classConvolution2D_a54909b2da5a3fa4436d42a4d40135649}} 
+{\bfseries Convolution2D} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Filters, uint filter\+Size, uint stride, P\+A\+D\+D\+I\+N\+G\+\_\+\+M\+O\+DE pad, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Value\+Type $>$ $\ast$data\+Tensor\+Factory, \hyperlink{classTensorFactory}{Tensor\+Factory}$<$ Weight\+Type $>$ $\ast$weigth\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classConvolution2D_af9bd71d1356e708f9872d48279f6713a}\label{classConvolution2D_af9bd71d1356e708f9872d48279f6713a}} 
+{\bfseries Convolution2D} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Filters, uint filter\+Size, uint stride, P\+A\+D\+D\+I\+N\+G\+\_\+\+M\+O\+DE pad, TensorP$<$ Value\+Type $>$ input)
+\item 
+\mbox{\Hypertarget{classConvolution2D_a3ac1b953a9fb5eb2f48faf0229933531}\label{classConvolution2D_a3ac1b953a9fb5eb2f48faf0229933531}} 
+{\bfseries Convolution2D} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Filters, uint filter\+Size, uint stride, P\+A\+D\+D\+I\+N\+G\+\_\+\+M\+O\+DE pad)
+\item 
+\mbox{\Hypertarget{classConvolution2D_af69229ab131e71abc743057699edfb42}\label{classConvolution2D_af69229ab131e71abc743057699edfb42}} 
+{\bfseries Convolution2D} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Filters, uint filter\+Size, uint stride, P\+A\+D\+D\+I\+N\+G\+\_\+\+M\+O\+DE pad, TensorP$<$ Value\+Type $>$ input, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classConvolution2D_aa4d634085ca7ab3d1945185d8c908dc9}\label{classConvolution2D_aa4d634085ca7ab3d1945185d8c908dc9}} 
+{\bfseries Convolution2D} (std\+::string name, ActivationP$<$ Value\+Type $>$ act, uint no\+Filters, uint filter\+Size, uint stride, P\+A\+D\+D\+I\+N\+G\+\_\+\+M\+O\+DE pad, Tensor\+FactoryP$<$ Value\+Type $>$ data\+Tensor\+Factory, Tensor\+FactoryP$<$ Weight\+Type $>$ weight\+Tensor\+Factory)
+\item 
+\mbox{\Hypertarget{classConvolution2D_a713b56c33b0595d1095397129391e70e}\label{classConvolution2D_a713b56c33b0595d1095397129391e70e}} 
+\hyperlink{classShape}{Shape} {\bfseries output\+Shape} () override
+\item 
+\mbox{\Hypertarget{classConvolution2D_a2031c3d59486ce80626f04ae21a34162}\label{classConvolution2D_a2031c3d59486ce80626f04ae21a34162}} 
+void {\bfseries feed\+Forward} () override
+\item 
+\mbox{\Hypertarget{classConvolution2D_aa3084202934370bcb7a81894657dc51c}\label{classConvolution2D_aa3084202934370bcb7a81894657dc51c}} 
+void {\bfseries load\+Weights} (std\+::string path, std\+::string file\+Name) override
+\item 
+\mbox{\Hypertarget{classConvolution2D_a1d8cfc56655d5b2321a27a8e99a8d2cf}\label{classConvolution2D_a1d8cfc56655d5b2321a27a8e99a8d2cf}} 
+void {\bfseries load\+Weights} (std\+::string path) override
+\item 
+\mbox{\Hypertarget{classConvolution2D_a60f6c470cee849147107690c4662ba0f}\label{classConvolution2D_a60f6c470cee849147107690c4662ba0f}} 
+virtual void {\bfseries random\+Init} () override
+\item 
+\mbox{\Hypertarget{classConvolution2D_ae0fdd1ea63c8c9de35069d2ae115b114}\label{classConvolution2D_ae0fdd1ea63c8c9de35069d2ae115b114}} 
+void {\bfseries description} () override
+\item 
+\mbox{\Hypertarget{classConvolution2D_a32c8da64840fa7a3527e0b4180faaff8}\label{classConvolution2D_a32c8da64840fa7a3527e0b4180faaff8}} 
+virtual std\+::vector$<$ TensorP$<$ Weight\+Type $>$ $>$ \hyperlink{classConvolution2D_a32c8da64840fa7a3527e0b4180faaff8}{all\+Weights} () override
+\begin{DoxyCompactList}\small\item\em Returns weights, biases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Layer\+Impl.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,100 @@
+\hypertarget{classHETensor}{}\section{H\+E\+Tensor$<$ T $>$ Class Template Reference}
+\label{classHETensor}\index{H\+E\+Tensor$<$ T $>$@{H\+E\+Tensor$<$ T $>$}}
+
+
+Inheritance diagram for H\+E\+Tensor$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{classHETensor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for H\+E\+Tensor$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHETensor__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHETensor_a7d20de8a5a4b73a5b26a530df8f5983f}\label{classHETensor_a7d20de8a5a4b73a5b26a530df8f5983f}} 
+{\bfseries H\+E\+Tensor} (\hyperlink{classShape}{Shape} s, \hyperlink{classShape}{Shape} plain\+Text\+Shape, \hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}$<$ T $>$ $\ast$factory)
+\item 
+\mbox{\Hypertarget{classHETensor_adfa6d2f93f822c6f7294728b59a400ee}\label{classHETensor_adfa6d2f93f822c6f7294728b59a400ee}} 
+{\bfseries H\+E\+Tensor} (\hyperlink{classShape}{Shape} s, \hyperlink{classShape}{Shape} plain\+Text\+Shape, \hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}$<$ T $>$ $\ast$factory, TensorP$<$ T $>$ other)
+\item 
+\mbox{\Hypertarget{classHETensor_a92788abf99e5d6773f021f1ef21886a7}\label{classHETensor_a92788abf99e5d6773f021f1ef21886a7}} 
+virtual void \hyperlink{classHETensor_a92788abf99e5d6773f021f1ef21886a7}{perform\+Checks} () override
+\begin{DoxyCompactList}\small\item\em Runs some checks on the content of the tensor. If the factory has {\ttfamily refresh\+On\+High\+Noise\+Enabled} this triggers the data to be sent to the client for rencryption. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHETensor_af96ae9015195d89f91e44024cd6cc35c}\label{classHETensor_af96ae9015195d89f91e44024cd6cc35c}} 
+TensorP$<$ double $>$ {\bfseries decrypt\+Double} ()
+\item 
+\mbox{\Hypertarget{classHETensor_aa52a0a3d339202b5dac7fcd507b00eb7}\label{classHETensor_aa52a0a3d339202b5dac7fcd507b00eb7}} 
+TensorP$<$ long $>$ {\bfseries decrypt\+Long} ()
+\item 
+\mbox{\Hypertarget{classHETensor_a3f94bbe3c8bc5f29666cf309b9251abf}\label{classHETensor_a3f94bbe3c8bc5f29666cf309b9251abf}} 
+virtual T {\bfseries empty} () override
+\item 
+\mbox{\Hypertarget{classHETensor_a0d9de653c9b2ec6963bb98ec5679be4b}\label{classHETensor_a0d9de653c9b2ec6963bb98ec5679be4b}} 
+virtual std\+::vector$<$ int $>$ {\bfseries argmax\+Vector} (uint axis=0) override
+\item 
+\mbox{\Hypertarget{classHETensor_a9b58e05ba89b3c66084e33ca5423bbb6}\label{classHETensor_a9b58e05ba89b3c66084e33ca5423bbb6}} 
+virtual void {\bfseries init} () override
+\item 
+\mbox{\Hypertarget{classHETensor_a171fd555451e5b9d6e71ebb871d368a3}\label{classHETensor_a171fd555451e5b9d6e71ebb871d368a3}} 
+virtual void \hyperlink{classHETensor_a171fd555451e5b9d6e71ebb871d368a3}{init\+Random} (uint seed=7) override
+\begin{DoxyCompactList}\small\item\em allocates the memory and fills it with random values \mbox{[}0,1\mbox{]} You can pass a seed for the random generator. Default seed is 7 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHETensor_ac22b8062f261724d8a6a810d60a0d1cd}\label{classHETensor_ac22b8062f261724d8a6a810d60a0d1cd}} 
+void \hyperlink{classHETensor_ac22b8062f261724d8a6a810d60a0d1cd}{refresh\+Cipher\+Texts} ()
+\begin{DoxyCompactList}\small\item\em Refreshes the ciphertexts in the tensor. Currently they are decrypted and rencrypted. A more realistic implementation would send them to the holder of the private key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHETensor_a1b771ebed43f0ee13398a72837313ce4}\label{classHETensor_a1b771ebed43f0ee13398a72837313ce4}} 
+static std\+::shared\+\_\+ptr$<$ \hyperlink{classHETensor}{H\+E\+Tensor}$<$ T $>$ $>$ {\bfseries create\+Tensor} (\hyperlink{classShape}{Shape} s, \hyperlink{classShape}{Shape} plain\+Text\+Shape, \hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}$<$ T $>$ $\ast$factory)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classHETensor_ab0b9ca7b3826bc6c385514523e29de06}{compute\+Strides} () override
+\item 
+\mbox{\Hypertarget{classHETensor_a6c6723c9443c99e93b7135b6cd3d746e}\label{classHETensor_a6c6723c9443c99e93b7135b6cd3d746e}} 
+virtual void {\bfseries create\+Storage} () override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHETensor_aa425107854263da0f5201441f28d06a4}\label{classHETensor_aa425107854263da0f5201441f28d06a4}} 
+\hyperlink{classShape}{Shape} {\bfseries m\+Plain\+Text\+Shape}
+\item 
+\mbox{\Hypertarget{classHETensor_afba83053883bb84881f313074600af40}\label{classHETensor_afba83053883bb84881f313074600af40}} 
+\hyperlink{classCipherTextWrapperFactory}{Cipher\+Text\+Wrapper\+Factory}$<$ T $>$ $\ast$ {\bfseries m\+Factory}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classHETensor_ab0b9ca7b3826bc6c385514523e29de06}\label{classHETensor_ab0b9ca7b3826bc6c385514523e29de06}} 
+\index{H\+E\+Tensor@{H\+E\+Tensor}!compute\+Strides@{compute\+Strides}}
+\index{compute\+Strides@{compute\+Strides}!H\+E\+Tensor@{H\+E\+Tensor}}
+\subsubsection{\texorpdfstring{compute\+Strides()}{computeStrides()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual void \hyperlink{classHETensor}{H\+E\+Tensor}$<$ T $>$\+::compute\+Strides (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Strides and shapes work somewhat differently with HE Tensors. Since we are working with S\+I\+MD our shape is \mbox{[} channel, y, x, batch \mbox{]}. This also changes the capacity of.
+
+We want to keep the same shape notation as regular tensors. 
+
+Reimplemented from \hyperlink{classTensor_a22b23dcd3dbe86924e01d13476f44204}{Tensor$<$ T $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/\+H\+E\+Backend/H\+E\+Tensor.\+h\end{DoxyCompactItemize}

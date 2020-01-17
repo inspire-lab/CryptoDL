@@ -1,0 +1,51 @@
+\hypertarget{classPlainTensorFactory}{}\section{Plain\+Tensor\+Factory$<$ T $>$ Class Template Reference}
+\label{classPlainTensorFactory}\index{Plain\+Tensor\+Factory$<$ T $>$@{Plain\+Tensor\+Factory$<$ T $>$}}
+
+
+Inheritance diagram for Plain\+Tensor\+Factory$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classPlainTensorFactory__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plain\+Tensor\+Factory$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classPlainTensorFactory__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlainTensorFactory_af46037c3e4e9ae9579247250fa003737}\label{classPlainTensorFactory_af46037c3e4e9ae9579247250fa003737}} 
+virtual TensorP$<$ T $>$ {\bfseries create} (\hyperlink{classShape}{Shape} s) override
+\item 
+\mbox{\Hypertarget{classPlainTensorFactory_a221f21b72137ad3460a2914a77f9b98f}\label{classPlainTensorFactory_a221f21b72137ad3460a2914a77f9b98f}} 
+virtual TensorP$<$ T $>$ \hyperlink{classPlainTensorFactory_a221f21b72137ad3460a2914a77f9b98f}{create\+View} (\hyperlink{classShape}{Shape} s, TensorP$<$ T $>$ other) override
+\begin{DoxyCompactList}\small\item\em Creates a different view on the same datastorage. Shapes must match. Views can alter the underlying data just as the original \hyperlink{classTensor}{Tensor}. After the creation they share equal ownership of the data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPlainTensorFactory_a1d2ad4cff7795b8aca08e0cce6a25460}\label{classPlainTensorFactory_a1d2ad4cff7795b8aca08e0cce6a25460}} 
+TensorP$<$ T $>$ {\bfseries ones} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classPlainTensorFactory_a7aa6fd3ac0fc2f2d8a190265ce799e8c}\label{classPlainTensorFactory_a7aa6fd3ac0fc2f2d8a190265ce799e8c}} 
+TensorP$<$ T $>$ {\bfseries zeros} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classPlainTensorFactory_a5b7fcd7f1430f6db2942e34d16506ac6}\label{classPlainTensorFactory_a5b7fcd7f1430f6db2942e34d16506ac6}} 
+TensorP$<$ T $>$ {\bfseries range} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classPlainTensorFactory_a5dd2321bee11f00b9874562a5ce65fc0}\label{classPlainTensorFactory_a5dd2321bee11f00b9874562a5ce65fc0}} 
+virtual TensorP$<$ T $>$ {\bfseries ones\+And\+Init} (\hyperlink{classShape}{Shape} s)
+\item 
+\mbox{\Hypertarget{classPlainTensorFactory_af2fc84f75b3c3f03a056964095c829fe}\label{classPlainTensorFactory_af2fc84f75b3c3f03a056964095c829fe}} 
+virtual TensorP$<$ T $>$ {\bfseries arange\+And\+Init} (\hyperlink{classShape}{Shape} s, int start=1, int step=1)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/architecture/Plain\+Tensor\+Impl.\+h\end{DoxyCompactItemize}
