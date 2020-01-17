@@ -1,5 +1,5 @@
 
-# Kalyp.so
+# CryptoDL
 
 # README 
 v.0.1.0
@@ -139,7 +139,7 @@ directory there.
 
 ~~1. Install [HELib](https://github.com/shaih/HElib) and its dependencies. Follow the instrutctions for Option 2 library installation.~~
 
-### Building Kalyp.so
+### Building CryptoDL
 
 1. Check out this project.
 2. Build the library using the makefile located in `Debug`
