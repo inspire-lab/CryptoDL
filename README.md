@@ -37,7 +37,7 @@ Flatten(data_format="channels_last")
  
 #### Supported version of HELib ####
 
-The last none version of HELib supported is: `ac0308715e5ae6bf5e750e8701e736d855550fc8`
+The last known version of HELib supported is: `ac0308715e5ae6bf5e750e8701e736d855550fc8`
 To obtain it use:
 
 ```
