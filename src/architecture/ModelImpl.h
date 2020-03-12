@@ -12,6 +12,7 @@
 #include <vector>
 #include <chrono>
 #include <ctime>
+#include <iostream>
 #include "Layer.h"
 #include "Tensor.h"
 #include "PlainTensor.h"
@@ -171,9 +172,9 @@ public:
 			run();
 			// get the predicitons
 			std::vector<int> preds = classification();
-			std::cout << preds << std::endl;
+//			std::cout << preds << std::endl; //FIXME compile error
 			predictions.insert( predictions.end(), preds.begin(), preds.end() );
-			std::cout << predictions << std::endl;
+//			std::cout << predictions << std::endl; //FIXME error
 			std::cout << "[";
 			for ( uint var = 0; var < predictions.size(); ++var )
 				std::cout << (unsigned) Y [ var ] << " ";

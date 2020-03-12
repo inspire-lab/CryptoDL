@@ -18,6 +18,7 @@
 #include <memory>
 #include <chrono>
 #include <type_traits>
+#include <assert.h>
 #include "ActivationFunction.h"
 #include "Tensor.h"
 #include "TensorFactory.h"

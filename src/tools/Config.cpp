@@ -8,6 +8,8 @@
 
 #include "Config.h"
 #include "SystemTools.h"
+#include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <iomanip>
