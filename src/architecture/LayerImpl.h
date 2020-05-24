@@ -9,6 +9,7 @@
 #define ARCHITECTURE_LAYERIMPL_H_
 
 #include <vector>
+#include <stdexcept>
 #include <string>
 #include <cstdlib>
 #include <cmath>
@@ -105,6 +106,11 @@ public:
 
 	virtual void randomInit() = 0;
 
+	virtual void initTensors(){
+		mInput->init();
+		mOutput->init();
+	}
+
 	/**
 	 * @brief This function is supposed to be used if a layer needs to build a special output layer.
 	 * It will get called when layers gets added to the model. Build yuour own output layer in this function and
@@ -142,23 +148,23 @@ public:
 
 
 	//setters
-	void input( TensorP<ValueType> input ) {
+	virtual void input( TensorP<ValueType> input ) {
 		this->mInput = input;
 	}
 
-	void output( TensorP<ValueType> output ) {
+	virtual void output( TensorP<ValueType> output ) {
 		this->mOutput = output;
 	}
 
-	void activation( ActivationP<ValueType> act ) { //used to set the activation function
+	virtual  void activation( ActivationP<ValueType> act ) { //used to set the activation function
 		mActivation = act;
 	}
 
-	void weights( TensorP<WeightType> weights ) {
+	virtual void weights( TensorP<WeightType> weights ) {
 		this->mWeights = weights;
 	}
 
-	void biases( TensorP<WeightType> biases ) {
+	virtual void biases( TensorP<WeightType> biases ) {
 		this->mBiases = biases;
 	}
 
@@ -995,19 +1001,15 @@ public:
 		
 	}
 
-
+	// FIXME add override
 	void loadWeights( std::string path, std::string fileName ) {
-		loadWeights( path, this->mName );
-	}
-
-	void loadWeights( std::string path ) {
 		//load weigths from file
-		std::vector<std::vector<WeightType>> weightsVector = loadingFCWeights<WeightType>( path + this->mName,
+		std::vector<std::vector<WeightType>> weightsVector = loadingFCWeights<WeightType>( path + fileName,
 				mUnits );
 		//load recurrent weigths from file
-		std::vector<std::vector<WeightType>> reccurnteWeightsVector = loadingFCWeights<WeightType>( path + this->mName + "_recurrent",	mUnits );
+		std::vector<std::vector<WeightType>> reccurnteWeightsVector = loadingFCWeights<WeightType>( path + fileName + "_recurrent",	mUnits );
 		//load biases from file
-		std::vector<WeightType> biasesVector = loadFilterWeights<WeightType>( path + this->mName + "_bias.txt" );
+		std::vector<WeightType> biasesVector = loadFilterWeights<WeightType>( path + fileName + "_bias.txt" );
 
 		//create tensors and copy values into it
 
@@ -1017,6 +1019,13 @@ public:
 		this->mRecurrentWeights->init( reccurnteWeightsVector );
 		this->mBiases = this->mWeigthTensorFactory->create( Shape { mUnits } );
 		this->mBiases->init( biasesVector );
+
+	}
+
+	// FIXME add override
+	void loadWeights( std::string path ) {
+		loadWeights( path, this->mName ); // FIXME this is not correct. endless recursion. should probably be switched with void loadWeights( std::string path )
+
 	}
 
 	virtual void randomInit() override {
@@ -1543,6 +1552,369 @@ private:
 	uint mPadding;
 
 };
+
+// TODO currently only works for 3D tensors and splitting along axis 1
+template<class ValueType, class WeightType, class DataTensorType=TensorP<ValueType>, class WeightTensorType=TensorP<WeightType>, class ConvertedWeights=float>
+class SplitLayer: public Layer<ValueType, WeightType, DataTensorType, WeightTensorType> {
+public:
+
+	SplitLayer( std::string name, uint axis, uint splits, TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), input, dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis )
+	{
+		this->mOutput = this->mDataTensorFactory->create( outputShape() );
+	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	SplitLayer( std::string name, uint axis, uint splits, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			:
+	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis )
+	{
+	}
+
+	SplitLayer( std::string name,  uint axis, uint splits, TensorP<ValueType> input )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), input), mSplits( splits ), mAxis( axis )
+	{
+		this->mOutput = this->mDataTensorFactory->create( outputShape() );
+	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	SplitLayer( std::string name, uint axis, uint splits )
+			:
+	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer() ), mSplits( splits ), mAxis( axis )
+	{
+	}
+
+
+
+	// computes the outputshape for the layer
+	/**
+	 * Output shape for this layer is weird. It returns a list of tensors.
+	 * But the output shape it returns is the shape of the elements in list.
+	 */
+	Shape outputShape() override {
+		if( this->mInput->shape[ mAxis ] % mSplits )
+			throw std::logic_error( "splits needs to divide axis evenly" );
+		uint splitSize = this->mInput->shape[ mAxis ] / mSplits;
+		Shape out( this->mInput->shape );
+		out[ mAxis ] = splitSize;
+		out.computeCapacity();
+		return out;
+	}
+
+
+	void feedForward() override {
+		uint splitSize = outputShape()[ mAxis ];
+		for( uint split = 0; split < mSplits; ++split ){
+			for (uint d0 = 0; d0 < this->mInput->shape[ 0 ]; ++d0 ) { // batch
+				for (uint d1 = 0; d1 < splitSize  ; ++d1 ) { // splitting dimension
+					for (uint d2 = 0; d2 < this->mInput->shape[ 2 ]; ++d2 ) {
+						( *mOutputList[ split ] ) [ { d0, d1, d2 } ] = ( *this->mInput ) [ { d0, d1 * split, d2 } ];
+					}
+				}
+			}
+		}
+	}
+
+
+	void loadWeights( std::string path, std::string fileName ) {
+		// nothing to do
+
+	}
+
+	void loadWeights( std::string path ) {
+		// nothing to do
+	}
+
+	virtual void initTensors() override {
+		this->Layer<ValueType, WeightType, DataTensorType, WeightTensorType>::initTensors();
+		for( auto & element: mOutputList )
+			element->init();
+	}
+
+	virtual void randomInit() override {
+		// nothing to do
+	}
+
+	void description() override {
+		std::cout << this->mName << std::endl;
+		//TODO: other info such as shape, size, etc.
+	}
+
+	bool buildsOwnOutputTensor() override {
+		buildOutputTensor();
+		return true;
+	}
+
+	/**
+	 * @brief Returns empty vector
+	 */
+	virtual std::vector<TensorP<WeightType>> allWeights() override {
+		return std::vector<TensorP<WeightType>>();
+	}
+
+	const std::vector<TensorP<ValueType>>& outputList(){
+		return mOutputList;
+	}
+
+
+private:
+	uint mSplits, mAxis;
+	std::vector<TensorP<ValueType>> mOutputList;
+
+	void buildOutputTensor(){
+		for( uint split = 0; split < mSplits; ++split )
+			mOutputList.push_back( this->mDataTensorFactory->create( outputShape() ) );
+	}
+
+
+
+};
+
+template<class ValueType, class WeightType, class DataTensorType=TensorP<ValueType>, class WeightTensorType=TensorP<WeightType>, class ConvertedWeights=float>
+class ConcatLayer: public Layer<ValueType, WeightType, DataTensorType, WeightTensorType> {
+public:
+
+	// just fake an input tensor. we only work with the list
+	ConcatLayer( std::string name, uint axis, uint splits, std::vector<TensorP<ValueType>> inputList, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), dataTensorFactory->create( Shape({0}) ), dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis ), mInputList( inputList )
+	{
+		this->mOutput = this->mDataTensorFactory->create( outputShape() );
+	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	ConcatLayer( std::string name, uint axis, uint splits, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			:
+	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis )
+	{
+	}
+
+//	ConcatLayer( std::string name,  uint axis, uint splits, std::vector<TensorP<ValueType>> inputList )
+//			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), dataTensorFactory->create( Shape({0}) )), mSplits( splits ), mAxis( axis ), mInputList( inputList )
+//	{
+//		this->mOutput = this->mDataTensorFactory->create( outputShape() ); // FIXME: does this even work? dtf is null at this point
+//	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	// This does not work if used in a model. models can only use layers with one in and one output.
+	ConcatLayer( std::string name, uint axis, uint splits )
+			:
+	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer() ), mSplits( splits ), mAxis( axis )
+	{
+	}
+
+
+
+	// computes the outputshape for the layer
+	Shape outputShape() override {
+		Shape outShape( mInputList[ 0 ]->shape );
+		outShape[ mAxis ] = outShape[ mAxis ] * mSplits;
+		outShape.computeCapacity();
+		return outShape;
+	}
+
+
+	void feedForward() override {
+		Shape inputShape( mInputList[ 0 ]->shape );
+		for( uint split = 0; split < mSplits; ++split ){
+			for (uint d0 = 0; d0 < inputShape[ 0 ]; ++d0 ) { // batch
+				for (uint d1 = 0; d1 < inputShape[ 1 ]  ; ++d1 ) { // splitting dimension
+					for (uint d2 = 0; d2 < inputShape[ 2 ]; ++d2 ) {
+						( *this->mOutput )[ { d0, d1 * split, d2 } ] = ( *mInputList[ split ] ) [ { d0, d1, d2 } ];
+					}
+				}
+			}
+		}
+	}
+
+
+	void loadWeights( std::string path, std::string fileName ) {
+		// nothing to do
+	}
+
+	void loadWeights( std::string path ) {
+		// nothing to do
+	}
+	virtual void randomInit() override {
+		// nothing to do
+	}
+
+	void description() override {
+		std::cout << this->mName << std::endl;
+		//TODO: other info such as shape, size, etc.
+	}
+
+	/**
+	 * @brief Returns empty vector
+	 */
+	virtual std::vector<TensorP<WeightType>> allWeights() override {
+		return std::vector<TensorP<WeightType>>();
+	}
+
+private:
+	uint mSplits, mAxis;
+	std::vector<TensorP<ValueType>> mInputList;
+
+};
+
+/**
+ *
+ * A class that combines the splitting layer, rnn and concat layer into a single layer which is compatible with the model API.
+ * It hides the "uglyness" of dealing with the tensor lists that are the out/input of split/concat layer.
+ *
+ * Splitting and concatination is done along axis 1.
+ *
+ * Return returnSequences not supported atm.
+ *
+ */
+template<class ValueType, class WeightType, class DataTensorType=TensorP<ValueType>, class WeightTensorType=TensorP<WeightType>, class ConvertedWeights=float>
+class ParallelRNNBlocskLayer: public Layer<ValueType, WeightType, DataTensorType, WeightTensorType> {
+public:
+
+
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights,
+			TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, input, dataTensorFactory, weigthTensorFactory ),
+			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+	{
+		build();
+	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, dataTensorFactory, weigthTensorFactory ),
+			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+	{
+	}
+
+	//Fixme this constructor does not work right now. the factories are set after the constructor runs. the model does not know to call build
+	// maybe make a setter methode for the factories. For now just use any of the constructors.
+//	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights, TensorP<ValueType> input )
+//			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, input),
+//			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+//	{
+////		this->mOutput = this->mDataTensorFactory->create( outputShape() ); // FIXME: does this even work? dtf is null at this point
+//		build();
+//	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act ),
+			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+	{
+	}
+
+
+	/**
+	 * This layer requires some more complex building than other layers do. Building can be done once we have the input and output tensor.
+	 * It gets triggered if the constructer with an input tensor is called or once the input setter is called.
+	 * The main purpose of building is to tie together all the layers that are wrapped up in here. Normally all this would be handled by the model class
+	 * but it does not know of the internals of this layer.
+	 *
+	 * Setup can be used for this it is called too late and without the steps in this function shape inference would not be possible.
+	 *
+	 */
+	void build(){
+		// splitting layer
+		mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "split", mAxis, mSplits, this->mInput, this->mDataTensorFactory, this->mWeigthTensorFactory );
+		mSplitLayer.buildsOwnOutputTensor();
+
+		// setup the rnn blocks. the weight sharing takes effect during the loading of weights
+		for ( size_t i = 0; i < mSplits; ++i ) {
+			mRNNBlocks.push_back( RNN<ValueType, WeightType, DataTensorType, WeightTensorType>( "rnn_block_" + std::to_string( i ), this->mActivation, mRnnUits, mReturnSequences, mSplitLayer.outputList()[ i ], this->mDataTensorFactory, this->mWeigthTensorFactory ) );
+			mRNNBlocks[ i ].setup();
+			mRNNOuts.push_back( mRNNBlocks[ i ].output() );
+		}
+
+		// concat layer
+		mConcatLayer = ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "concat", mAxis, mSplits, mRNNOuts, this->mDataTensorFactory, this->mWeigthTensorFactory );
+		// the output of the entire layer is what ever falls out of the concat layer
+		this->output( mConcatLayer.output() );
+	}
+
+	// computes the outputshape for the layer
+	Shape outputShape() override {
+		return mConcatLayer.outputShape();
+	}
+
+
+	void feedForward() override {
+		mSplitLayer.feedForward();
+		// TODO this could be run in parallel if we have enough cores
+		// but at the moment it does not make a difference. the blocks utilize
+		// all cores anyway right now
+		for( auto& block: mRNNBlocks )
+			block.feedForward();
+		mConcatLayer.feedForward();
+	}
+
+
+	void loadWeights( std::string path, std::string fileName ) {
+		throw std::runtime_error( "dynamic filenames not supported for rnn blocks at this time" );
+		// TODO need to pass the correct stuff to the rnn layer
+	}
+
+	void loadWeights( std::string path ) {
+		for( uint i = 0; i < mSplits; ++i ){
+			if( i == 0 )
+				mRNNBlocks[ i ].loadWeights( path, this->name() );
+			else if( mShareWeights ){
+				mRNNBlocks[ i ].weights( mRNNBlocks[ 0 ].weights() );
+				mRNNBlocks[ i ].biases( mRNNBlocks[ 0 ].biases() );
+				mRNNBlocks[ i ].recurrentWeights( mRNNBlocks[ 0 ].recurrentWeights() );
+			} else
+				mRNNBlocks[ i ].loadWeights( path, this->name() + "_" + std::to_string( i ) );
+		}
+	}
+
+	virtual void initTensors() override {
+		mSplitLayer.initTensors();
+		for( auto& rnn: mRNNBlocks )
+			rnn.initTensors();
+		mConcatLayer.initTensors();
+	}
+
+
+	virtual void randomInit() override {
+		for( auto& rnn: mRNNBlocks )
+			rnn.randomInit();
+	}
+
+	void description() override {
+		std::cout << this->mName << std::endl;
+		//TODO: other info such as shape, size, etc.
+	}
+
+
+	virtual void input( TensorP<ValueType> input ) override {
+		// once we have the input tensor we have all the information
+		// to setup the tensors and layers
+		Layer<ValueType,WeightType, DataTensorType, WeightTensorType>::input( input );
+		build();
+	}
+
+	/**
+	 * @brief Returns empty vector
+	 */
+	//Fixme need to think about how this works for this layer. maybe it doesnt
+	virtual std::vector<TensorP<WeightType>> allWeights() override {
+		return std::vector<TensorP<WeightType>>();
+	}
+
+private:
+
+	uint mSplits, mAxis, mRnnUits;
+	bool mReturnSequences, mShareWeights;
+	std::vector<TensorP<ValueType>> mRNNOuts;
+	SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0 );
+	std::vector<RNN<ValueType, WeightType, DataTensorType, WeightTensorType>> mRNNBlocks;
+	ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mConcatLayer = ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0 );
+
+
+
+
+
+};
+
 
 
 #endif /* ARCHITECTURE_LAYERIMPL_H_ */

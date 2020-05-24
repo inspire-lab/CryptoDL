@@ -7,18 +7,21 @@ CPP_SRCS += \
 ../src/tools/Config.cpp \
 ../src/tools/DataReaders.cpp \
 ../src/tools/FileSystemTools.cpp \
+../src/tools/RNNTools.cpp \
 ../src/tools/SystemTools.cpp 
 
 OBJS += \
 ./src/tools/Config.o \
 ./src/tools/DataReaders.o \
 ./src/tools/FileSystemTools.o \
+./src/tools/RNNTools.o \
 ./src/tools/SystemTools.o 
 
 CPP_DEPS += \
 ./src/tools/Config.d \
 ./src/tools/DataReaders.d \
 ./src/tools/FileSystemTools.d \
+./src/tools/RNNTools.d \
 ./src/tools/SystemTools.d 
 
 
@@ -26,7 +29,7 @@ CPP_DEPS += \
 src/tools/%.o: ../src/tools/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -std=c++17 -I/usr/local/helib_pack/include/ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -std=c++17 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

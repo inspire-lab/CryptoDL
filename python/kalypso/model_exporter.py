@@ -1,7 +1,6 @@
 import os
-import keras
+from tensorflow import keras
 from .exportWeights import export_weights
-
 
 
 def model_exporter( model_file, output_dir, json_file ):
@@ -19,16 +18,16 @@ def model_exporter( model_file, output_dir, json_file ):
         into the custom objects dict provided by keras.
     
     """
-    
+
     # create output folder if it does not exist
     try:
         import pathlib
-        pathlib.Path(output_dir + '/weights/' ).mkdir( parents=True, exist_ok=True )
+        pathlib.Path( output_dir + '/weights/' ).mkdir( parents=True, exist_ok=True )
     except:
 	    # python 2 backup
-	    if not os.path.exists(directory):
-             os.makedirs(directory)
-    
+	    if not os.path.exists( directory ):
+             os.makedirs( directory )
+
     # load the model
     model = keras.models.load_model( model_file )
     # export the weights
@@ -36,5 +35,5 @@ def model_exporter( model_file, output_dir, json_file ):
     # get json config
     json_string = model.to_json()
     # save json to file
-    with open( json_file,  'w' ) as f:
+    with open( json_file, 'w' ) as f:
         f.write( json_string )

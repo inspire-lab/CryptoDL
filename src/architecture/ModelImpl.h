@@ -41,7 +41,7 @@ template<class ValueType, class WeightType, class DataTensorType=Tensor<ValueTyp
 class Model {
 public:
 
-	Model( MemoryUsage usage, TensorFactory<ValueType>* dtf, TensorFactory<WeightType	>* wtf, WeightConverter<WeightType,ConvertType>* weightConverter )
+	Model( MemoryUsage usage, TensorFactory<ValueType>* dtf, TensorFactory<WeightType>* wtf, WeightConverter<WeightType,ConvertType>* weightConverter )
 		: mLayers( { } ), mUsage( usage ), mDataFactory( dtf ), mWeightFactory( wtf ), mWeightConverter( weightConverter ) {
 		if( (usage & MemoryUsage::pre_convert_weights) && weightConverter == nullptr ){
 			std::cerr << "Can not create with with pre weight conversion and no converter" << std::endl;
@@ -81,8 +81,7 @@ public:
 		mLayers.push_back( layer );
 
 		if ( ( mUsage & MemoryUsage::greedy ) ) { // greedy memory allocation
-			layer->input()->init();
-			layer->output()->init();
+			layer->initTensors();
 			if ( ( mUsage & MemoryUsage::pre_convert_weights ) ){
 				std::vector<TensorP<ConvertType>> c;
 				for( auto tensor : layer->allWeights() )

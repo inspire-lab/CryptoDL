@@ -8,6 +8,8 @@
 #ifndef TOOLS_FILESYSTEMTOOLS_H_
 #define TOOLS_FILESYSTEMTOOLS_H_
 
+#include <vector>
+
 /**
  * Check if a file exists
  * @return true if and only if the file exists, false else
