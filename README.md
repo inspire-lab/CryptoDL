@@ -109,6 +109,7 @@ normally can. We suggest using poynomials as activation functions.
 C++:
  - HELib
  - boost 1.67
+ - libjpeg-dev
 
 python:
  - keras
