@@ -36,12 +36,12 @@ public:
 
 	HELibCipherText();
 
-	HELibCipherText( std::shared_ptr<helib::Ctxt> ctxt, HELibCipherTextFactory* factory ) :
+	HELibCipherText( std::shared_ptr<Ctxt> ctxt, HELibCipherTextFactory* factory ) :
 			mFactory( factory ), mCtxt( ctxt ) {
 
 	}
 
-	const helib::Ctxt& ctxt() const {
+	const Ctxt& ctxt() const {
 		return *mCtxt;
 	}
 
@@ -104,7 +104,7 @@ public:
 
 	// FIXME move back to private
 	HELibCipherTextFactory* mFactory;
-	std::shared_ptr<helib::Ctxt> mCtxt; 	// needs to wrapped in a pointer because of its = operator
+	std::shared_ptr<Ctxt> mCtxt; 	// needs to wrapped in a pointer because of its = operator
 									// which only allows assignment to ctxt with the same context
 									// and that makes things annoying
 private:
@@ -132,12 +132,12 @@ public:
 
 
 		if ( useBFV ) {
-			unsigned long p = 4999; // Plaintext prime modulus
+			long p = 4999; // Plaintext prime modulus
 			long L = 300;	/// Number of levels in the modulus chain [default=heuristic]
 							/// if used with out the FindM function  it is  Number of bits of the modulus chain
 //			long m = 32109;	// Specific modulus
-			unsigned long m = 2;	// Specific modulus
-			unsigned long r = 1;		// Lifting [default=1]
+			long m = 2;	// Specific modulus
+			long r = 1;		// Lifting [default=1]
 			long c = 2;		// Number of columns in key-switching matrix [default=2]
 			long d = 1;		// Degree of the field extension [default=1]
 			//FIXME: unused variables (remove/use)?
@@ -151,17 +151,17 @@ public:
 
 			NTL::ZZX G;
 //			m = FindM( k, L, c, p, d, s, 0, true );		// Find a value for m given the specified values
-			context = std::make_shared<helib::Context>( m, p, r );
+			context = std::make_shared<FHEcontext>( m, p, r );
 			buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
 
-			secretKey = std::make_shared<helib::SecKey>( *context );
+			secretKey = std::make_shared<FHESecKey>( *context );
 			secretKey->GenSecKey( w );
 			addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 			publicKey = secretKey;
-			G = helib::makeIrredPoly( p, d );
+			G = makeIrredPoly( p, d );
 
 			context->ea;
-			ea = std::make_shared<helib::EncryptedArray>( *context, G );
+			ea = std::make_shared<EncryptedArray>( *context, G );
 		}
 		else {
 			long L = 128;	// Number of levels in the modulus chain [default=heuristic]
@@ -173,13 +173,13 @@ public:
 			/// m specific the ring
 			/// p = -1 means CKKS
 			/// r is the number of bits after the decimal aka precision
-			context = std::make_shared<helib::Context>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
+			context = std::make_shared<FHEcontext>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
 			buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
-			secretKey = std::make_shared<helib::SecKey>( *context );
+			secretKey = std::make_shared<FHESecKey>( *context );
 			secretKey->GenSecKey();
 			addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 			publicKey = secretKey;
-			ea = std::make_shared<helib::EncryptedArray>( *context );
+			ea = std::make_shared<EncryptedArray>( *context );
 		}
 
 	}
@@ -191,26 +191,26 @@ public:
 		/// m specific the ring
 		/// p = -1 means CKKS
 		/// r is the number of bits after the decimal aka precision
-		context = std::make_shared<helib::Context>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
+		context = std::make_shared<FHEcontext>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
 		buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
-		secretKey = std::make_shared<helib::SecKey>( *context );
+		secretKey = std::make_shared<FHESecKey>( *context );
 		secretKey->GenSecKey();
 		addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 		publicKey = secretKey;
-		ea = std::make_shared<helib::EncryptedArray>( *context );
+		ea = std::make_shared<EncryptedArray>( *context );
 
 	}
 
 	virtual HELibCipherText empty() override {
-		return HELibCipherText( std::make_shared<helib::Ctxt>( *publicKey ), this );
+		return HELibCipherText( std::make_shared<Ctxt>( *publicKey ), this );
 	}
 
 	virtual HELibCipherText createCipherText( long x ) override {
-		std::shared_ptr<helib::Ctxt> ctxt = std::make_shared<helib::Ctxt>( *publicKey );
+		std::shared_ptr<Ctxt> ctxt = std::make_shared<Ctxt>( *publicKey );
 		if ( useBFV ) {
 			publicKey->Encrypt( *ctxt, NTL::to_ZZX( x ) );
 		} else {
-			helib::EncryptedArrayCx ea = context.get()->ea->getCx();
+			EncryptedArrayCx ea = context.get()->ea->getCx();
 			std::vector<long> vdLong;
 			for ( long i = 0; i < ea.size(); i++ ) {
 				vdLong.push_back( x );
@@ -250,19 +250,19 @@ public:
 		return ea->size();
 	}
 
-	std::shared_ptr<helib::Ctxt> createRawEmpty() {
-		return std::make_shared<helib::Ctxt>( *publicKey );
+	std::shared_ptr<Ctxt> createRawEmpty() {
+		return std::make_shared<Ctxt>( *publicKey );
 	}
 
 
 	virtual ~HELibCipherTextFactory() {
 	}
 
-	std::shared_ptr<helib::SecKey> secretKey; // FIXME for debugging. should be private
+	std::shared_ptr<FHESecKey> secretKey; // FIXME for debugging. should be private
 private:
-	std::shared_ptr<helib::EncryptedArray> ea;
-	std::shared_ptr<helib::Context> context;
-	std::shared_ptr<helib::PubKey> publicKey;
+	std::shared_ptr<EncryptedArray> ea;
+	std::shared_ptr<FHEcontext> context;
+	std::shared_ptr<FHEPubKey> publicKey;
 };
 
 
@@ -409,3 +409,4 @@ public:
 
 
 #endif /* ARCHITECTURE_HEBACKEND_HELIB_HELIBCIPHERTEXT_H_ */
+

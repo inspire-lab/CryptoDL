@@ -35,9 +35,21 @@
 //FIXME: change all TensorFactory* to TensorFactoryP
 
 
+
+
 namespace {
+	uint getThreadPoolSize(){
+	    const char* poolSizeChar = std::getenv( "POOL_SIZE" );
+	    unsigned int ps = poolSizeChar ? std::stoi( poolSizeChar ) : std::thread::hardware_concurrency();
+//	    std::cout << "using threads: " << ps << std::endl;
+//	    std::cout << "avaialable threads: " << std::thread::hardware_concurrency() << std::endl;
+	    return ps;
+	}
+
 	const bool DEBUG = std::getenv( "DEBUG_LAYER" ) || Config::getConfig()->get<bool>( "general", "debug_layer");
-	const unsigned int POOL_SIZE = std::thread::hardware_concurrency() * 2;
+    const char* poolSizeChar = std::getenv( "POOL_SIZE" );
+    const unsigned int POOL_SIZE = getThreadPoolSize();
+
 }
 //const uint POOL_SIZE = 1; // for debugging
 
@@ -982,8 +994,8 @@ public:
 					tt[ i ].join();
 
 
-				if ( timeIdx % 27 == 0 )
-					this->innerStates->performChecks();
+//				if ( timeIdx % 27 == 0 )
+//					this->innerStates->performChecks();
 				auto end = std::chrono::system_clock::now();
 				std::chrono::duration<double> elapsed_seconds = end - start;
 				if( DEBUG ) std::cout << " Time: " << elapsed_seconds.count() << "s" << std::endl;
@@ -1608,7 +1620,7 @@ public:
 			for (uint d0 = 0; d0 < this->mInput->shape[ 0 ]; ++d0 ) { // batch
 				for (uint d1 = 0; d1 < splitSize  ; ++d1 ) { // splitting dimension
 					for (uint d2 = 0; d2 < this->mInput->shape[ 2 ]; ++d2 ) {
-						( *mOutputList[ split ] ) [ { d0, d1, d2 } ] = ( *this->mInput ) [ { d0, d1 * split, d2 } ];
+						( *mOutputList[ split ] ) [ { d0, d1, d2 } ] = ( *this->mInput ) [ { d0, d1 + split * splitSize, d2 } ];
 					}
 				}
 			}
@@ -1715,12 +1727,11 @@ public:
 
 	void feedForward() override {
 		Shape inputShape( mInputList[ 0 ]->shape );
+		uint splitSize = mInputList[ 0 ]->shape[ 1 ];
 		for( uint split = 0; split < mSplits; ++split ){
 			for (uint d0 = 0; d0 < inputShape[ 0 ]; ++d0 ) { // batch
-				for (uint d1 = 0; d1 < inputShape[ 1 ]  ; ++d1 ) { // splitting dimension
-					for (uint d2 = 0; d2 < inputShape[ 2 ]; ++d2 ) {
-						( *this->mOutput )[ { d0, d1 * split, d2 } ] = ( *mInputList[ split ] ) [ { d0, d1, d2 } ];
-					}
+				for (uint d1 = 0; d1 < inputShape[ 1 ]; ++d1 ) { // splitting dimension
+					( *this->mOutput )[ { d0, d1 + splitSize * split } ] = ( *mInputList[ split ] ) [ { d0, d1 } ];
 				}
 			}
 		}
@@ -1839,12 +1850,26 @@ public:
 
 	void feedForward() override {
 		mSplitLayer.feedForward();
+		if ( DEBUG ){
+			std::cout << mSplitLayer.name() << " " << mSplits << mSplitLayer.output()->shape << std::endl;
+			for( size_t i=0; i < mRNNBlocks.size(); ++i ){
+				std::cout << "block " << i << std::endl;
+				std::cout << *mSplitLayer.outputList()[ i ] << std::endl;
+			}
+		}
 		// TODO this could be run in parallel if we have enough cores
 		// but at the moment it does not make a difference. the blocks utilize
 		// all cores anyway right now
-		for( auto& block: mRNNBlocks )
-			block.feedForward();
+		for( size_t i=0; i < mRNNBlocks.size(); ++i ){
+			std::cout << "running block: " << i << std::endl;
+			mRNNBlocks[ i ].feedForward();
+			if ( DEBUG ) std::cout << *mRNNBlocks[ i ].output() << std::endl;
+		}
 		mConcatLayer.feedForward();
+		if ( DEBUG ){
+			std::cout << "contact layer " <<  mConcatLayer.output()->shape << std::endl;
+			std::cout << *mConcatLayer.output() << std::endl;
+		}
 	}
 
 
