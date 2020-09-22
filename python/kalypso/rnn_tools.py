@@ -3,7 +3,6 @@ import numpy as np
 import keras.backend as K
 from keras.datasets import imdb
 from kalypso import actFunctions
-from sklearn.feature_selection.tests.test_base import support
 from keras.preprocessing import sequence
 import sys
 import os
