@@ -11,7 +11,12 @@
 #include <vector>
 #include <bits/stdc++.h>
 #include <iostream>
-#include <boost/gil/extension/io/jpeg_io.hpp>
+#include <boost/version.hpp>
+#if BOOST_VERSION>106700
+	#include <boost/gil/extension/io/jpeg.hpp>
+#else
+	#include <boost/gil/extension/io/jpeg_io.hpp>
+#endif
 #include <boost/algorithm/string.hpp>
 #include "DataReaders.h"
 #include "../architecture/PlainTensor.h"
@@ -93,8 +98,13 @@ std::vector<double> floatToDouble(const std::vector<float>& floats ){
 
 float_img_vec readJPGquantized( const std::string& file, float maxvalue ){
 
-	 gil::rgb8_image_t img;
-	 gil::jpeg_read_image( file , img );
+	gil::rgb8_image_t img;
+	#if BOOST_VERSION>106700
+		gil::read_image( file , img, gil::jpeg_tag() );
+	#else
+		gil::jpeg_read_image( file , img );
+	#endif
+	 
 	 auto w = img.width();
 	 auto h = img.height();
 	 std::cout << "Read complete, got an image " << w << " by " << h << " pixels" << std::endl;
@@ -133,7 +143,11 @@ float_img_vec readJPGquantized( const std::string& file, float maxvalue ){
 
 std::vector<float> readJPGquantizedFlat( const std::string& file, float maxvalue ){
 	gil::rgb8_image_t img;
-	gil::jpeg_read_image( file , img );
+	#if BOOST_VERSION>106700
+		gil::read_image( file , img, gil::jpeg_tag() );
+	#else
+		gil::jpeg_read_image( file , img );
+	#endif
 	auto w = img.width();
 	auto h = img.height();
 //	std::cout << "Read complete, got an image " << img.width() << " by " << img.height() << " pixels" << std::endl;
