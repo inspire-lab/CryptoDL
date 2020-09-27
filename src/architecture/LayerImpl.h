@@ -1059,7 +1059,7 @@ public:
 		return mRecurrentWeights;
 	}
 
-	void recurrentWeights( const TensorP<WeightType>& recurrentWeights ) {
+	void recurrentWeights( TensorP<WeightType> recurrentWeights ) {
 		mRecurrentWeights = recurrentWeights;
 	}
 
@@ -1570,29 +1570,30 @@ template<class ValueType, class WeightType, class DataTensorType=TensorP<ValueTy
 class SplitLayer: public Layer<ValueType, WeightType, DataTensorType, WeightTensorType> {
 public:
 
-	SplitLayer( std::string name, uint axis, uint splits, TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
-			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), input, dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis )
+	SplitLayer( std::string name, uint axis, uint splits, uint overlap, TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), input, dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis ), mOverlap( overlap )
+	{
+		// the input tensor is set by the super constructor
+		this->mOutput = this->mDataTensorFactory->create( outputShape() );
+	}
+
+	// This constructor is to be used when the layer is passed to the model and is not the first layer
+	SplitLayer( std::string name, uint axis, uint splits, uint overlap, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			:
+	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis ), mOverlap( overlap )
+	{
+	}
+
+	SplitLayer( std::string name,  uint axis, uint splits, uint overlap, TensorP<ValueType> input )
+			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), input), mSplits( splits ), mAxis( axis ), mOverlap( overlap )
 	{
 		this->mOutput = this->mDataTensorFactory->create( outputShape() );
 	}
 
 	// This constructor is to be used when the layer is passed to the model and is not the first layer
-	SplitLayer( std::string name, uint axis, uint splits, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+	SplitLayer( std::string name, uint axis, uint splits, uint overlap )
 			:
-	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), dataTensorFactory, weigthTensorFactory ), mSplits( splits ), mAxis( axis )
-	{
-	}
-
-	SplitLayer( std::string name,  uint axis, uint splits, TensorP<ValueType> input )
-			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer(), input), mSplits( splits ), mAxis( axis )
-	{
-		this->mOutput = this->mDataTensorFactory->create( outputShape() );
-	}
-
-	// This constructor is to be used when the layer is passed to the model and is not the first layer
-	SplitLayer( std::string name, uint axis, uint splits )
-			:
-	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer() ), mSplits( splits ), mAxis( axis )
+	Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, LinearActivation<ValueType>::getSharedPointer() ), mSplits( splits ), mAxis( axis ), mOverlap( overlap )
 	{
 	}
 
@@ -1607,6 +1608,7 @@ public:
 		if( this->mInput->shape[ mAxis ] % mSplits )
 			throw std::logic_error( "splits needs to divide axis evenly" );
 		uint splitSize = this->mInput->shape[ mAxis ] / mSplits;
+		splitSize += 2 * mOverlap;
 		Shape out( this->mInput->shape );
 		out[ mAxis ] = splitSize;
 		out.computeCapacity();
@@ -1616,14 +1618,24 @@ public:
 
 	void feedForward() override {
 		uint splitSize = outputShape()[ mAxis ];
+		uint splitStart = 0;
 		for( uint split = 0; split < mSplits; ++split ){
-			for (uint d0 = 0; d0 < this->mInput->shape[ 0 ]; ++d0 ) { // batch
-				for (uint d1 = 0; d1 < splitSize  ; ++d1 ) { // splitting dimension
-					for (uint d2 = 0; d2 < this->mInput->shape[ 2 ]; ++d2 ) {
-						( *mOutputList[ split ] ) [ { d0, d1, d2 } ] = ( *this->mInput ) [ { d0, d1 + split * splitSize, d2 } ];
-					}
-				}
+			// first splits begins at 0; nothing to do
+			if ( split == 0 )
+				splitStart = 0;
+			// last split; just start at then end of the axis and substract the splitsize
+			else if ( split == mSplits - 1 )
+				splitStart = this->mInput->shape[ mAxis ] - splitSize;
+			// all other splits start at the previous splits' end - overlap
+			else {
+				std::cout << splitSize << " - " << mOverlap << " = " << splitSize - mOverlap << std::endl;
+				splitStart += this->mInput->shape[ mAxis ] / mSplits - mOverlap;
 			}
+			for (uint d0 = 0; d0 < this->mInput->shape[ 0 ]; ++d0 )  // batch
+				for (uint d1 = 0; d1 < splitSize  ; ++d1 )  // splitting dimension
+					for (uint d2 = 0; d2 < this->mInput->shape[ 2 ]; ++d2 ) 
+						// copy data
+						( *mOutputList[ split ] )[ { d0, d1, d2 } ] = ( *this->mInput ) [ { d0, d1 + splitStart, d2 } ];
 		}
 	}
 
@@ -1670,7 +1682,7 @@ public:
 
 
 private:
-	uint mSplits, mAxis;
+	uint mSplits, mAxis, mOverlap;
 	std::vector<TensorP<ValueType>> mOutputList;
 
 	void buildOutputTensor(){
@@ -1782,18 +1794,18 @@ class ParallelRNNBlocskLayer: public Layer<ValueType, WeightType, DataTensorType
 public:
 
 
-	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights,
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights,
 			TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
 			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, input, dataTensorFactory, weigthTensorFactory ),
-			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
 	{
 		build();
 	}
 
 	// This constructor is to be used when the layer is passed to the model and is not the first layer
-	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
 			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, dataTensorFactory, weigthTensorFactory ),
-			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
 	{
 	}
 
@@ -1808,9 +1820,9 @@ public:
 //	}
 
 	// This constructor is to be used when the layer is passed to the model and is not the first layer
-	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint rnnUnits, bool returnSequences, bool shareWeights )
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights )
 			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act ),
-			  mSplits( splits ), mAxis( axis ), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
 	{
 	}
 
@@ -1826,7 +1838,7 @@ public:
 	 */
 	void build(){
 		// splitting layer
-		mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "split", mAxis, mSplits, this->mInput, this->mDataTensorFactory, this->mWeigthTensorFactory );
+		mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "split", mAxis, mSplits, mOverlap, this->mInput, this->mDataTensorFactory, this->mWeigthTensorFactory );
 		mSplitLayer.buildsOwnOutputTensor();
 
 		// setup the rnn blocks. the weight sharing takes effect during the loading of weights
@@ -1917,6 +1929,12 @@ public:
 		build();
 	}
 
+	// TODO this is a dirty hack. change the API in the base class
+	TensorP<ValueType> getInput() {
+		return this->mInput;
+	}
+
+
 	/**
 	 * @brief Returns empty vector
 	 */
@@ -1925,12 +1943,21 @@ public:
 		return std::vector<TensorP<WeightType>>();
 	}
 
+	std::vector<RNN<ValueType, WeightType, DataTensorType, WeightTensorType>>& getBlocks(){
+		return mRNNBlocks;
+	}
+
+	SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>& getSplitLaye(){
+		return mSplitLayer;
+	}
+	
+
 private:
 
-	uint mSplits, mAxis, mRnnUits;
+	uint mSplits, mAxis, mOverlap, mRnnUits;
 	bool mReturnSequences, mShareWeights;
 	std::vector<TensorP<ValueType>> mRNNOuts;
-	SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0 );
+	SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0, 0 );
 	std::vector<RNN<ValueType, WeightType, DataTensorType, WeightTensorType>> mRNNBlocks;
 	ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mConcatLayer = ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0 );
 

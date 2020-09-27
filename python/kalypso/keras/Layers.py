@@ -1,4 +1,5 @@
 import tensorflow as tf
+from tensorflow.keras import backend as K
 import numpy as np
 
 
@@ -63,3 +64,27 @@ class SplitLayer( tf.keras.layers.Layer ):
     conf[ 'n_splits' ] = self.n_splits
     conf[ 'overlap' ] = self.overlap
     return conf
+
+
+class PolyActivation( object ):
+  
+    def __init__( self, a=1, b=0, c=0, d=0, **kwargs ):
+        self.a = a
+        self.b = b
+        self.c = c
+        self.d = d
+    
+    def get_config( self ):
+        conf = {}
+        conf[ 'a' ] = self.a
+        conf[ 'b' ] = self.b
+        conf[ 'c' ] = self.c
+        conf[ 'd' ] = self.d
+        return conf
+
+    @classmethod
+    def from_config( cls, config ):
+        return cls( **config )
+    
+    def __call__( self, x ):
+        return self.a * K.pow( x, 3 ) + self.b * K.pow( x, 2 ) + self.c * x + self.d
