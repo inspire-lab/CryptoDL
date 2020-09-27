@@ -118,7 +118,13 @@ private:
  * and might be removed in the future. The big drawback of BFV is that it
  * does not supoort float numbers
  *
+ * Parameters for the CKKS constructor
+ * HELibCipherTextFactory( long L, long m, long r, long c = 2 ) :
+ * const long L;         // Number of bits (kinda like levels)
+ * const long m;         // Zm*
+ * const long r;         // bit precision
  *
+ * 
  */
 class HELibCipherTextFactory: public CipherTextWrapperFactory<HELibCipherText> {
 public:
@@ -184,13 +190,19 @@ public:
 
 	}
 
+	/**
+	* const long m;         // Zm*
+ 	* const long r;         // bit precision
+ 	* const long L;         // Number of bits
+	*/
 	HELibCipherTextFactory( long L, long m, long r, long c = 2 ) :
 			useBFV( false ) {
 
 		SetSeed( NTL::ZZ( 0 ) );
-		/// m specific the ring
+		/// m specific the ring Zm*
 		/// p = -1 means CKKS
-		/// r is the number of bits after the decimal aka precision
+		/// r is the number of bits after the decimal aka precision 
+		/// L Number of bits
 		context = std::make_shared<FHEcontext>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
 		buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
 		secretKey = std::make_shared<FHESecKey>( *context );
@@ -198,6 +210,7 @@ public:
 		addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 		publicKey = secretKey;
 		ea = std::make_shared<EncryptedArray>( *context );
+		std::cout << "security level: " << context->securityLevel() << std::endl;
 
 	}
 

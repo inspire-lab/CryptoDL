@@ -206,8 +206,8 @@ void HELibCipherTextFactory::feedCipherTensor( const std::vector<double>& in, Te
 	size_t numCheck = 1;
 	for( size_t i = 1; i < tensor->shape.size; ++i )
 		numCheck *= tensor->shape[ i ];
-	std::cout << num << std::endl;
-	std::cout << numCheck << std::endl;
+	// std::cout << num << std::endl;
+	// std::cout << numCheck << std::endl;
 	if( num != numCheck )
 		throw std::logic_error( "Shape does not match supported batchsize" );
 
@@ -218,7 +218,9 @@ void HELibCipherTextFactory::feedCipherTensor( const std::vector<double>& in, Te
 		for( size_t batch = 0; batch < bs; ++batch )
 			temp[ batch ]= in[ i + batch * num ];
 		cipherTexts.push_back( createCipherText( temp ) );
+		std::cout << "\rcreating ciphertext: " << i << "/" << num << std::flush;
 	}
+	std::cout << std::endl;
 	Shape oldShape = tensor->shape;
 	tensor->flatten();
 	tensor->init( cipherTexts );
