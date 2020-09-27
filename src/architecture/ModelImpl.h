@@ -66,12 +66,12 @@ public:
 		if ( !mLayers.empty() ) { //first layer needs to init output
 			TensorP<ValueType> outputPrev = mLayers.back()->output();
 			layer->input( outputPrev );
-			Shape outputShape = layer->outputShape(); // @suppress("Invalid arguments")
+			Shape outputShape = layer->outputShape(); 
 			std::cout << layer->name() << "   " << outputShape << std::endl;
 			if ( !layer->buildsOwnOutputTensor() )
 				layer->output( mDataFactory->create( outputShape ) );
 		} else {
-			Shape temp = layer->outputShape(); // @suppress("Invalid arguments")
+			Shape temp = layer->outputShape();
 			std::cout << layer->name() << "   " << temp << std::endl;
 		}
 
