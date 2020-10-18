@@ -202,7 +202,8 @@ def export_weights( model, path, format=1 ):
 
 if __name__ == '__main__':
     from . import actFunctions
+    from .keras.Layers import custom_objects
     # load model
-    model = keras.models.load_model( sys.argv[ 1 ] )
+    model = keras.models.load_model( sys.argv[ 1 ], custom_objects=custom_objects )
     SavingOriginalWeights( model, sys.argv[ 2 ] )
 

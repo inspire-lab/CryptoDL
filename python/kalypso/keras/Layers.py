@@ -3,6 +3,7 @@ from tensorflow.keras import backend as K
 import numpy as np
 
 
+
 class SplitLayer( tf.keras.layers.Layer ):
   """
   Split the input of the layer along the given axis into equall chunks
@@ -88,3 +89,6 @@ class PolyActivation( object ):
     
     def __call__( self, x ):
         return self.a * K.pow( x, 3 ) + self.b * K.pow( x, 2 ) + self.c * x + self.d
+
+
+custom_objects = { 'SplitLayer': SplitLayer, 'PolyActivation': PolyActivation }

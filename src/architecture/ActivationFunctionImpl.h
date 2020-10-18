@@ -29,8 +29,9 @@ public:
 
 	static std::shared_ptr<Activation<T>> getSharedPointer() {
 		return nullptr;
-	}
-	;
+	};
+
+	virtual void emptyProvider( TensorP<T> t ) { /*default does nothing */	}
 
 	//can prob force to be pure abstract class but need to also define destructors in child classes
 	virtual ~Activation() {
@@ -127,11 +128,7 @@ public:
 
 /**
  *
-<<<<<<< HEAD
- * ax^4+bx^3+cx^2+dx+e
-=======
  * ax^3+bx^2+cx+d
->>>>>>> rnn
  *
  */
 
@@ -140,13 +137,20 @@ class PolynomialActivationDegree3: public Activation<T> {
 
 public:
 	const float a, b, c, d;
-	const TensorP<T> tensor;
+	TensorP<T> tensor = nullptr;
 
 	PolynomialActivationDegree3( float a, float b, float c,float d, TensorP<T> tensor )
 			:a( a ), b( b ), c( c ), d( d ),  tensor( tensor ) {
 	}
 
+	PolynomialActivationDegree3( float a, float b, float c,float d )
+			:a( a ), b( b ), c( c ), d( d ) {
+	}
+
 	void activate( T& in ) override {
+		if ( tensor == nullptr )
+			throw std::runtime_error( "Activation function not properly initialized" );
+
 		/// Need to calculate the individual parts and then sum it up at the end
 		// ax^3
 		T ax3 = tensor->empty();
@@ -183,6 +187,10 @@ public:
 		in = result;
 	}
 
+	virtual void emptyProvider( TensorP<T> t ) override {
+		tensor = t;
+	}
+
 	/**
 	 * Needs coeffecients a,b,c,d, for ax^3+bx^2+cx+d and TensorP<T> that can provied an empty T.
 	 * It does not need initialized storage.
@@ -190,6 +198,15 @@ public:
 
 	static std::shared_ptr<Activation<T>> getSharedPointer( float a, float b, float c,float d, TensorP<T> tensor ) {
 		return std::make_shared<PolynomialActivationDegree3<T>>(a,b,c,d,tensor);
+	}
+
+
+	/**
+	 * Needs coeffecients a,b,c,d, for ax^3+bx^2+cx+d. The TensorP<T> for empties can be provided later. But before 
+	 * activate is called.
+	 */
+	static std::shared_ptr<Activation<T>> getSharedPointer( float a, float b, float c,float d ) {
+		return std::make_shared<PolynomialActivationDegree3<T>>(a,b,c,d);
 	}
 
 

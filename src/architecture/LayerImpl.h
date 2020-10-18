@@ -41,13 +41,14 @@ namespace {
 	uint getThreadPoolSize(){
 	    const char* poolSizeChar = std::getenv( "POOL_SIZE" );
 	    unsigned int ps = poolSizeChar ? std::stoi( poolSizeChar ) : std::thread::hardware_concurrency();
+		unsigned int fromConfig =  static_cast<unsigned int>( Config::getConfig()->get<long>( "general", "thread_pool_size" ) );
 //	    std::cout << "using threads: " << ps << std::endl;
 //	    std::cout << "avaialable threads: " << std::thread::hardware_concurrency() << std::endl;
-	    return ps;
+	    return fromConfig == 0 ? ps : fromConfig;
 	}
 
 	const bool DEBUG = std::getenv( "DEBUG_LAYER" ) || Config::getConfig()->get<bool>( "general", "debug_layer");
-    const char* poolSizeChar = std::getenv( "POOL_SIZE" );
+    // const char* poolSizeChar = std::getenv( "POOL_SIZE" );
     const unsigned int POOL_SIZE = getThreadPoolSize();
 
 }
@@ -162,13 +163,14 @@ public:
 	//setters
 	virtual void input( TensorP<ValueType> input ) {
 		this->mInput = input;
+		this->mActivation->emptyProvider( input );
 	}
 
 	virtual void output( TensorP<ValueType> output ) {
 		this->mOutput = output;
 	}
 
-	virtual  void activation( ActivationP<ValueType> act ) { //used to set the activation function
+	virtual void activation( ActivationP<ValueType> act ) { //used to set the activation function
 		mActivation = act;
 	}
 
