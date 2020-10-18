@@ -45,7 +45,7 @@ void Config::readConfig(){
 		str.erase( remove_if( str.begin(), str.end(), isspace ), str.end() );
 
 		// is it a comment
-		if( boost::starts_with( "#", str ) )
+		if( boost::starts_with( str, "#" ) )
 			continue;
 
 		// is it an empty line, or is the line too short?
