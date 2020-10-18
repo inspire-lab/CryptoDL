@@ -1,10 +1,15 @@
-################################################################################
-# Automatically-generated file. Do not edit!
-################################################################################
-
 -include ../makefile.init
 
+# create the versions file and include it
+$(shell ../dependencies/versions.sh)
+-include ../dependencies/makefile.versions
+
 RM := rm -rf
+
+# INCLUDES := -include../src/mnist/include/mnist/mnist_reader_less.hpp $(DEP_INCLUDES)
+INCLUDES := $(DEP_INCLUDES)
+
+CXXFLAGS := -std=c++17 -O3 -g0 -Wall -c -fmessage-length=0 -fopenmp
 
 # All of the sources participating in the build are defined here
 -include sources.mk
