@@ -250,14 +250,28 @@ public:
 
 	virtual TensorP<HELibCipherText> createCipherTensor( const std::vector<float>& in, const Shape& shape, HETensorFactory<HELibCipherText>* hetf ) override;
 
-	virtual void feedCipherTensor( const std::vector<double>& in, TensorP<HELibCipherText> tensor ) override;
+	/**
+	 * Encrypts the data and sticks it into the ciphertensor.
+	 * If batchSize == -1 the batch size is infered from the crypto parameters otherwise it
+	 * must not be larger than the batch size infered from the crypto parameters. 
+	 */
+	virtual void feedCipherTensor( const std::vector<double>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 ) override;
 
-
-	virtual void feedCipherTensor( const std::vector<float>& in, TensorP<HELibCipherText> tensor ) override;
+	/**
+	 * Encrypts the data and sticks it into the ciphertensor.
+	 * If batchSize == -1 the batch size is infered from the crypto parameters otherwise it
+	 * must not be larger than the batch size infered from the crypto parameters. 
+	 */
+	virtual void feedCipherTensor( const std::vector<float>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 ) override;
 
 	virtual void feedCipherTensor( const TensorP<double> in, TensorP<HELibCipherText> tensor ) override;
 
 	virtual void feedCipherTensor( const TensorP<double> in, Tensor<HELibCipherText>& tensor ) override ;
+
+	/**
+	 * experimental multi threaded feeding
+	 */
+	void feedCipherTensorMultiThread(const std::vector<double>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 );
 
 	virtual uint batchsize() override {
 		return ea->size();
@@ -269,6 +283,10 @@ public:
 
 
 	virtual ~HELibCipherTextFactory() {
+	}
+
+	double securityLevel(){
+		return context->securityLevel();
 	}
 
 	std::shared_ptr<FHESecKey> secretKey; // FIXME for debugging. should be private
@@ -362,14 +380,20 @@ class PolynomialActivationDegree3<HELibCipherText> : public Activation<HELibCiph
 public:
 
 	const float a, b, c, d;
-	const TensorP<HELibCipherText> tensor;
+	TensorP<HELibCipherText> tensor = nullptr; 
 
 	PolynomialActivationDegree3( float a, float b, float c,float d, TensorP<HELibCipherText> tensor )
 			:a( a ), b( b ), c( c ), d( d ),  tensor( tensor ) {
 	}
-
+	
+		PolynomialActivationDegree3( float a, float b, float c,float d )
+			:a( a ), b( b ), c( c ), d( d ){
+	}
 
 	void activate( HELibCipherText& in ) {
+
+		if ( tensor == nullptr )
+			throw std::runtime_error( "Activation function not properly initialized" );
 		/// Need to calculate the invidual parts and then sum it up at the end
 		// ax^3
 		HELibCipherText ax3 = this-> tensor->empty();
@@ -405,6 +429,10 @@ public:
 		in = result;
 	}
 
+	void emptyProvider( TensorP<HELibCipherText> t ) override {
+		tensor = t;
+	}
+
 	/**
 	 * Needs coeffecients a,b,c,d, for ax^3+bx^2+cx+d and TensorP<T> that can provied an empty T.
 	 * It does not need initialized storage.
@@ -412,6 +440,10 @@ public:
 
 	static std::shared_ptr<Activation<HELibCipherText>> getSharedPointer( float a, float b, float c,float d, TensorP<HELibCipherText> tensor ) {
 		return std::make_shared<PolynomialActivationDegree3<HELibCipherText>>(a,b,c,d,tensor);
+	}
+
+		static std::shared_ptr<Activation<HELibCipherText>> getSharedPointer( float a, float b, float c,float d ) {
+		return std::make_shared<PolynomialActivationDegree3<HELibCipherText>>(a,b,c,d);
 	}
 
 };
