@@ -8,7 +8,7 @@ setup(
     install_requires=[
         "numpy ",
         "sklearn",
-        "keras >= 2.1.5",
+        "tensorflow >= 2.3.0",
         "imageio"
     ]
 )
