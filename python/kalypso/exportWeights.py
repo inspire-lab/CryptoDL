@@ -1,8 +1,8 @@
 import os
 import tempfile
 from tensorflow import keras
-from keras import backend as K
-from keras import datasets
+from tensorflow.keras import backend as K
+from tensorflow.keras import datasets
 import numpy as np
 import sys
 

@@ -1,9 +1,9 @@
 from tensorflow import keras
 import numpy as np
-import keras.backend as K
-from keras.datasets import imdb
+import tensorflow.keras.backend as K
+from tensorflow.keras.datasets import imdb
 from kalypso import actFunctions
-from keras.preprocessing import sequence
+from tensorflow.keras.preprocessing import sequence
 import sys
 import os
 
