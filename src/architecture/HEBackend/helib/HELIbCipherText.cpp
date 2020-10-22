@@ -73,7 +73,7 @@ HELibCipherText& HELibCipherText::operator+=( float x ) {
 	if ( mFactory->useBFV )
 		mCtxt->addConstant( NTL::to_ZZ( x ) );
 	else {
-		mCtxt->addConstantCKKS( rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
+		mCtxt->addConstantCKKS( helib::rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
 	}
 	return *this;
 }
@@ -86,7 +86,7 @@ HELibCipherText& HELibCipherText::operator*=( float x ) {
 	if ( mFactory->useBFV )
 		throw std::logic_error( "cant do float with bfv" );
 	else
-		mCtxt->multByConstantCKKS( rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
+		mCtxt->multByConstantCKKS( helib::rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
 	return *this;
 }
 
@@ -94,7 +94,7 @@ HELibCipherText& HELibCipherText::operator+=( double x ) {
 	if ( mFactory->useBFV )
 		mCtxt->addConstant( NTL::to_ZZ( x ) );
 	else {
-		mCtxt->addConstantCKKS( rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
+		mCtxt->addConstantCKKS(  helib::rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
 	}
 	return *this;
 }
@@ -107,7 +107,7 @@ HELibCipherText& HELibCipherText::operator*=( double x ) {
 	if ( mFactory->useBFV )
 		throw std::logic_error( "cant do float with bfv" );
 	else
-		mCtxt->multByConstantCKKS( rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
+		mCtxt->multByConstantCKKS(  helib::rationalApprox( x, 1L << mCtxt->getContext().alMod.getR() ) );
 	return *this;
 }
 
@@ -121,11 +121,11 @@ void HELibCipherTextFactory::setAsDefaultFactory(){
 
 
 HELibCipherText HELibCipherTextFactory::createCipherText( const std::vector<long> & in ) {
-	std::shared_ptr<Ctxt> ctxt = std::make_shared<Ctxt>( *publicKey );
+	std::shared_ptr<helib::Ctxt> ctxt = std::make_shared<helib::Ctxt>( *publicKey );
 	if ( useBFV ) {
 		ea->encrypt<std::vector<long>>( *ctxt, *publicKey, in );
 	} else {
-		EncryptedArrayCx ea = context.get()->ea->getCx();
+		helib::EncryptedArrayCx ea = context.get()->ea->getCx();
 		ea.encrypt( *ctxt, *publicKey, in );
 	}
 	return HELibCipherText( ctxt, this );
@@ -133,11 +133,11 @@ HELibCipherText HELibCipherTextFactory::createCipherText( const std::vector<long
 
 
 HELibCipherText HELibCipherTextFactory::createCipherText( const std::vector<double> & in ) {
-	std::shared_ptr<Ctxt> ctxt = std::make_shared<Ctxt>( *publicKey );
+	std::shared_ptr< helib::Ctxt> ctxt = std::make_shared< helib::Ctxt>( *publicKey );
 	if ( useBFV ) {
 		throw std::logic_error( "cant use doubles with BFV" );
 	} else {
-		EncryptedArrayCx ea = context.get()->ea->getCx();
+		helib::EncryptedArrayCx ea = context.get()->ea->getCx();
 		ea.encrypt( *ctxt, *publicKey, in );
 	}
 	return HELibCipherText( ctxt, this );
@@ -145,7 +145,7 @@ HELibCipherText HELibCipherTextFactory::createCipherText( const std::vector<doub
 
 
 HELibCipherText HELibCipherTextFactory::createCipherText( const std::vector<float> & in ) {
-	std::shared_ptr<Ctxt> ctxt = std::make_shared<Ctxt>( *publicKey );
+	std::shared_ptr<helib::Ctxt> ctxt = std::make_shared<helib::Ctxt>( *publicKey );
 	if ( useBFV )
 		throw std::logic_error( "cant use doubles with BFV" );
 	std::vector<double> doubleVector( in.begin(), in.end() );
@@ -165,7 +165,7 @@ std::vector<double> HELibCipherTextFactory::decryptDouble( const HELibCipherText
 	if ( useBFV )
 		throw std::logic_error( "cant decrypt doubles with BFV" );
 	std::vector<double> plain( batchsize(), 0.0 );
-	EncryptedArrayCx ea = context.get()->ea->getCx();
+	helib::EncryptedArrayCx ea = context.get()->ea->getCx();
 	ea.decrypt( ctx.ctxt(), *secretKey, plain );
 	return plain;
 }

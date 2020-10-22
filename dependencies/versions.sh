@@ -1,7 +1,8 @@
 #!/bin/sh
-GMP_VERSION=6.1.2
-NTL_VERSION=11.3.2
-HELIB_COMMIT=ac0308715e5ae6bf5e750e8701e736d855550fc8
+CMAKE_VERSION=3.10.2
+GMP_VERSION=6.2.0
+NTL_VERSION=11.4.3
+HELIB_COMMIT=286e4bc0f585dc9ace754fd755ad09d91a4648e7
 
 
 # Absolute path to this script, e.g. /home/user/bin/foo.sh
@@ -25,3 +26,4 @@ MAKEFILE="${DEPENDENCIES_DIR}"/makefile.versions
 echo "# this file is auto generated. edit version.sh instead" > "${MAKEFILE}"
 echo "DEP_INCLUDES := -I${GMP_INCLUDE_DIR} -I${NTL_INCLUDE_DIR} -I${HELIB_INCLUDE_DIR}" >> "${MAKEFILE}"
 echo "DEP_LIBS := ${HELIB_DIR}/fhe.a -L${NTL_DIR}/lib -lntl -L${GMP_DIR}/lib -lgmp -lboost_filesystem -lpthread -lboost_system -ljpeg" >> "${MAKEFILE}"
+echo "DEP_RPATH := -Wl,-rpath=${NTL_DIR}/lib" >> "${MAKEFILE}"

@@ -10,6 +10,20 @@ HELIB_GIT=https://github.com/homenc/HElib.git
 # helpers
 WD="${DEPENDENCIES_DIR}"
 
+# check if cmake is installed
+cmake --version
+if [ $? -ne 0 ]; then
+    echo "installing cmake  ${CMAKE_VERSION}"
+    wget https://github.com/Kitware/CMake/releases/download/v$(echo $CMAKE_VERSION | cut -d'-' -f2)/$CMAKE_VERSION.tar.gz
+    tar -zxvf $CMAKE_VERSION.tar.gz
+    rm $CMAKE_VERSION.tar.gz
+    mv $CMAKE_VERSION cmake_$CMAKE_VERSION
+    mv cmake_$CMAKE_VERSION
+    ./bootstrap --prefix="${DEPENDENCIES_DIR}"
+    make; make install
+    cd "${DEPENDENCIES_DIR}"
+fi 
+
 # create dirs
 mkdir -p "${GMP_DIR}"
 mkdir -p "${NTL_DIR}"
@@ -23,29 +37,32 @@ if [ ! -f ntl-${NTL_VERSION}.tar.gz ]; then
 fi
 git clone ${HELIB_GIT}
 
-# start building
-echo "Building ${GMP_VERSION}"
-tar xf gmp-${GMP_VERSION}.tar.bz2
-cd gmp-${GMP_VERSION}
-./configure --prefix="${GMP_DIR}" --disable-shared
-make
-make install
-cd "${WD}"
+# # start building
+# echo "Building ${GMP_VERSION}"
+# tar xf gmp-${GMP_VERSION}.tar.bz2
+# cd gmp-${GMP_VERSION}
+# ./configure --prefix="${GMP_DIR}"
+# make -j16
+# make install
+# cd "${WD}"
 
-echo "Building ${NTL_VERSION}"
-tar xf ntl-${NTL_VERSION}.tar.gz
-cd ntl-${NTL_VERSION}/src
-./configure NTL_GMP_LIP=on PREFIX="${NTL_DIR}" GMP_PREFIX="${GMP_DIR}"
-make
-make install
-cd "${WD}"
+# echo "Building ${NTL_VERSION}"
+# tar xf ntl-${NTL_VERSION}.tar.gz
+# cd ntl-${NTL_VERSION}/src
+# ./configure NTL_GMP_LIP=on PREFIX="${NTL_DIR}" GMP_PREFIX="${GMP_DIR}" SHARED=on  NTL_THREADS=on NTL_THREAD_BOOST=on
+# make -j16
+# make install
+# cd "${WD}"
 
 # build HElib
 echo "Building HElib"
 cd HElib
 git checkout ${HELIB_COMMIT}
-cd src
-make INC_NTL=-I"${NTL_INCLUDE_DIR}" INC_GMP=-I"${GMP_INCLUDE_DIR}" LIB_NTL="${NTL_DIR}" LIB_GMP="${GMP_DIR}"
-mkdir -p "${HELIB_INCLUDE_DIR}"/helib
-cp *.h "${HELIB_INCLUDE_DIR}"/helib
-cp fhe.a "${HELIB_DIR}"
+rm -rf build
+mkdir build
+cd build
+cmake -DGMP_DIR="${GMP_DIR}" -DNTL_DIR="${NTL_DIR}" ..
+make -j16
+mkdir -p "${HELIB_INCLUDE_DIR}"
+cp -r ../include/helib "${HELIB_INCLUDE_DIR}"
+cp lib/libhelib.a "${HELIB_DIR}"/fhe.a
