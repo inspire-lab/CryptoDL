@@ -8,8 +8,8 @@
 #ifndef TOOLS_SYSTEMTOOLS_H_
 #define TOOLS_SYSTEMTOOLS_H_
 
+#include <string>
 
-const bool USE_PYTHON_3 = std::getenv( "USE_PYTHON_3" );
 
 int executePython( std::string pythonCode );
 

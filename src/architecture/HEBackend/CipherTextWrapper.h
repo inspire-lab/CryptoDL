@@ -46,9 +46,19 @@ public:
 
 	virtual TensorP<CiphterTextWrapper> createCipherTensor( const std::vector<float>& in, const Shape& shape, HETensorFactory<CiphterTextWrapper>* hetf ) = 0;
 
-	virtual void feedCipherTensor( const std::vector<double>& in, TensorP<CiphterTextWrapper> tensor ) = 0;
+	/**
+	 * Encrypts the data and sticks it into the ciphertensor.
+	 * If batchSize == -1 the batch size is infered from the crypto parameters otherwise it
+	 * must not be larger than the batch size infered from the crypto parameters. 
+	 */
+	virtual void feedCipherTensor( const std::vector<double>& in, TensorP<CiphterTextWrapper> tensor, int batchSize=-1 ) = 0;
 
-	virtual void feedCipherTensor( const std::vector<float>& in, TensorP<CiphterTextWrapper> tensor ) = 0;
+	/**
+	 * Encrypts the data and sticks it into the ciphertensor.
+	 * If batchSize == -1 the batch size is infered from the crypto parameters otherwise it
+	 * must not be larger than the batch size infered from the crypto parameters. 
+	 */
+	virtual void feedCipherTensor( const std::vector<float>& in, TensorP<CiphterTextWrapper> tensor, int batchSize=-1 ) = 0;
 
 	virtual void feedCipherTensor( const TensorP<double> in, TensorP<CiphterTextWrapper> tensor ) = 0;
 

@@ -12,6 +12,7 @@
 #include <vector>
 #include <chrono>
 #include <ctime>
+#include <iostream>
 #include "Layer.h"
 #include "Tensor.h"
 #include "PlainTensor.h"
@@ -40,7 +41,7 @@ template<class ValueType, class WeightType, class DataTensorType=Tensor<ValueTyp
 class Model {
 public:
 
-	Model( MemoryUsage usage, TensorFactory<ValueType>* dtf, TensorFactory<WeightType	>* wtf, WeightConverter<WeightType,ConvertType>* weightConverter )
+	Model( MemoryUsage usage, TensorFactory<ValueType>* dtf, TensorFactory<WeightType>* wtf, WeightConverter<WeightType,ConvertType>* weightConverter )
 		: mLayers( { } ), mUsage( usage ), mDataFactory( dtf ), mWeightFactory( wtf ), mWeightConverter( weightConverter ) {
 		if( (usage & MemoryUsage::pre_convert_weights) && weightConverter == nullptr ){
 			std::cerr << "Can not create with with pre weight conversion and no converter" << std::endl;
@@ -65,12 +66,12 @@ public:
 		if ( !mLayers.empty() ) { //first layer needs to init output
 			TensorP<ValueType> outputPrev = mLayers.back()->output();
 			layer->input( outputPrev );
-			Shape outputShape = layer->outputShape(); // @suppress("Invalid arguments")
+			Shape outputShape = layer->outputShape(); 
 			std::cout << layer->name() << "   " << outputShape << std::endl;
 			if ( !layer->buildsOwnOutputTensor() )
 				layer->output( mDataFactory->create( outputShape ) );
 		} else {
-			Shape temp = layer->outputShape(); // @suppress("Invalid arguments")
+			Shape temp = layer->outputShape();
 			std::cout << layer->name() << "   " << temp << std::endl;
 		}
 
@@ -80,8 +81,7 @@ public:
 		mLayers.push_back( layer );
 
 		if ( ( mUsage & MemoryUsage::greedy ) ) { // greedy memory allocation
-			layer->input()->init();
-			layer->output()->init();
+			layer->initTensors();
 			if ( ( mUsage & MemoryUsage::pre_convert_weights ) ){
 				std::vector<TensorP<ConvertType>> c;
 				for( auto tensor : layer->allWeights() )
@@ -171,9 +171,9 @@ public:
 			run();
 			// get the predicitons
 			std::vector<int> preds = classification();
-			std::cout << preds << std::endl;
+//			std::cout << preds << std::endl; //FIXME compile error
 			predictions.insert( predictions.end(), preds.begin(), preds.end() );
-			std::cout << predictions << std::endl;
+//			std::cout << predictions << std::endl; //FIXME error
 			std::cout << "[";
 			for ( uint var = 0; var < predictions.size(); ++var )
 				std::cout << (unsigned) Y [ var ] << " ";

@@ -8,7 +8,13 @@
 
 #include <cstdlib>
 #include <unistd.h>
+#include <iostream>
 #include "SystemTools.h"
+#include "Config.h"
+
+namespace {
+	const bool USE_PYTHON_3 = std::getenv( "USE_PYTHON_3" ) || Config::getConfig()->get<bool>( "general", "use_python_3") ;
+}
 
 
 int executePython( std::string pythonCode ){

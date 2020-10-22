@@ -7,5 +7,5 @@ from . import rnn_tools
 from . import public_functions
 from . import tools
 from . import datasets
+from . import keras
 
-    

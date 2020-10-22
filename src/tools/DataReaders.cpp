@@ -11,7 +11,12 @@
 #include <vector>
 #include <bits/stdc++.h>
 #include <iostream>
-#include <boost/gil/extension/io/jpeg_io.hpp>
+#include <boost/version.hpp>
+#if BOOST_VERSION>106700
+	#include <boost/gil/extension/io/jpeg.hpp>
+#else
+	#include <boost/gil/extension/io/jpeg_io.hpp>
+#endif
 #include <boost/algorithm/string.hpp>
 #include "DataReaders.h"
 #include "../architecture/PlainTensor.h"
@@ -93,8 +98,13 @@ std::vector<double> floatToDouble(const std::vector<float>& floats ){
 
 float_img_vec readJPGquantized( const std::string& file, float maxvalue ){
 
-	 gil::rgb8_image_t img;
-	 gil::jpeg_read_image( file , img );
+	gil::rgb8_image_t img;
+	#if BOOST_VERSION>106700
+		gil::read_image( file , img, gil::jpeg_tag() );
+	#else
+		gil::jpeg_read_image( file , img );
+	#endif
+	 
 	 auto w = img.width();
 	 auto h = img.height();
 	 std::cout << "Read complete, got an image " << w << " by " << h << " pixels" << std::endl;
@@ -133,7 +143,11 @@ float_img_vec readJPGquantized( const std::string& file, float maxvalue ){
 
 std::vector<float> readJPGquantizedFlat( const std::string& file, float maxvalue ){
 	gil::rgb8_image_t img;
-	gil::jpeg_read_image( file , img );
+	#if BOOST_VERSION>106700
+		gil::read_image( file , img, gil::jpeg_tag() );
+	#else
+		gil::jpeg_read_image( file , img );
+	#endif
 	auto w = img.width();
 	auto h = img.height();
 //	std::cout << "Read complete, got an image " << img.width() << " by " << img.height() << " pixels" << std::endl;
@@ -157,92 +171,92 @@ std::vector<float> readJPGquantizedFlat( const std::string& file, float maxvalue
 
 
 
-template<>
-TensorP<float> readTensorFromBinary( const std::string& file ){
-	/*
-	 *     binary file format:
-
-    version 0:
-        [ 1byte: version ][ 1byte: reserved ][ 4byte: no dimension n ][ n*4 byte: dimensions ][ 1byte: datatype ][ ...data... ]
-    datatypes:
-        version: unsigned char
-        no dimensions n: unsigned char
-        dimensions: 32bit unsignet integer
-        datatype: unsigned char
-    meaning of the fields:
-        version:
-            what version of the file is being read headerfields might change depending on the version.
-            current version: 0
-        reserved:
-            currently unused
-        no dimensions:
-            unsigned integer that indicates the number of dimesions of the stored tensor
-        dimensions:
-            a number of unsigned ints that indicate the number of elements for each tensor dimension. the number of unsigned ints
-            is given by the previous field
-        datatype:
-            the datatype of the tensor. supported types:
-            0: int32
-            1: float32
-        data:
-            the actual payload. the size should be the product of all dimensions * size_of( dataype ) in bytes
-
-	 */
-
-
-	// open file
-	std::ifstream fin( file, std::ios::binary );
-	if ( !fin ) {
-		std::cerr << " Error, Couldn't find " << file << std::endl;
-		exit( 1 );
-	}
-
-	// read version
-	unsigned char version;
-	fin.read( reinterpret_cast<char*>( &version ), sizeof( version ) );
-	if ( version != 0 ){
-		// only support version 0 so far
-		std::cerr << " Unsupported version " << (unsigned) version << std::endl;
-		exit( 1 );
-	}
-
-	// skip reserved byte
-	fin.ignore( 1 );
-
-	// read number of dimensions
-	uint32_t dims;
-	fin.read( reinterpret_cast<char*>( &dims ), sizeof( dims ) );
-
-	// read the shape as a vector
-	std::vector<uint32_t> shape_v( dims );
-	fin.read( reinterpret_cast<char*>( &shape_v ), dims * sizeof( uint32_t ) );
-
-	// read the type info
-	unsigned char datatype;
-	fin.read( reinterpret_cast<char*>( &datatype ), sizeof( datatype ) );
-
-	// only floats in this function
-	if( datatype != 1 ){
-		// only support version 0 so far
-		std::cerr << " Unsupported datatype " << (unsigned) version << std::endl;
-		exit( 1 );
-	}
-
-	// read the rest of the data
-	Shape shape( shape_v );
-	std::vector<float> data_v( shape.size );
-	fin.read( reinterpret_cast<char*>( &data_v ), shape.size * sizeof( float ) );
-
-	PlainTensorFactory<float> tf;
-
-	auto tensor = tf.create(shape);
-	tensor->flatten();
-	tensor->init( data_v );
-	tensor->reshape( shape );
-
-	return tensor;
-
-}
+//template<>
+//TensorP<float> readTensorFromBinary( const std::string& file ){
+//	/*
+//	 *     binary file format:
+//
+//    version 0:
+//        [ 1byte: version ][ 1byte: reserved ][ 4byte: no dimension n ][ n*4 byte: dimensions ][ 1byte: datatype ][ ...data... ]
+//    datatypes:
+//        version: unsigned char
+//        no dimensions n: unsigned char
+//        dimensions: 32bit unsignet integer
+//        datatype: unsigned char
+//    meaning of the fields:
+//        version:
+//            what version of the file is being read headerfields might change depending on the version.
+//            current version: 0
+//        reserved:
+//            currently unused
+//        no dimensions:
+//            unsigned integer that indicates the number of dimesions of the stored tensor
+//        dimensions:
+//            a number of unsigned ints that indicate the number of elements for each tensor dimension. the number of unsigned ints
+//            is given by the previous field
+//        datatype:
+//            the datatype of the tensor. supported types:
+//            0: int32
+//            1: float32
+//        data:
+//            the actual payload. the size should be the product of all dimensions * size_of( dataype ) in bytes
+//
+//	 */
+//
+//
+//	// open file
+//	std::ifstream fin( file, std::ios::binary );
+//	if ( !fin ) {
+//		std::cerr << " Error, Couldn't find " << file << std::endl;
+//		exit( 1 );
+//	}
+//
+//	// read version
+//	unsigned char version;
+//	fin.read( reinterpret_cast<char*>( &version ), sizeof( version ) );
+//	if ( version != 0 ){
+//		// only support version 0 so far
+//		std::cerr << " Unsupported version " << (unsigned) version << std::endl;
+//		exit( 1 );
+//	}
+//
+//	// skip reserved byte
+//	fin.ignore( 1 );
+//
+//	// read number of dimensions
+//	uint32_t dims;
+//	fin.read( reinterpret_cast<char*>( &dims ), sizeof( dims ) );
+//
+//	// read the shape as a vector
+//	std::vector<uint32_t> shape_v( dims );
+//	fin.read( reinterpret_cast<char*>( &shape_v ), dims * sizeof( uint32_t ) );
+//
+//	// read the type info
+//	unsigned char datatype;
+//	fin.read( reinterpret_cast<char*>( &datatype ), sizeof( datatype ) );
+//
+//	// only floats in this function
+//	if( datatype != 1 ){
+//		// only support version 0 so far
+//		std::cerr << " Unsupported datatype " << (unsigned) version << std::endl;
+//		exit( 1 );
+//	}
+//
+//	// read the rest of the data
+//	Shape shape( shape_v );
+//	std::vector<float> data_v( shape.size );
+//	fin.read( reinterpret_cast<char*>( &data_v ), shape.size * sizeof( float ) );
+//
+//	PlainTensorFactory<float> tf;
+//
+//	auto tensor = tf.create(shape);
+//	tensor->flatten();
+//	tensor->init( data_v );
+//	tensor->reshape( shape );
+//
+//	return tensor;
+//
+//}
 
 
 

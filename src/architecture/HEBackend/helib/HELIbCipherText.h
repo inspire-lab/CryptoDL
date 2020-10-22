@@ -18,6 +18,7 @@
 #include "../HETensor.h"
 
 
+
 class HELibCipherTextFactory;
 
 
@@ -36,12 +37,12 @@ public:
 
 	HELibCipherText();
 
-	HELibCipherText( std::shared_ptr<Ctxt> ctxt, HELibCipherTextFactory* factory ) :
+	HELibCipherText( std::shared_ptr<helib::Ctxt> ctxt, HELibCipherTextFactory* factory ) :
 			mFactory( factory ), mCtxt( ctxt ) {
 
 	}
 
-	const Ctxt& ctxt() const {
+	const helib::Ctxt& ctxt() const {
 		return *mCtxt;
 	}
 
@@ -104,7 +105,7 @@ public:
 
 	// FIXME move back to private
 	HELibCipherTextFactory* mFactory;
-	std::shared_ptr<Ctxt> mCtxt; 	// needs to wrapped in a pointer because of its = operator
+	std::shared_ptr<helib::Ctxt> mCtxt; 	// needs to wrapped in a pointer because of its = operator
 									// which only allows assignment to ctxt with the same context
 									// and that makes things annoying
 private:
@@ -118,7 +119,13 @@ private:
  * and might be removed in the future. The big drawback of BFV is that it
  * does not supoort float numbers
  *
+ * Parameters for the CKKS constructor
+ * HELibCipherTextFactory( long L, long m, long r, long c = 2 ) :
+ * const long L;         // Number of bits (kinda like levels)
+ * const long m;         // Zm*
+ * const long r;         // bit precision
  *
+ * 
  */
 class HELibCipherTextFactory: public CipherTextWrapperFactory<HELibCipherText> {
 public:
@@ -151,17 +158,17 @@ public:
 
 			NTL::ZZX G;
 //			m = FindM( k, L, c, p, d, s, 0, true );		// Find a value for m given the specified values
-			context = std::make_shared<FHEcontext>( m, p, r );
+			context = std::make_shared<helib::Context>( m, p, r );
 			buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
 
-			secretKey = std::make_shared<FHESecKey>( *context );
+			secretKey = std::make_shared<helib::SecKey>( *context );
 			secretKey->GenSecKey( w );
-			addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
+			helib::addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 			publicKey = secretKey;
-			G = makeIrredPoly( p, d );
+			G = helib::makeIrredPoly( p, d );
 
 			context->ea;
-			ea = std::make_shared<EncryptedArray>( *context, G );
+			ea = std::make_shared<helib::EncryptedArray>( *context, G );
 		}
 		else {
 			long L = 128;	// Number of levels in the modulus chain [default=heuristic]
@@ -173,44 +180,51 @@ public:
 			/// m specific the ring
 			/// p = -1 means CKKS
 			/// r is the number of bits after the decimal aka precision
-			context = std::make_shared<FHEcontext>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
+			context = std::make_shared<helib::Context>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
 			buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
-			secretKey = std::make_shared<FHESecKey>( *context );
+			secretKey = std::make_shared<helib::SecKey>( *context );
 			secretKey->GenSecKey();
-			addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
+			helib::addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 			publicKey = secretKey;
-			ea = std::make_shared<EncryptedArray>( *context );
+			ea = std::make_shared<helib::EncryptedArray>( *context );
 		}
 
 	}
 
+	/**
+	* const long m;         // Zm*
+ 	* const long r;         // bit precision
+ 	* const long L;         // Number of bits
+	*/
 	HELibCipherTextFactory( long L, long m, long r, long c = 2 ) :
 			useBFV( false ) {
 
 		SetSeed( NTL::ZZ( 0 ) );
-		/// m specific the ring
+		/// m specific the ring Zm*
 		/// p = -1 means CKKS
-		/// r is the number of bits after the decimal aka precision
-		context = std::make_shared<FHEcontext>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
+		/// r is the number of bits after the decimal aka precision 
+		/// L Number of bits
+		context = std::make_shared<helib::Context>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
 		buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
-		secretKey = std::make_shared<FHESecKey>( *context );
+		secretKey = std::make_shared<helib::SecKey>( *context );
 		secretKey->GenSecKey();
 		addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
 		publicKey = secretKey;
-		ea = std::make_shared<EncryptedArray>( *context );
+		ea = std::make_shared<helib::EncryptedArray>( *context );
+		std::cout << "security level: " << context->securityLevel() << std::endl;
 
 	}
 
 	virtual HELibCipherText empty() override {
-		return HELibCipherText( std::make_shared<Ctxt>( *publicKey ), this );
+		return HELibCipherText( std::make_shared<helib::Ctxt>( *publicKey ), this );
 	}
 
 	virtual HELibCipherText createCipherText( long x ) override {
-		std::shared_ptr<Ctxt> ctxt = std::make_shared<Ctxt>( *publicKey );
+		std::shared_ptr<helib::Ctxt> ctxt = std::make_shared<helib::Ctxt>( *publicKey );
 		if ( useBFV ) {
 			publicKey->Encrypt( *ctxt, NTL::to_ZZX( x ) );
 		} else {
-			EncryptedArrayCx ea = context.get()->ea->getCx();
+			const helib::EncryptedArrayCx& ea = context.get()->ea->getCx();
 			std::vector<long> vdLong;
 			for ( long i = 0; i < ea.size(); i++ ) {
 				vdLong.push_back( x );
@@ -237,32 +251,50 @@ public:
 
 	virtual TensorP<HELibCipherText> createCipherTensor( const std::vector<float>& in, const Shape& shape, HETensorFactory<HELibCipherText>* hetf ) override;
 
-	virtual void feedCipherTensor( const std::vector<double>& in, TensorP<HELibCipherText> tensor ) override;
+	/**
+	 * Encrypts the data and sticks it into the ciphertensor.
+	 * If batchSize == -1 the batch size is infered from the crypto parameters otherwise it
+	 * must not be larger than the batch size infered from the crypto parameters. 
+	 */
+	virtual void feedCipherTensor( const std::vector<double>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 ) override;
 
-
-	virtual void feedCipherTensor( const std::vector<float>& in, TensorP<HELibCipherText> tensor ) override;
+	/**
+	 * Encrypts the data and sticks it into the ciphertensor.
+	 * If batchSize == -1 the batch size is infered from the crypto parameters otherwise it
+	 * must not be larger than the batch size infered from the crypto parameters. 
+	 */
+	virtual void feedCipherTensor( const std::vector<float>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 ) override;
 
 	virtual void feedCipherTensor( const TensorP<double> in, TensorP<HELibCipherText> tensor ) override;
 
 	virtual void feedCipherTensor( const TensorP<double> in, Tensor<HELibCipherText>& tensor ) override ;
 
+	/**
+	 * experimental multi threaded feeding
+	 */
+	void feedCipherTensorMultiThread(const std::vector<double>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 );
+
 	virtual uint batchsize() override {
 		return ea->size();
 	}
 
-	std::shared_ptr<Ctxt> createRawEmpty() {
-		return std::make_shared<Ctxt>( *publicKey );
+	std::shared_ptr<helib::Ctxt> createRawEmpty() {
+		return std::make_shared<helib::Ctxt>( *publicKey );
 	}
 
 
 	virtual ~HELibCipherTextFactory() {
 	}
 
-	std::shared_ptr<FHESecKey> secretKey; // FIXME for debugging. should be private
+	double securityLevel(){
+		return context->securityLevel();
+	}
+
+	std::shared_ptr<helib::SecKey> secretKey; // FIXME for debugging. should be private
 private:
-	std::shared_ptr<EncryptedArray> ea;
-	std::shared_ptr<FHEcontext> context;
-	std::shared_ptr<FHEPubKey> publicKey;
+	std::shared_ptr<helib::EncryptedArray> ea;
+	std::shared_ptr<helib::Context> context;
+	std::shared_ptr<helib::PubKey> publicKey;
 };
 
 
@@ -349,14 +381,20 @@ class PolynomialActivationDegree3<HELibCipherText> : public Activation<HELibCiph
 public:
 
 	const float a, b, c, d;
-	const TensorP<HELibCipherText> tensor;
+	TensorP<HELibCipherText> tensor = nullptr; 
 
 	PolynomialActivationDegree3( float a, float b, float c,float d, TensorP<HELibCipherText> tensor )
 			:a( a ), b( b ), c( c ), d( d ),  tensor( tensor ) {
 	}
-
+	
+		PolynomialActivationDegree3( float a, float b, float c,float d )
+			:a( a ), b( b ), c( c ), d( d ){
+	}
 
 	void activate( HELibCipherText& in ) {
+
+		if ( tensor == nullptr )
+			throw std::runtime_error( "Activation function not properly initialized" );
 		/// Need to calculate the invidual parts and then sum it up at the end
 		// ax^3
 		HELibCipherText ax3 = this-> tensor->empty();
@@ -392,6 +430,10 @@ public:
 		in = result;
 	}
 
+	void emptyProvider( TensorP<HELibCipherText> t ) override {
+		tensor = t;
+	}
+
 	/**
 	 * Needs coeffecients a,b,c,d, for ax^3+bx^2+cx+d and TensorP<T> that can provied an empty T.
 	 * It does not need initialized storage.
@@ -399,6 +441,10 @@ public:
 
 	static std::shared_ptr<Activation<HELibCipherText>> getSharedPointer( float a, float b, float c,float d, TensorP<HELibCipherText> tensor ) {
 		return std::make_shared<PolynomialActivationDegree3<HELibCipherText>>(a,b,c,d,tensor);
+	}
+
+		static std::shared_ptr<Activation<HELibCipherText>> getSharedPointer( float a, float b, float c,float d ) {
+		return std::make_shared<PolynomialActivationDegree3<HELibCipherText>>(a,b,c,d);
 	}
 
 };
@@ -409,3 +455,4 @@ public:
 
 
 #endif /* ARCHITECTURE_HEBACKEND_HELIB_HELIBCIPHERTEXT_H_ */
+

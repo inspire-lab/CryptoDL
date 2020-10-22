@@ -175,3 +175,9 @@ savedWeights/
 
 # ignores any txt files in keras subdir
 src/keras/data/**/*.txt
+
+# downloaded dependencies
+dependencies/*
+!dependencies/install_dependencies.sh
+!dependencies/versions.sh
+!dependencies/README.MD

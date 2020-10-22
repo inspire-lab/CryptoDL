@@ -67,6 +67,22 @@ ActivationP<ValueType> grabActivation( std::string act, std::map<std::string, Ac
 }
 
 
+//checks input from json object to return correct activation pointer
+template<class ValueType>
+ActivationP<ValueType> grabActivation( json act, std::map<std::string, ActivationP<ValueType>>& map=std::map<std::string, ActivationP<ValueType>>() ) {
+	// std::cout << act << std::endl;
+	if ( act.is_object() ){
+		if ( act[ "class_name" ] == "PolyActivation" ){
+			auto config = act[ "config" ];
+			return PolynomialActivationDegree3<ValueType>::getSharedPointer( config[ "a" ], config[ "b" ], config[ "c" ], config[ "d" ] );
+		}
+	} else
+		return grabActivation( std::string( act ), map );
+	
+	// see if there is a replacement
+	return grabActivation( std::string( act[ "class_name" ] ), map );
+}
+
 
 
 
@@ -177,7 +193,7 @@ public:
 	}
 
 
-	LayerP<ValueType, WeightType, DataTensorType, WeightTensorType> grabConv2D(	json conv2d) {
+	LayerP<ValueType, WeightType, DataTensorType, WeightTensorType> grabConv2D(	json conv2d ) {
 		//grab layer attributes
 		std::string name = conv2d [ "name" ];
 		ActivationP<ValueType> act = grabActivation<ValueType>(	conv2d [ "activation" ], mActivationMap );
