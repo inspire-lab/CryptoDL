@@ -18,7 +18,7 @@ if [ $? -ne 0 ]; then
     tar -zxvf cmake-$CMAKE_VERSION.tar.gz > /dev/null
     rm cmake-$CMAKE_VERSION.tar.gz
     # mv $CMAKE_VERSION cmake_$CMAKE_VERSION
-    cd cmake_$CMAKE_VERSION
+    cd cmake-$CMAKE_VERSION
     ./bootstrap
     make; make install
     cd "${DEPENDENCIES_DIR}"
