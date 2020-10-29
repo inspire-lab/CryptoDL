@@ -15,10 +15,9 @@ cmake --version
 if [ $? -ne 0 ]; then
     echo "installing cmake  ${CMAKE_VERSION}"
     wget https://github.com/Kitware/CMake/releases/download/v$(echo $CMAKE_VERSION | cut -d'-' -f2)/cmake-$CMAKE_VERSION.tar.gz
-    tar -zxvf $CMAKE_VERSION.tar.gz
-    rm $CMAKE_VERSION.tar.gz
+    tar -zxvf cmake-$CMAKE_VERSION.tar.gz
+    rm cmake-$CMAKE_VERSION.tar.gz
     mv $CMAKE_VERSION cmake_$CMAKE_VERSION
-    mv cmake_$CMAKE_VERSION
     ./bootstrap --prefix="${DEPENDENCIES_DIR}"
     make; make install
     cd "${DEPENDENCIES_DIR}"
