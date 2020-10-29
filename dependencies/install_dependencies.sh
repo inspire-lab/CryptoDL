@@ -1,6 +1,20 @@
 #!/bin/bash
 source versions.sh
 
+CLEAN_UP=0
+for arg in "$@"
+do
+    case $arg in
+        -c|--cleanup)
+        CLEAN_UP=1
+        shift # Remove
+        ;;
+        *)
+        shift # Remove generic argument from processing
+        ;;
+    esac
+done
+
 # libraries
 GMP_URL=https://gmplib.org/download/gmp/gmp-${GMP_VERSION}.tar.bz2
 NTL_URL=https://shoup.net/ntl/ntl-${NTL_VERSION}.tar.gz
@@ -21,7 +35,10 @@ if [ $? -ne 0 ]; then
     cd cmake-$CMAKE_VERSION
     ./bootstrap
     make; make install
-    cd "${DEPENDENCIES_DIR}"
+    cd "${WD}"
+    if [ $CLEAN_UP -eq 1 ]; then
+        rm -rf cmake-$CMAKE_VERSION
+    fi
 fi 
 
 # create dirs
@@ -45,6 +62,11 @@ cd gmp-${GMP_VERSION}
 make -j16
 make install
 cd "${WD}"
+# clean up
+if [ $CLEAN_UP -eq 1 ]; then
+    rm gmp-${GMP_VERSION}.tar.bz2
+    rm -rf gmp-${GMP_VERSION}
+fi
 
 echo "Building ${NTL_VERSION}"
 tar xf ntl-${NTL_VERSION}.tar.gz
@@ -53,6 +75,11 @@ cd ntl-${NTL_VERSION}/src
 make -j16
 make install
 cd "${WD}"
+# clean up
+if [ $CLEAN_UP -eq 1 ]; then
+    rm ntl-${NTL_VERSION}.tar.gz
+    rm -rf ntl-${NTL_VERSION}
+fi
 
 # build HElib
 echo "Building HElib"
@@ -66,3 +93,8 @@ make -j16
 mkdir -p "${HELIB_INCLUDE_DIR}"
 cp -r ../include/helib "${HELIB_INCLUDE_DIR}"
 cp lib/libhelib.a "${HELIB_DIR}"/fhe.a
+cd "${WD}"
+# clean up
+if [ $CLEAN_UP -eq 1 ]; then
+    rm -rf HElib
+fi
