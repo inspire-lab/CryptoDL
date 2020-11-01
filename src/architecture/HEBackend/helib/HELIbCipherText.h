@@ -42,7 +42,7 @@ public:
 
 	}
 
-	const helib::Ctxt& ctxt() const {
+	helib::Ctxt& ctxt() const {
 		return *mCtxt;
 	}
 
@@ -70,6 +70,11 @@ public:
 		return *this;
 	}
 
+	HELibCipherText& operator=( const HELibCipherText& other ) {
+		*mCtxt = ( (HELibCipherText&) other ).ctxt();
+		return *this;
+	}
+
 	virtual HELibCipherText empty();
 
 	void square(){
@@ -87,9 +92,19 @@ public:
 	/**
 	*	Write the HElib ctxt to a binary file
 	*/
-	void writeToFile( std::ostream& str ){
-		ctxt().write( str );
+	void writeToFile( const std::string& fileName ){
+		std::fstream fstr;
+		fstr = std::fstream( fileName, std::ios::out | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << fileName << std::endl;
+			exit( 1 );
+		}
+
+		ctxt().write( fstr );
+		fstr.close();
 	}
+
+
 
 	/**
 	 * @brief Checks if the noise is about to overflow
@@ -131,6 +146,8 @@ class HELibCipherTextFactory: public CipherTextWrapperFactory<HELibCipherText> {
 public:
 
 	const bool useBFV;
+
+	HELibCipherTextFactory (const HELibCipherTextFactory& );
 
 	HELibCipherTextFactory( long seed = 0, bool useBFV = true ) :
 			useBFV( useBFV ) {
@@ -215,6 +232,53 @@ public:
 
 	}
 
+	HELibCipherTextFactory( const std::string& contextFileName, const std::string& pubkeyFileName  ) :
+			useBFV( false ) {
+
+		// read context
+		std::fstream fstr;
+		fstr = std::fstream( contextFileName, std::ios::in | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << contextFileName << std::endl;
+			exit( 1 );
+		}
+		context = helib::buildContextFromBinary( fstr );
+		helib::readContextBinary( fstr, *context );
+		fstr.close();
+		
+		
+		// read publickey
+		fstr = std::fstream( pubkeyFileName, std::ios::in | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << pubkeyFileName << std::endl;
+			exit( 1 );
+		}
+		publicKey =  std::make_shared<helib::PubKey>( *context );
+		helib::readPubKeyBinary( fstr, *publicKey );
+		fstr.close();
+
+		ea = std::make_shared<helib::EncryptedArray>( *context );
+		std::cout << "security level: " << context->securityLevel() << std::endl;
+
+		secretKey = NULL;
+
+	}
+
+	HELibCipherTextFactory( const std::string& contextFileName, const std::string& pubkeyFileName, const std::string& secFileName ) :
+			HELibCipherTextFactory( contextFileName, pubkeyFileName ) {
+
+		// read secrectkey
+		std::fstream fstr;
+		fstr = std::fstream( secFileName, std::ios::in | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << secFileName << std::endl;
+			exit( 1 );
+		}
+		secretKey = std::make_shared<helib::SecKey>( *context );
+		helib::readSecKeyBinary( fstr, *secretKey );
+		fstr.close();
+	}
+	
 	virtual HELibCipherText empty() override {
 		return HELibCipherText( std::make_shared<helib::Ctxt>( *publicKey ), this );
 	}
@@ -286,11 +350,62 @@ public:
 	virtual ~HELibCipherTextFactory() {
 	}
 
+	void writeToFile( const std::string& contextFile, const std::string& pubKeyFile, const std::string& seckeyFile ){
+
+		// write context
+		std::fstream fstr;
+		fstr = std::fstream( contextFile, std::ios::out | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << contextFile << std::endl;
+			exit( 1 );
+		}
+		helib::writeContextBaseBinary( fstr, *context );
+		helib::writeContextBinary( fstr, *context );
+		fstr.close();
+
+		// pubkey
+		fstr = std::fstream( pubKeyFile, std::ios::out | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << pubKeyFile << std::endl;
+			exit( 1 );
+		}
+		helib::writePubKeyBinary( fstr, *publicKey );
+
+		// write seckey if we have one
+		if ( secretKey == NULL || seckeyFile.size() == 0 )
+			return;
+
+		// pubkey
+		fstr = std::fstream( seckeyFile, std::ios::out | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << seckeyFile << std::endl;
+			exit( 1 );
+		}
+		helib::writeSecKeyBinary( fstr, *secretKey );
+
+
+	}
+
+	/**
+	*	Read HElib ctxt from a binary file
+	*/
+	HELibCipherText readCtxtFromFile( const std::string& fileName ){
+		std::fstream fstr;
+		fstr = std::fstream( fileName, std::ios::in | std::ios::binary );
+		if ( !fstr ){
+			std::cerr << "something messed up when opening " << fileName << std::endl;
+			exit( 1 );
+		}
+		HELibCipherText ctxt = empty();
+		ctxt.ctxt().read( fstr );
+		return ctxt;
+	}
+
 	double securityLevel(){
 		return context->securityLevel();
 	}
 
-	std::shared_ptr<helib::SecKey> secretKey; // FIXME for debugging. should be private
+	std::shared_ptr<helib::SecKey> secretKey = NULL; // FIXME for debugging. should be private
 private:
 	std::shared_ptr<helib::EncryptedArray> ea;
 	std::shared_ptr<helib::Context> context;

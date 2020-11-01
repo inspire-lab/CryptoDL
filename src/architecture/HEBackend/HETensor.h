@@ -164,16 +164,15 @@ public:
 			std::cerr << "something messed up when opening " << file << std::endl;
 			exit( 1 );
 		}
-		for( size_t i = 0; i < this->shape.capacity(); ++i )
-			this->mdata.get()[ i ].writeToFile( myfile );
+		// for( size_t i = 0; i < this->shape.capacity(); ++i )
+		// 	this->mdata.get()[ i ].writeToFile( myfile );
 		myfile.close();
 	}
 
-
-
+	CipherTextWrapperFactory<T>* mFactory;
+	
 protected:
 	Shape mPlainTextShape;
-	CipherTextWrapperFactory<T>* mFactory;
 
 
 	/**
