@@ -26,6 +26,9 @@ public:
 
 	virtual void activate( T& in ) = 0;
 
+	virtual uint multiplicativeDepth() {
+		return 0;
+	}
 
 	static std::shared_ptr<Activation<T>> getSharedPointer() {
 		return nullptr;
@@ -59,6 +62,10 @@ class SquareActivation: public Activation<T> {
 
 	void activate( T& in ) override {
 		in *= in;
+	}
+
+	virtual uint multiplicativeDepth() {
+		return 1;
 	}
 
 
@@ -113,6 +120,10 @@ public:
 		in = result;
 	}
 
+	virtual uint multiplicativeDepth() {
+		return 1;
+	}
+
 	/**
 	 * Needs coeffecients a,b,c for ax^2+bx+c and TensorP<T> that can provied an empty T.
 	 * It does not need initialized storage.
@@ -148,6 +159,7 @@ public:
 	}
 
 	void activate( T& in ) override {
+
 		if ( tensor == nullptr )
 			throw std::runtime_error( "Activation function not properly initialized" );
 
@@ -185,6 +197,10 @@ public:
 		if( c != 0 )
 			result += cx;
 		in = result;
+	}
+
+	virtual uint multiplicativeDepth() {
+		return 2;
 	}
 
 	virtual void emptyProvider( TensorP<T> t ) override {
@@ -271,6 +287,10 @@ public:
 			in += cx2;
 	}
 
+	virtual uint multiplicativeDepth() {
+		return 2;
+	}
+
 	/**
 	 * Needs coeffecients a,b,c,d,e for x+c ax^4+bx^3+cx^2+dx+e and TensorP<T> that can provied an empty T.
 	 * It does not need initialized storage.
@@ -288,6 +308,10 @@ template<class T>
 class ReluActivation: public Activation<T> {
 private:
 	T zero = 0;
+
+	virtual uint multiplicativeDepth() {
+		return 0;
+	}
 
 public:
 	static std::shared_ptr<Activation<T>> getSharedPointer() {

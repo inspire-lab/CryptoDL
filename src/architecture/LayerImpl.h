@@ -159,6 +159,10 @@ public:
 		return this->mOutput;
 	}
 
+	virtual uint multiplicativeDepth() {
+		return this->mInput->multiplicativeDepth();
+	}
+
 
 	//setters
 	virtual void input( TensorP<ValueType> input ) {
@@ -1072,6 +1076,10 @@ public:
 		return std::vector<TensorP<WeightType>>{ this->mWeights, this->mBiases, this->mRecurrentWeights };
 	}
 
+	virtual uint multiplicativeDepth() {
+		return this->mInput->multiplicativeDepth() * this->mInput->shape[ 1 ] ;
+	}
+
 
 private:
 	uint mUnits;
@@ -1934,6 +1942,10 @@ public:
 	// TODO this is a dirty hack. change the API in the base class
 	TensorP<ValueType> getInput() {
 		return this->mInput;
+	}
+
+	virtual uint multiplicativeDepth() {
+		return this->mRNNBlocks->multiplicativeDepth();
 	}
 
 
