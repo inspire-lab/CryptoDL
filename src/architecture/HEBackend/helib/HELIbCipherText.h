@@ -54,7 +54,8 @@ public:
 	virtual HELibCipherText& operator*=( double x );
 
 	virtual HELibCipherText& operator+=( HELibCipherText* other ) {
-		*mCtxt += ( (HELibCipherText*) other )->ctxt();
+		// *mCtxt += ( (HELibCipherText*) other )->ctxt();
+		mCtxt->multiplyBy( other->ctxt() );
 		return *this;
 	}
 
@@ -66,7 +67,8 @@ public:
 	virtual HELibCipherText& operator+=( HELibCipherText& other );
 
 	virtual HELibCipherText& operator*=( HELibCipherText& other ) {
-		*mCtxt *= ( (HELibCipherText&) other ).ctxt();
+		// *mCtxt *= ( (HELibCipherText&) other ).ctxt();
+		mCtxt->multiplyBy( other.ctxt() );
 		return *this;
 	}
 
@@ -140,7 +142,51 @@ private:
  * const long m;         // Zm*
  * const long r;         // bit precision
  *
+ * Some experimentally determined values for at least 128bit security
  * 
+ * L = 50 M = 2^13 r = 16
+ * L = 100 M = 2^13 r = 16
+ * L = 150 M = 2^14 r = 16
+ * L = 200 M = 2^14 r = 16
+ * L = 250 M = 2^15 r = 16
+ * L = 300 M = 2^15 r = 16
+ * L = 350 M = 2^15 r = 16
+ * L = 400 M = 2^15 r = 16
+ * L = 450 M = 2^15 r = 16
+ * L = 500 M = 2^15 r = 16
+ * L = 550 M = 2^16 r = 16
+ * L = 600 M = 2^16 r = 16
+ * L = 650 M = 2^16 r = 16
+ * L = 700 M = 2^16 r = 16
+ * L = 750 M = 2^16 r = 16
+ * L = 800 M = 2^16 r = 16
+ * L = 850 M = 2^16 r = 16
+ * L = 900 M = 2^16 r = 16
+ * L = 950 M = 2^16 r = 16
+ * L = 1000 M = 2^16 r = 16
+ * L = 1050 M = 2^16 r = 16
+ * 
+ * L = 50 M = 2^13 r = 32
+ * L = 100 M = 2^13 r = 32
+ * L = 150 M = 2^14 r = 32
+ * L = 200 M = 2^14 r = 32
+ * L = 250 M = 2^15 r = 32
+ * L = 300 M = 2^15 r = 32
+ * L = 350 M = 2^15 r = 32
+ * L = 400 M = 2^15 r = 32
+ * L = 450 M = 2^15 r = 32
+ * L = 500 M = 2^15 r = 32
+ * L = 550 M = 2^16 r = 32
+ * L = 600 M = 2^16 r = 32
+ * L = 650 M = 2^16 r = 32
+ * L = 700 M = 2^16 r = 32
+ * L = 750 M = 2^16 r = 32
+ * L = 800 M = 2^16 r = 32
+ * L = 850 M = 2^16 r = 32
+ * L = 900 M = 2^16 r = 32
+ * L = 950 M = 2^16 r = 32
+ * L = 1000 M = 2^16 r = 32
+ * L = 1050 M = 2^16 r = 32
  */
 class HELibCipherTextFactory: public CipherTextWrapperFactory<HELibCipherText> {
 public:
@@ -216,19 +262,20 @@ public:
 	HELibCipherTextFactory( long L, long m, long r, long c = 2 ) :
 			useBFV( false ) {
 
-		SetSeed( NTL::ZZ( 0 ) );
+		// SetSeed( NTL::ZZ( 0 ) );
 		/// m specific the ring Zm*
 		/// p = -1 means CKKS
 		/// r is the number of bits after the decimal aka precision 
 		/// L Number of bits
 		context = std::make_shared<helib::Context>( /*m=*/m, /*p=*/-1, r ); /// just using the examples given by HELib docu.
-		buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
+		helib::buildModChain( *context, L, c ); 				// Modify the context, adding primes to the modulus chain
 		secretKey = std::make_shared<helib::SecKey>( *context );
 		secretKey->GenSecKey();
-		addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
+		helib::addSome1DMatrices( *secretKey );					// compute key-switching matrices that we need
+		// helib::addAllMatrices( *secretKey );
 		publicKey = secretKey;
 		ea = std::make_shared<helib::EncryptedArray>( *context );
-		std::cout << "security level: " << context->securityLevel() << std::endl;
+		// std::cout << "security level: " << context->securityLevel() << std::endl;
 
 	}
 
@@ -406,9 +453,9 @@ public:
 	}
 
 	std::shared_ptr<helib::SecKey> secretKey = NULL; // FIXME for debugging. should be private
+	std::shared_ptr<helib::Context> context;
 private:
 	std::shared_ptr<helib::EncryptedArray> ea;
-	std::shared_ptr<helib::Context> context;
 	std::shared_ptr<helib::PubKey> publicKey;
 };
 
@@ -470,6 +517,12 @@ public:
 		in = result;
 	}
 
+	virtual uint multiplicativeDepth() {
+		if ( a != 0 )
+			return 1;
+		return 0;
+	}
+
 
 	/**
 	 * Needs coeffecients a,b,c for ax^2+bx+c and TensorP<T> that can provide an empty T.
@@ -515,14 +568,15 @@ public:
 		HELibCipherText ax3 = this-> tensor->empty();
 		if( a != 0 ){
 			ax3 += in;
-			ax3.power(3);
+			ax3 *= in;
+			ax3 *= in;
 			ax3 *= a;
 		}
 		// bx^2
 		HELibCipherText bx2 = tensor->empty();
 		if( b != 0 ){
 			bx2 += in;
-			bx2.square();
+			bx2 *= bx2;
 			bx2 *= b;
 		}
 		// cx
@@ -543,6 +597,14 @@ public:
 		if( c != 0 )
 			result += cx;
 		in = result;
+	}
+
+	virtual uint multiplicativeDepth() {
+		if ( a != 0 )
+			return 2;
+		if ( b != 0 )
+			return 1;
+		return 0;
 	}
 
 	void emptyProvider( TensorP<HELibCipherText> t ) override {
