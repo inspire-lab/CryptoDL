@@ -31,7 +31,7 @@ git checkout ${HELIB_COMMIT}
 rm -rf build
 mkdir build
 cd build
-cmake -DPACKAGE_BUILD=ON -DCMAKE_INSTALL_PREFIX=${HELIB_DIR} ..
+cmake -DPACKAGE_BUILD=ON -DCMAKE_INSTALL_PREFIX="${DEPENDENCIES_DIR}"/install/ ..
 make -j16
 make install
 cp ${HELIB_DIR}/lib/libhelib.a ${HELIB_DIR}/lib/fhe.a
