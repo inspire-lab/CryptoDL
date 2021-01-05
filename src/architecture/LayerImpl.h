@@ -159,8 +159,9 @@ public:
 		return this->mOutput;
 	}
 
+	// TODO:
 	virtual uint multiplicativeDepth() {
-		return this->mInput->multiplicativeDepth();
+		return 0;//this->mInput->multiplicativeDepth();
 	}
 
 
@@ -1076,8 +1077,9 @@ public:
 		return std::vector<TensorP<WeightType>>{ this->mWeights, this->mBiases, this->mRecurrentWeights };
 	}
 
+	// TODO
 	virtual uint multiplicativeDepth() {
-		return this->mInput->multiplicativeDepth() * this->mInput->shape[ 1 ] ;
+		return 0; //this->mInput->multiplicativeDepth() * this->mInput->shape[ 1 ] ;
 	}
 
 
