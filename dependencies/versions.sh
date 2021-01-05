@@ -12,18 +12,16 @@ DEPENDENCIES_DIR=$(dirname "$SCRIPT")
 # DEPENDENCIES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 #directories
 # install dirs
-GMP_DIR="${DEPENDENCIES_DIR}"/install/gmp-${GMP_VERSION}
-NTL_DIR="${DEPENDENCIES_DIR}"/install/ntl-${NTL_VERSION}
-HELIB_DIR="${DEPENDENCIES_DIR}"/install/helib
+HELIB_DIR="${DEPENDENCIES_DIR}"/install/helib_pack
+
 
 # include dirs 
-NTL_INCLUDE_DIR="${NTL_DIR}"/include 
-GMP_INCLUDE_DIR="${GMP_DIR}"/include 
 HELIB_INCLUDE_DIR="${HELIB_DIR}"/include 
 
 # generate a makefile that can be included
 MAKEFILE="${DEPENDENCIES_DIR}"/makefile.versions
 echo "# this file is auto generated. edit version.sh instead" > "${MAKEFILE}"
-echo "DEP_INCLUDES := -I${GMP_INCLUDE_DIR} -I${NTL_INCLUDE_DIR} -I${HELIB_INCLUDE_DIR}" >> "${MAKEFILE}"
-echo "DEP_LIBS := ${HELIB_DIR}/fhe.a -L${NTL_DIR}/lib -lntl -L${GMP_DIR}/lib -lgmp -lboost_filesystem -lpthread -lboost_system -ljpeg" >> "${MAKEFILE}"
-echo "DEP_RPATH := -Wl,-rpath=${NTL_DIR}/lib" >> "${MAKEFILE}"
+echo "DEP_INCLUDES := -I${HELIB_INCLUDE_DIR}" >> "${MAKEFILE}"
+# echo "DEP_LIBS := ${HELIB_DIR}/fhe.a -L${NTL_DIR}/lib -lntl -L${GMP_DIR}/lib -lgmp -lboost_filesystem -lpthread -lboost_system -ljpeg" >> "${MAKEFILE}"
+echo "DEP_LIBS := ${HELIB_DIR}/lib/fhe.a -L${HELIB_DIR}/lib -lntl -lboost_filesystem -lpthread -lboost_system -ljpeg" >> "${MAKEFILE}"
+echo "DEP_RPATH := -Wl,-rpath=${HELIB_DIR}/lib/ >> "${MAKEFILE}"

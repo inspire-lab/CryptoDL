@@ -179,5 +179,8 @@ src/keras/data/**/*.txt
 # downloaded dependencies
 dependencies/*
 !dependencies/install_dependencies.sh
+!dependencies/old_install_dependencies.sh
 !dependencies/versions.sh
+!dependencies/old_versions.sh
+!dependencies/config_system.sh
 !dependencies/README.MD
