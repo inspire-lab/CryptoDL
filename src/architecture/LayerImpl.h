@@ -1946,8 +1946,8 @@ public:
 		return this->mInput;
 	}
 
-	virtual uint multiplicativeDepth() {
-		return this->mRNNBlocks->multiplicativeDepth();
+	virtual uint multiplicativeDepth() { // FIXME
+		return 0; // this->mRNNBlocks->multiplicativeDepth();
 	}
 
 
