@@ -28,7 +28,7 @@ do
 done
 # read user information to change ownership later
 USER=$(stat -c '%U' .)
-GROUP=$(stat -c '%U' .)
+GROUP=$(stat -c '%G' .)
 
 # install packages using apt
 apt-get update && DEBIAN_FRONTEND="noninteractive" apt install -y m4 libarmadillo-dev libboost-all-dev libjpeg-dev build-essential wget libcurl4-openssl-dev
