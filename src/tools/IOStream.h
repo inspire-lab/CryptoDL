@@ -12,18 +12,18 @@
 #include <vector>
 
 
-//FIXME needed with a newer version of HELIB
-//template<typename T>
-//std::ostream& operator<<(std::ostream& os, const std::vector<T> &input) {
-//	os << "[";
-//	for( auto it = input.begin(); it != input.end(); ++it ){
-//		os << " " << *it;
-//		if( std::next( it ) != input.end() )
-//			os << ",";
-//	}
-//	os << "]";
-//	return os;
-//}
+// FIXME needed with a newer version of HELIB
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T> &input) {
+	os << "[";
+	for( auto it = input.begin(); it != input.end(); ++it ){
+		os << " " << *it;
+		if( std::next( it ) != input.end() )
+			os << ",";
+	}
+	os << "]";
+	return os;
+}
 
 
 
