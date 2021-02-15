@@ -4,6 +4,8 @@
 #include "FileSystemTools.h"
 #include "DataReaders.h"
 #include "SystemTools.h"
+#include <algorithm>
+#include "RNNTools.h"
 
 
 std::pair<std::vector<float>,std::vector<int8_t>> getEmbeddings( const std::string& modelFile, int maxlen, int maxwords, std::string dataset, std::string outDir ){
@@ -78,3 +80,54 @@ std::pair<std::vector<float>,std::vector<int8_t>> getEmbeddings( const std::stri
 	std::pair<std::vector<float>,std::vector<int8_t>> ret( embeddings, labels  );
 	return ret;
 }
+
+
+Embedding::Embedding(uint embeddingDim, uint inputDim, const std::string& file ) : embeddingDim( embeddingDim ), inputDim( inputDim ) {
+        std::vector<float> flatMatrix = readFloat32FromBinary( file );
+        // sanity check
+		if ( flatMatrix.size() % embeddingDim != 0 )
+			throw std::logic_error( "invalid embedding matrix shape" );
+    
+        for ( size_t i = 0; i <= inputDim; ++i ){
+            embeddingMatrix.push_back( std::vector<float>() );
+            for ( size_t j = 0; j <= embeddingDim; ++j ){
+                embeddingMatrix[ i ].push_back( flatMatrix[ ( i * inputDim ) + j ] );
+            }
+        }
+}
+
+
+ std::vector<float> Embedding::embed( const std::vector<std::vector<int>>& idx, int batchSize ){
+	std::vector<float> embeddings( idx.size() * inputDim * embeddingDim );
+
+	// TODO add batchsize and use copy
+	size_t c = 0; // counter
+	for ( size_t i = 0; i < idx.size(); ++i )
+		for ( size_t j = 0; i < inputDim; ++i )
+			for( float e: embeddingMatrix[ idx[ i ][ j ] ] )
+				embeddings[ c++ ] = e;
+
+	return embeddings;
+ }
+
+  std::vector<float> Embedding::embed( const std::vector<int>& idx, int batchSize ){
+	// a single instance has inputDim elements
+	batchSize = batchSize == -1 ? idx.size() : batchSize;
+	if ( batchSize > idx.size() ){
+		std::cerr << "batch size of " << batchSize << " too large for embedding with imput dim: " << inputDim << " and " << idx.size() << " inputs " << std::endl;
+		exit( 1 );
+	}
+	std::cout << "creating embedding vector, size: " << batchSize << std::endl; 
+	std::vector<float> embeddings( batchSize * embeddingDim, 0.0 );
+	std::cout << embeddings.size() << " done" << std::endl;
+
+	auto target = embeddings.begin();
+	for ( size_t i = 0; i < batchSize; ++i ){
+		std::cout << "copying: " << i << "/" << batchSize << " " << std::distance( embeddings.begin(), target ) << "/" << embeddings.size() << std::endl;
+		auto temp = embeddingMatrix[ idx[ i ] ];
+		std::cout << "word index " << idx[ i ] << "," << temp.size() << std::endl;
+		auto start = temp.begin();
+		target = std::copy( start, start + embeddingDim, target );
+	}	
+	return embeddings;
+ }
