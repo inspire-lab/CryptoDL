@@ -6,6 +6,7 @@
 #include "SystemTools.h"
 #include <algorithm>
 #include "RNNTools.h"
+#include "IOStream.h"
 
 
 std::pair<std::vector<float>,std::vector<int8_t>> getEmbeddings( const std::string& modelFile, int maxlen, int maxwords, std::string dataset, std::string outDir ){
@@ -84,16 +85,20 @@ std::pair<std::vector<float>,std::vector<int8_t>> getEmbeddings( const std::stri
 
 Embedding::Embedding(uint embeddingDim, uint inputDim, const std::string& file ) : embeddingDim( embeddingDim ), inputDim( inputDim ) {
         std::vector<float> flatMatrix = readFloat32FromBinary( file );
+	std::cout << "read " << flatMatrix.size() << " values from file" << std::endl;
         // sanity check
 		if ( flatMatrix.size() % embeddingDim != 0 )
 			throw std::logic_error( "invalid embedding matrix shape" );
-    
-        for ( size_t i = 0; i <= inputDim; ++i ){
+
+        for ( size_t i = 0; i <= flatMatrix.size() / embeddingDim; ++i ){
             embeddingMatrix.push_back( std::vector<float>() );
-            for ( size_t j = 0; j <= embeddingDim; ++j ){
-                embeddingMatrix[ i ].push_back( flatMatrix[ ( i * inputDim ) + j ] );
+            for ( size_t j = 0; j < embeddingDim; ++j ){
+                embeddingMatrix[ i ].push_back( flatMatrix[ ( i * embeddingDim ) + j ] );
             }
+//	std::cout << embeddingMatrix[i] <<std::endl;
         }
+	std::cout << "created " << embeddingMatrix.size() <<  " embeddings" << std::endl;
+
 }
 
 
@@ -117,17 +122,20 @@ Embedding::Embedding(uint embeddingDim, uint inputDim, const std::string& file )
 		std::cerr << "batch size of " << batchSize << " too large for embedding with imput dim: " << inputDim << " and " << idx.size() << " inputs " << std::endl;
 		exit( 1 );
 	}
-	std::cout << "creating embedding vector, size: " << batchSize << std::endl; 
-	std::vector<float> embeddings( batchSize * embeddingDim, 0.0 );
+	std::cout << "creating embedding vector, size: " << batchSize << std::endl;
+	std::vector<float> embeddings( batchSize * inputDim * embeddingDim, 0.0 );
 	std::cout << embeddings.size() << " done" << std::endl;
 
 	auto target = embeddings.begin();
-	for ( size_t i = 0; i < batchSize; ++i ){
-		std::cout << "copying: " << i << "/" << batchSize << " " << std::distance( embeddings.begin(), target ) << "/" << embeddings.size() << std::endl;
-		auto temp = embeddingMatrix[ idx[ i ] ];
-		std::cout << "word index " << idx[ i ] << "," << temp.size() << std::endl;
+	for ( size_t i = 0; i < inputDim * batchSize; ++i ){
+		//std::cout << "copying: " << i << "/" << batchSize << " " << std::distance( embeddings.begin(), target ) << "/" << embeddings.size() << std::endl;
+		//std::cout << idx[i] << "/" << embeddingMatrix.size() << std::endl;
+		auto& temp = embeddingMatrix[ idx[ i ] ];
+		//std::cout << temp[0] << std::endl;
+		//std::cout << "word index " << idx[ i ] << "," << temp.size() << std::endl;
 		auto start = temp.begin();
+		//std::cout << "one last thing" << std::endl;
 		target = std::copy( start, start + embeddingDim, target );
-	}	
+	}
 	return embeddings;
  }
