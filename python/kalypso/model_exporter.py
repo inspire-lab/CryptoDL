@@ -31,6 +31,7 @@ def model_exporter( model_file, output_dir, json_file ):
 
     # load the model
     model = keras.models.load_model( model_file, custom_objects=custom_objects )
+    # model.summary()
     # export the weights
     export_weights( model, output_dir + '/weights/' )
     # get json config

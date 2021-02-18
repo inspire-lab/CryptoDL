@@ -38,6 +38,15 @@ class Embedding{
      * Transform word indices into embeddings.
      */
     std::vector<float> embed( const std::vector<int>& idx, int batchSize = -1 );
+
+    /**
+     * Transform word indices into embeddings.
+     * 
+     * Trunctates `trunc` entries from the beginning before embedding.
+     * The output does not match the inputdim after
+     */
+    std::vector<float> embed_truncated( const std::vector<int>& idx, int trunc, int batchSize = -1 );
+
 };
 
 

@@ -139,3 +139,25 @@ Embedding::Embedding(uint embeddingDim, uint inputDim, const std::string& file )
 	}
 	return embeddings;
  }
+
+
+std::vector<float> Embedding::embed_truncated( const std::vector<int>& idx, int trunc, int batchSize ) {
+	// a single instance has inputDim elements
+	batchSize = batchSize == -1 ? idx.size() : batchSize;
+	if ( batchSize > idx.size() ){
+		std::cerr << "batch size of " << batchSize << " too large for embedding with imput dim: " << inputDim << " and " << idx.size() << " inputs " << std::endl;
+		exit( 1 );
+	}
+	std::cout << "creating embedding vector, size: " << batchSize << std::endl;
+	std::vector<float> embeddings( batchSize * ( inputDim - trunc ) * embeddingDim, 0.0 );
+	std::cout << embeddings.size() << " done" << std::endl;
+
+	auto target = embeddings.begin();
+	for ( size_t batch = 0; batch < batchSize; ++batch )
+		for ( size_t i = trunc; i < inputDim; ++i ){
+			auto& temp = embeddingMatrix[ idx[ ( batch * inputDim ) + i ] ];
+			auto start = temp.begin();
+			target = std::copy( start, start + embeddingDim, target );
+		}
+	return embeddings;
+ }
