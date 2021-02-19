@@ -1082,6 +1082,10 @@ public:
 		return 0; //this->mInput->multiplicativeDepth() * this->mInput->shape[ 1 ] ;
 	}
 
+	void clearInnerStates() {
+		innerStates->clear();
+		lastInnerStates->clear();
+	}
 
 private:
 	uint mUnits;
@@ -1692,6 +1696,9 @@ public:
 		return mOutputList;
 	}
 
+	void clearOutput(){
+		mOutputList.clear()
+	}
 
 private:
 	uint mSplits, mAxis, mOverlap;
@@ -1785,6 +1792,11 @@ public:
 		return std::vector<TensorP<WeightType>>();
 	}
 
+	void clearInputs(){
+		for( size_t i = 0; i < mInputList.size(); ++i )
+			mInputList[ i ]->clear();
+	}
+
 private:
 	uint mSplits, mAxis;
 	std::vector<TensorP<ValueType>> mInputList;
@@ -1807,17 +1819,17 @@ public:
 
 
 	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights,
-			TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+			TensorP<ValueType> input, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory, bool freeMemory=false )
 			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, input, dataTensorFactory, weigthTensorFactory ),
-			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights ), mFreeMemory( freeMemory )
 	{
 		build();
 	}
 
 	// This constructor is to be used when the layer is passed to the model and is not the first layer
-	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory )
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights, TensorFactory<ValueType>* dataTensorFactory, TensorFactory<WeightType>* weigthTensorFactory, bool freeMemory=false  )
 			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act, dataTensorFactory, weigthTensorFactory ),
-			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights ), mFreeMemory( freeMemory )
 	{
 	}
 
@@ -1832,9 +1844,9 @@ public:
 //	}
 
 	// This constructor is to be used when the layer is passed to the model and is not the first layer
-	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights )
+	ParallelRNNBlocskLayer( std::string name, ActivationP<ValueType> act, uint axis, uint splits, uint overlap, uint rnnUnits, bool returnSequences, bool shareWeights, bool freeMemory=false )
 			: Layer<ValueType, WeightType, DataTensorType, WeightTensorType>( name, act ),
-			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights )
+			  mSplits( splits ), mAxis( axis ), mOverlap(overlap), mRnnUits( rnnUnits ), mReturnSequences( returnSequences ), mShareWeights( shareWeights ), mFreeMemory( freeMemory )
 	{
 	}
 
@@ -1874,6 +1886,8 @@ public:
 
 	void feedForward() override {
 		mSplitLayer.feedForward();
+		if( mFreeMemory ) 
+			mSplitLayer.input()->clear();
 		if ( DEBUG ){
 			std::cout << mSplitLayer.name() << " " << mSplits << mSplitLayer.output()->shape << std::endl;
 			for( size_t i=0; i < mRNNBlocks.size(); ++i ){
@@ -1888,11 +1902,25 @@ public:
 			std::cout << "running block: " << i << std::endl;
 			mRNNBlocks[ i ].feedForward();
 			if ( DEBUG ) std::cout << *mRNNBlocks[ i ].output() << std::endl;
+			if( mFreeMemory ) 
+				mRNNBlocks[ i ].input()->clear();
 		}
+		if( mFreeMemory ) 
+			mSplitLayer.clearOutput();
 		mConcatLayer.feedForward();
+		if( mFreeMemory ) {
+			mSplitLayer.clearOutput();
+			for( size_t i=0; i < mRNNBlocks.size(); ++i ) {
+				mRNNBlocks[ i ].output()->clear();
+				mRNNBlocks[ i ].clearInnerStates();
+			}
+		}
 		if ( DEBUG ){
 			std::cout << "contact layer " <<  mConcatLayer.output()->shape << std::endl;
 			std::cout << *mConcatLayer.output() << std::endl;
+		}
+		if ( mFreeMemory ){
+			mConcatLayer.clearInputs();
 		}
 	}
 
@@ -1966,6 +1994,17 @@ public:
 	SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>& getSplitLaye(){
 		return mSplitLayer;
 	}
+
+	/*
+	* Turn agressive memory freeing on or off
+	*/
+	void freeMemory( boolean on ){
+		mFreeMemory = on;
+	}
+	
+	void freeMemory(){
+		return mFreeMemory;
+	}
 	
 
 private:
@@ -1976,7 +2015,7 @@ private:
 	SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mSplitLayer = SplitLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0, 0 );
 	std::vector<RNN<ValueType, WeightType, DataTensorType, WeightTensorType>> mRNNBlocks;
 	ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType> mConcatLayer = ConcatLayer<ValueType, WeightType, DataTensorType, WeightTensorType>( "placeholder", 0, 0 );
-
+	bool mFreeMemory = false;
 
 
 
