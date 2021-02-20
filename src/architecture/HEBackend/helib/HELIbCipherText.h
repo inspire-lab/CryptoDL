@@ -403,14 +403,7 @@ public:
 
 	virtual void feedCipherTensor( const TensorP<double> in, Tensor<HELibCipherText>& tensor ) override ;
 
-	/**
-	 * experimental multi threaded feeding
-	 */
-	void feedCipherTensorMultiThread(const std::vector<double>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 );
 
-	virtual uint batchsize() override {
-		return ea->size();
-	}
 
 	std::shared_ptr<helib::Ctxt> createRawEmpty() {
 		return std::make_shared<helib::Ctxt>( *publicKey );
@@ -473,6 +466,18 @@ public:
 
 	double securityLevel(){
 		return context->securityLevel();
+	}
+
+	/**
+	 * experimental multi threaded feeding
+	 */
+
+	void feedCipherTensorMultiThread(const std::vector<float>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 );
+
+	void feedCipherTensorMultiThread(const std::vector<double>& in, TensorP<HELibCipherText> tensor, int batchSize=-1 );
+
+	virtual uint batchsize() override {
+		return ea->size();
 	}
 
 	std::shared_ptr<helib::SecKey> secretKey = NULL; // FIXME for debugging. should be private
