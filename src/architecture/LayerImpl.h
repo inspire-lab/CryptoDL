@@ -1644,7 +1644,7 @@ public:
 				splitStart = this->mInput->shape[ mAxis ] - splitSize;
 			// all other splits start at the previous splits' end - overlap
 			else {
-				std::cout << splitSize << " - " << mOverlap << " = " << splitSize - mOverlap << std::endl;
+				// std::cout << splitSize << " - " << mOverlap << " = " << splitSize - mOverlap << std::endl;
 				splitStart += this->mInput->shape[ mAxis ] / mSplits - mOverlap;
 			}
 			for (uint d0 = 0; d0 < this->mInput->shape[ 0 ]; ++d0 )  // batch
@@ -1697,7 +1697,7 @@ public:
 	}
 
 	void clearOutput(){
-		mOutputList.clear()
+		mOutputList.clear();
 	}
 
 private:
@@ -1998,11 +1998,11 @@ public:
 	/*
 	* Turn agressive memory freeing on or off
 	*/
-	void freeMemory( boolean on ){
+	void freeMemory( bool on ){
 		mFreeMemory = on;
 	}
 	
-	void freeMemory(){
+	bool freeMemory(){
 		return mFreeMemory;
 	}
 	
