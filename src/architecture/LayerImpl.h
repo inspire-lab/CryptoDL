@@ -1001,8 +1001,8 @@ public:
 					tt[ i ].join();
 
 
-//				if ( timeIdx % 27 == 0 )
-//					this->innerStates->performChecks();
+				if ( mRefreshAfterSteps < 0 && timeIdx % mRefreshAfterSteps == 0 )
+					this->innerStates->performChecks();
 				auto end = std::chrono::system_clock::now();
 				std::chrono::duration<double> elapsed_seconds = end - start;
 				if( DEBUG ) std::cout << " Time: " << elapsed_seconds.count() << "s" << std::endl;
@@ -1087,12 +1087,17 @@ public:
 		lastInnerStates->clear();
 	}
 
+	void refreshAfterSteps( int steps ){
+		mRefreshAfterSteps = steps;
+	}
+
 private:
 	uint mUnits;
 	bool mReturnSquences;
 	TensorP<WeightType> mRecurrentWeights;
 	TensorP<ValueType> innerStates;
 	TensorP<ValueType> lastInnerStates; // we only need this one if we don't return sequences
+	int mRefreshAfterSteps = -1;
 
 	/** @brief the hidden untis for the netwrok.
 	 * coputes on the hidden units taking only the input into account.
