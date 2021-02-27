@@ -106,6 +106,12 @@ public:
 		fstr.close();
 	}
 
+	/**
+	*	Write the HElib ctxt to a binary file
+	*/
+	void writeToFile( std::ostream& str ){
+		ctxt().write( str );
+	}
 
 
 	/**

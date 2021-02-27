@@ -51,7 +51,7 @@ public:
 		if( mFactory->refreshOnHighNoiseEnabled() ){
 			for( size_t i = 0; i < this->shape.capacity(); ++ i ){
 				if( this->mdata.get()[ i ].noiseNearOverflow() || true ){
-					std::cout << "WARNING checks for noiseoverflow not performed correctly" << std::endl;
+					// std::cout << "WARNING checks for noiseoverflow not performed correctly" << std::endl;
 					this->writeToFile( "old_" + std::to_string( mFactory->batchsize() ) + ".bin" )  ;
 					refreshCipherTexts();
 					this->writeToFile( "new_" + std::to_string( mFactory->batchsize() ) + ".bin" )  ;
@@ -164,8 +164,8 @@ public:
 			std::cerr << "something messed up when opening " << file << std::endl;
 			exit( 1 );
 		}
-		// for( size_t i = 0; i < this->shape.capacity(); ++i )
-		// 	this->mdata.get()[ i ].writeToFile( myfile );
+		for( size_t i = 0; i < this->shape.capacity(); ++i )
+			this->mdata.get()[ i ].writeToFile( myfile );
 		myfile.close();
 	}
 

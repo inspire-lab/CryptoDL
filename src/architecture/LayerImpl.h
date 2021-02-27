@@ -1001,7 +1001,7 @@ public:
 					tt[ i ].join();
 
 
-				if ( mRefreshAfterSteps < 0 && timeIdx % mRefreshAfterSteps == 0 )
+				if ( mRefreshAfterSteps > 0 && timeIdx % mRefreshAfterSteps == 0 )
 					this->innerStates->performChecks();
 				auto end = std::chrono::system_clock::now();
 				std::chrono::duration<double> elapsed_seconds = end - start;
