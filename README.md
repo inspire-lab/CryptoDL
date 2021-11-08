@@ -45,7 +45,7 @@ $(shell $(CRYPTODL_DIR)/dependencies/versions.sh)
 -include $(CRYPTODL_DIR)/dependencies/makefile.versions
 
 g++ -std=c++17 -Wall $(INCLUDE_DIRS) $(DEP_INCLUDES) -c example.cpp
-g++ -std=c++17 -o "example" example.o $(CRYPTODL_LIB) $(DEP_LIBS) $(DEP_RPATH)
+g++ -std=c++17 -o "example" example.o $(CRYPTODL_DIR)/Debug/libkalypso.a $(DEP_LIBS) $(DEP_RPATH)
 
 ```
 
