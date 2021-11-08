@@ -1,10 +1,53 @@
-# THIS IS OUTDATED! WILL BE UPDATED SOON!
-
-
 # CryptoDL
 
-# README 
-v.0.1.0
+# How to install
+
+These steps assume your are running Ubuntu.
+
+## First step
+
+Clone this repository
+ 
+## Install Dependency Packages
+
+`CryptoDL/dependencies/` contains scripts and information to install and build the 
+required dependencies. 
+
+Run
+```config_system.sh``` 
+as root to install the depencies that are availabe via the package manager.
+
+After that run
+```
+install_dependencies.sh
+```
+from `CryptoDL/dependencies/` directory. This downloads and builds dependcies
+not only availalbe from source or that require specific configuration.
+
+## Building CryptoDL
+
+To build CrptoDL simply run 
+```
+make
+```
+in the `CryptoDL/Debug` directory. This builds a static library `libkalypso.a` which
+other projects can link against.
+
+
+To make linking easier `CryptoDL/dependencies/versions.sh` creates varialbes that 
+you can use in your build scripts.
+
+An example build script can looks like this. All you need to is set the `CRYPTODL_DIR`
+variable to where you coloned the repository.
+
+```
+$(shell $(CRYPTODL_DIR)/dependencies/versions.sh)
+-include $(CRYPTODL_DIR)/dependencies/makefile.versions
+
+g++ -std=c++17 -Wall $(INCLUDE_DIRS) $(DEP_INCLUDES) -c example.cpp
+g++ -std=c++17 -o "example" example.o $(CRYPTODL_DIR)/Debug/libkalypso.a $(DEP_LIBS) $(DEP_RPATH)
+
+```
 
 ## What is this repository for? ##
 
@@ -17,38 +60,6 @@ We aim to provide a library that provides privacy preserving deep learning for
 people with a deep learning background without needing to dig into HE, aswell as
 the abiltity to easily integrate different HE libraries as computation backends. 
 
-
-## Things to be aware of and look out for ##
-
-### Image data format and channels  ###
-
-Out system currently assumes that the image data format is **channels first**.
-This means the contains the inputs are of the following form 
-`[batch, channel, y, x]`. 
-
-#### Keras 2.0.6 and later ####
-
-In Keras 2.0.6 the `Flatten` layer became aware of the image data format. In
-prior versions it was always assuming channels last. Our implementation does 
-not suport channels first flattening in the same way that Keras does. So make
-sure that your `Flatten` layers contains the correct data format like this:
-
-```
-Flatten(data_format="channels_last")
-```
- 
-#### Supported version of HELib ####
-
-The last known version of HELib supported is: `ac0308715e5ae6bf5e750e8701e736d855550fc8`
-To obtain it use:
-
-```
-git checkout ac0308715e5ae6bf5e750e8701e736d855550fc8
-```
-#### HELib build issues #### 
-
-There are issues witht he new HELib build system. It produces a way slower library.
-See the build section how to use the old system.
 
  
 ## What is supported at the moment? ##
@@ -101,68 +112,6 @@ can not run an arbitrary number of computations
 - **Limited support of Activation functions, Layers** Due the constraints 
 mentioned above we can not use every activation function or layer that we 
 normally can. We suggest using poynomials as activation functions. 
-
-## How do I get set up? ##
-
-### Dependencies ##
-
-
-
-C++:
- - HELib
- - boost 1.67
- - libjpeg-dev
-
-python:
- - keras
- - tenserflow
-
-
-At the moment only Linux is supported. We have run it succesfully on Ubuntu 16.04,  
-Ubuntu 17.10, Ubuntu 18.10 and Ubunutu 19.04. Other versions might work as well. 
-Our project is based on [HELib](https://github.com/shaih/HElib) which needs to be
-built. 
-
-### Building HElib
-
-The build instructions have changed. There are performance issue with the libary 
-file that is produced by the new HElib build system. Use the legacy system for
-now. 
-
-1. Follow the instructions here: https://github.com/shaih/HElib/blob/master/OLD_INSTALL.txt
-When  installling `gmp` make sure to include the c++ interface by using ` ./configure --enable-cxx `
-2. We expect to find the HElib headers in the systems include path. Typically 
- `/usr/local/include`. To make sure they can be found there create a directory called
-`helib` in `/usr/local/include` and copy all the `.h` files from the `HElib/src` 
-directory there.
-3. After installing HELib go into the `build` directory
-4. In the `objects.mk` file make sure the path to `fhe.a` is correct for your system
-5. Call `make`
-6. The resulting binary `CNNENC` needs to be copied to the project to be run correctly
-
-~~1. Install [HELib](https://github.com/shaih/HElib) and its dependencies. Follow the instrutctions for Option 2 library installation.~~
-
-### Building CryptoDL
-
-1. Check out this project.
-2. Build the library using the makefile located in `Debug`
-3. The output is `Debug/libkalypso.a`
-
-If the project build fails on the HELib include, copy the `.h` files from the HElib directory to your global include directory.
-
-### Installing the python module
-
-Some parts of the project require our python module. To install it run
-
-`pip install -e python`
-
-
-
-### What next?
-
-The `libkalypso.a` library can be used to build deeplearning models using the HEbackend. Be sure to add the `src` folder to the include path.
-
-For tips to how get started. Checkout the `examples` directory.
 
 
 ## Contribution guidelines ##
