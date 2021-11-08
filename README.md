@@ -1,7 +1,62 @@
-# THIS IS OUTDATED! WILL BE UPDATED SOON!
-
-
 # CryptoDL
+
+# How to install
+
+These steps assume your are running Ubuntu.
+
+## First step
+
+Clone this repository
+ 
+## Install Dependency Packages
+
+`CryptoDL/dependencies/` contains scripts and information to install and build the 
+required dependencies. 
+
+Run
+```config_system.sh``` 
+as root to install the depencies that are availabe via the package manager.
+
+After that run
+```
+install_dependencies.sh
+```
+from `CryptoDL/dependencies/` directory. This downloads and builds dependcies
+not only availalbe from source or that require specific configuration.
+
+## Building CryptoDL
+
+To build CrptoDL simply run 
+```
+make
+```
+in the `CryptoDL/Debug` directory. This builds a static library `libkalypso.a` which
+other projects can link against.
+
+
+To make linking easier `CryptoDL/dependencies/versions.sh` creates varialbes that 
+you can use in your build scripts.
+
+An example build script can looks like this. All you need to is set the `CRYPTODL_DIR`
+variable to where you coloned the repository.
+
+```
+$(shell $(CRYPTODL_DIR)/dependencies/versions.sh)
+-include $(CRYPTODL_DIR)/dependencies/makefile.versions
+
+	g++ -std=c++17 -Wall $(INCLUDE_DIRS) $(DEP_INCLUDES) -c example.cpp
+ g++ -std=c++17 -o "example" example.o $(CRYPTODL_LIB) $(DEP_LIBS) $(DEP_RPATH)
+
+```
+
+
+
+
+# THIS IS REST IS OUTDATED! WILL BE UPDATED SOON!
+It gives some good pointers but take it with a grain of salt.
+
+
+
 
 # README 
 v.0.1.0
