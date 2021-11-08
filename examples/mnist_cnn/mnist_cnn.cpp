@@ -7,9 +7,9 @@
 #include "../../src/architecture/HEBackend/helib/HELIbCipherText.h"
 #include "../../src/tools/Config.h"
 #include "../../src/tools/SystemTools.h"
+#include "../../src/tools/json/JSONModel.h"
+#include "../../src/tools/IOStream.h"
 using namespace std;
-
-
 
 /**
  * In this example we are running a convolutional neural network on encrypted data. The network performs
@@ -46,23 +46,24 @@ using namespace std;
  * {'name': 'dense_1', 'trainable': True, 'units': 100, 'activation': 'square', 'use_bias': True, 'kernel_initializer': {'class_name': 'VarianceScaling', 'config': {'scale': 1.0, 'mode': 'fan_avg', 'distribution': 'uniform', 'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}
  * {'name': 'dense_2', 'trainable': True, 'units': 10, 'activation': 'softmax', 'use_bias': True, 'kernel_initializer': {'class_name': 'VarianceScaling', 'config': {'scale': 1.0, 'mode': 'fan_avg', 'distribution': 'uniform', 'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}
  *
-**/
+ **/
 
+constexpr long L = 500;
+constexpr long m = 4096;
+constexpr long r = 32;
 
-int main(int argc, char* argv[]) {
-
-
+int main(int argc, char *argv[])
+{
 	cout << getCurrentWorkingDir() << endl;
 
 	/// load the data set
 	mnist::MNIST_dataset<uint8_t, uint8_t> dataset = loadMNIST();
 
 	/// create a ciphertext factory. The layers need to know how to create new ciphertexts
-	HELibCipherTextFactory ctxtFactory( 0, false );
-
+	HELibCipherTextFactory ctxtFactory(L, m, r);
 
 	/// create Tensor factories for both weights and data
-	HETensorFactory<HELibCipherText> hetfactory( &ctxtFactory );
+	HETensorFactory<HELibCipherText> hetfactory(&ctxtFactory);
 	PlainTensorFactory<long> ptFactory;
 
 	/// the bachsize is dependent on the parameters of the HE scheme
@@ -72,94 +73,89 @@ int main(int argc, char* argv[]) {
 	/// The shape for all consecutive layers will be calculated as they are added to the model.
 	///	input shape should be batch, channels, height, width. Since a single cipher text contains a number of
 	/// plaintexts the batchsize is set to 1.
-	TensorP<HELibCipherText> input = hetfactory.create( Shape( { 1, 1, 28, 28 } ) );
+	TensorP<HELibCipherText> input = hetfactory.create(Shape({1, 1, 28, 28}));
 
 	/// instantiate model
 	/// we need to specify the way memory is allocated and pass factories for the data tensors and weight tensors
-	Model<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long> > completeNetwork( MemoryUsage::greedy,
-			&hetfactory,
-			&ptFactory );
+	Model<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long>> model(MemoryUsage::greedy,
+																																									 &hetfactory,
+																																									 &ptFactory);
 
 	/// add layers
 	/// the first layer needs to be passed an input tensor. all other tensors will be created automatically
-	//conv1
-	completeNetwork.addLayer(
-			std::make_shared<Convolution2D<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long> >>(
+	// conv1
+	model.addLayer(
+			std::make_shared<Convolution2D<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long>>>(
 					"conv2d_1", SquareActivation<HELibCipherText>::getSharedPointer(), 32, 5, 2, PADDING_MODE::SAME,
 					input, &hetfactory,
-					&ptFactory ) );
-	//conv2
-	completeNetwork.addLayer(
-			std::make_shared<Convolution2D<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long> >>(
+					&ptFactory));
+	// conv2
+	model.addLayer(
+			std::make_shared<Convolution2D<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long>>>(
 					"conv2d_2", LinearActivation<HELibCipherText>::getSharedPointer(), 64, 5, 2, PADDING_MODE::VALID,
 					&hetfactory,
-					&ptFactory ) );
+					&ptFactory));
 
 	// flatten
-	completeNetwork.addLayer(
-			std::make_shared<Flatten<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long> >>( "flatten",
-					&hetfactory, &ptFactory ) );
-	//dense 1
-	completeNetwork.addLayer(
-			std::make_shared<Dense<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long> >>( "dense_1",
-					SquareActivation<HELibCipherText>::getSharedPointer(), 100, &hetfactory, &ptFactory ) );
+	model.addLayer(
+			std::make_shared<Flatten<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long>>>("flatten",
+																																																		 &hetfactory, &ptFactory));
+	// dense 1
+	model.addLayer(
+			std::make_shared<Dense<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long>>>("dense_1",
+																																																	 SquareActivation<HELibCipherText>::getSharedPointer(), 100, &hetfactory, &ptFactory));
 
-	//dense 2
-	completeNetwork.addLayer(
-			std::make_shared<Dense<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long> >>( "dense_2",
-					LinearActivation<HELibCipherText>::getSharedPointer(), 10, &hetfactory, &ptFactory ) );
+	// dense 2
+	model.addLayer(
+			std::make_shared<Dense<HELibCipherText, long, HETensor<HELibCipherText>, PlainTensor<long>>>("dense_2",
+																																																	 LinearActivation<HELibCipherText>::getSharedPointer(), 10, &hetfactory, &ptFactory));
 
 	/// since we have named the layers the same way they were named in keras we only need to specify the directory that
 	/// the exported weights
-	completeNetwork.loadWeights( "examples/mnist_cnn/weights/" );
+	model.loadWeights("examples/mnist_cnn/weights/");
 	std::cout << "batchsize: " << batchSize << std::endl;
 
 	/// crop the testdata to fit our batchsize
-	std::vector<std::vector<uint8_t>> X( dataset.test_images.begin(), dataset.test_images.begin() + batchSize );
-	std::vector<uint8_t> Y( dataset.test_labels.begin(), dataset.test_labels.begin() + batchSize );
+	std::vector<std::vector<uint8_t>> X(dataset.test_images.begin(), dataset.test_images.begin() + batchSize);
+	std::vector<uint8_t> Y(dataset.test_labels.begin(), dataset.test_labels.begin() + batchSize);
 
 	/// encrypt the test data
 	/// The "shape" of the data as it is loaded is [ instances, pixels ] but we need to reshape it to [ pixels, instances ]
 	/// so that we can encrypt all pixels with the same coordinates from multiple images into one ciphertext.
-	std::vector<std::vector<HELibCipherText>> encImages( 1, std::vector<HELibCipherText>() ); /// nested vectors to simulate batches
-	for ( size_t i = 0; i < X [ 0 ].size(); i++ ) {
-		/// contains every i th from all images in the test test batch
+	std::vector<HELibCipherText> encImages;
+	for (size_t i = 0; i < X[0].size(); i++)
+	{
+		/// contains every i th pixel from all images in the test test batch
 		vector<long> lp;
 		/// iterate over all images in the batch and extract ith pixel
-		for ( uint b = 0; b < batchSize; b++ ) {
-			lp.push_back( unsigned( dataset.test_images [ b ] [ i ] ) );
+		for (uint b = 0; b < batchSize; b++)
+		{
+			lp.push_back(unsigned(dataset.test_images[b][i]));
 		}
 		/// create a ciphertext contatining all the ith pixles
-		auto enc = ctxtFactory.createCipherText( lp );
-		encImages [ 0 ].push_back( enc );
+		auto enc = ctxtFactory.createCipherText(lp);
+		encImages.push_back(enc);
 	}
 
-
-	try {
-		completeNetwork.evaluate<HELibCipherText, uint8_t>( encImages, Y ); /// evaluate throws an excpetion cause we can not
-																			/// not do predictions on encrypted data
-	} catch ( ... ) {
-		// ignore the exception
-	}
+	// feed inputs to the model
+	Shape orgShape = model.input()->shape;
+	model.input()->flatten();
+	model.input()->init(encImages);
+	model.input()->reshape(orgShape);
+	// run the model
+	model.run();
 
 	/// get teh output of the network and decrypt it
-	TensorP<double> decrypted = ( (HETensor<HELibCipherText>*) completeNetwork.mLayers.back()->output().get() )->decryptDouble();
+	TensorP<double> decrypted = ((HETensor<HELibCipherText> *)model.mLayers.back()->output().get())->decryptDouble();
 	/// calcuate the accuracy and print results
 	auto preds = decrypted->argmaxVector();
-	float acc = completeNetwork.accuracy( preds, Y );
+	float acc = model.accuracy(preds, Y);
 	std::cout << preds << std::endl;
 	std::cout << "[";
-	for ( auto p : Y )
-		std::cout << (unsigned) p << " ";
+	for (auto p : Y)
+		std::cout << (unsigned)p << " ";
 	std::cout << "]" << std::endl;
 	cout << "Accuracy: " << acc << std::endl;
 
-
-
-
-
-
-
 	return 0;
-
 }
